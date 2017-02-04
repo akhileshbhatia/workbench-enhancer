@@ -1,0 +1,51 @@
+{
+  "name": "Workbench Enhancer",
+  "version": "0.1",
+  "manifest_version": 2,
+
+  "description": "It does something.",
+  "permissions": [
+    "cookies",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://workbench.developerforce.com/query.php*"],
+      "css": [
+        "styles/bootstrap_mod.css",
+        "styles/bootstrap.min.css",
+        "styles/sidebar.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/angular.min.js",
+        "pages/sidebar-script.js",
+        "pages/query.js"
+      ]
+    },
+    {
+      "matches": ["https://workbench.developerforce.com/execute.php*"],
+      "css": [
+        "styles/bootstrap_mod.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "pages/execute.js"
+      ]
+    },
+    {
+      "matches": ["https://workbench.developerforce.com/login.php*"],
+      "css": [
+        "styles/bootstrap_mod.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "pages/login.js"
+      ]
+      }],
+      "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
+      "web_accessible_resources": [
+        "popup.html",
+        "templates/sidebar-view.html"
+      ]
+    }
