@@ -17,10 +17,10 @@
         "styles/sidebar.css"
       ],
       "js": [
-        "scripts/jquery.min.js",
         "scripts/angular.min.js",
-        "pages/sidebar-script.js",
-        "pages/query.js"
+        "pages/init.js",
+        "pages/main-extension.js",
+        "pages/enhancerController.js"
       ]
     },
     {
@@ -46,6 +46,7 @@
       "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
       "web_accessible_resources": [
         "popup.html",
-        "templates/sidebar-view.html"
+        "templates/sidebar-view.html",
+        "templates/main-extension.html"
       ]
     }
