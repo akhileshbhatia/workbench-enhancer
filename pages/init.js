@@ -1,5 +1,7 @@
-//select id from loan_application__c limit 10
+//select id from account
+//select id,name from account
 
+//initializes the current html to link to angular application by adding ng-app,ng-controller and custom directive
 var body = document.getElementsByTagName('body')[0];
 body.setAttribute("ng-app","workbenchEnhancerApp");
 body.setAttribute("ng-controller","workbenchEnhancerController");
