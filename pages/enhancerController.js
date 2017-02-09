@@ -1,5 +1,4 @@
 app.controller("workbenchEnhancerController",function($scope){
-
   $scope.queryBtnClick = function(event){
     event.preventDefault();
     var date = new Date();
@@ -10,7 +9,7 @@ app.controller("workbenchEnhancerController",function($scope){
         data[todaysDate] = [$scope.textAreaVal.trim()];
       }
       else{
-        data[todaysDate].push($scope.textAreaVal.trim());
+        data[todaysDate].unshift($scope.textAreaVal.trim());
       }
       chrome.storage.local.set(data,function(){
         console.log("data added to storage");

@@ -17,6 +17,8 @@
         "styles/sidebar.css"
       ],
       "js": [
+        "scripts/jquery.min.js",
+        "scripts/bootstrap.min.js",
         "scripts/angular.min.js",
         "pages/init.js",
         "pages/main-extension.js",
