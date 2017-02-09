@@ -22,7 +22,7 @@
         "scripts/angular.min.js",
         "pages/init.js",
         "pages/main-extension.js",
-        "pages/enhancerController.js"
+        "pages/extensionController.js"
       ]
     },
     {
