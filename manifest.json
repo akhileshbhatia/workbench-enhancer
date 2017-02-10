@@ -48,6 +48,7 @@
       "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
       "web_accessible_resources": [
         "popup.html",
-        "templates/main-extension.html"
+        "templates/main-extension.html",
+        "pages/temp.html"
       ]
     }

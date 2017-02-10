@@ -1,49 +1,23 @@
 <div id="extension">
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
+      <div ng-repeat="(date,queriesArray) in allData track by date">
 
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">Panel 1</a>
-        </h4>
-      </div>
-
-      <div id="collapse1" class="panel collapse in">
-        <div class="panel-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <div class="panel-heading">
+          <h5 class="text-left">
+            <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{$index}}">{{date}}</a>
+          </h5>
         </div>
-      </div>
-
-      <div class="panel-heading">
-        <div class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse2">Panel 2</a>
+        
+        <div id="collapse{{$index}}" class="panel collapse">
+          <div ng-repeat ="query in queriesArray">
+            <div class="panel-body text-left">
+              {{query}}
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div id="collapse2" class="panel collapse">
-        <div class="panel-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
       </div>
-
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse3">Panel 3</a>
-        </h4>
-      </div>
-
-      <div id="collapse3" class="panel collapse">
-        <div class="panel-body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-
     </div>
   </div>
 </div>

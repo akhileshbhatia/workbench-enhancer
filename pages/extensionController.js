@@ -1,5 +1,5 @@
 app.controller("workbenchEnhancerController",function($scope,dataService){
-  $scope.queryBtnClick = function(event){
+  $scope.addDataToStorage = function(event){
     event.preventDefault();
     var date = new Date();
     var month = parseInt(date.getMonth(),10) + 1;
@@ -13,6 +13,8 @@ app.controller("workbenchEnhancerController",function($scope,dataService){
       }
       chrome.storage.local.set(data,function(){
         console.log("data added to storage");
+        $scope.textAreaVal = "";
+        $scope.getData();
       })
     });
   }

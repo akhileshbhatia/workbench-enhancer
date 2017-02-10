@@ -10,7 +10,7 @@ var textarea = document.getElementById("soql_query_textarea");
 textarea.setAttribute("ng-model","textAreaVal");
 
 var queryBtn = document.getElementsByName('querySubmit')[0];
-queryBtn.setAttribute("ng-click","queryBtnClick($event)");
+queryBtn.setAttribute("ng-click","addDataToStorage($event)");
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");
