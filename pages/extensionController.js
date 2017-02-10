@@ -1,9 +1,10 @@
 app.controller("workbenchEnhancerController",function($scope,dataService){
   $scope.addDataToStorage = function(event){
     event.preventDefault();
-    var date = new Date();
-    var month = parseInt(date.getMonth(),10) + 1;
-    var todaysDate = date.getDate() + "-" + month + "-" + date.getFullYear();
+    // var date = new Date();
+    // var month = parseInt(date.getMonth(),10) + 1;
+    // var todaysDate = date.getDate() + "-" + month + "-" + date.getFullYear();
+    var todaysDate = "7-2-2017";
     chrome.storage.local.get(todaysDate,function(data){
       if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
         data[todaysDate] = [$scope.textAreaVal.trim()];
@@ -12,9 +13,7 @@ app.controller("workbenchEnhancerController",function($scope,dataService){
         data[todaysDate].unshift($scope.textAreaVal.trim());
       }
       chrome.storage.local.set(data,function(){
-        console.log("data added to storage");
-        $scope.textAreaVal = "";
-        $scope.getData();
+        $scope.getData(); //call to getData function again to refresh view
       })
     });
   }
