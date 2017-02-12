@@ -1,4 +1,7 @@
 <div id="extension">
+  <div ng-if="allData | isEmpty">
+    <span class="text-center text-info" style="font-size:18px;">No queries found!</span>
+  </div>
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div ng-repeat="(date,queriesArray) in allData track by date">
@@ -8,9 +11,9 @@
             <a style="font-size:18px;">{{date}}</a>
         </div>
       </h5>
-        <div id="collapse{{$index}}" class="panel collapse">
-          <div ng-repeat ="query in queriesArray">
-            <div class="panel-body text-left">
+        <div id="collapse{{$index}}" class="panel collapse" ng-class="{in : $index == 0}">
+          <div ng-repeat ="query in queriesArray track by $index">
+            <div class="panel-body text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
               {{query}}
             </div>
           </div>

@@ -11,7 +11,13 @@ textarea.setAttribute("ng-model","textAreaVal");
 
 var queryBtn = document.getElementsByName('querySubmit')[0];
 queryBtn.setAttribute("ng-click","addDataToStorage($event)");
+queryBtn.setAttribute("ng-disabled","!(textAreaVal.length > 0)")
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");
 body.insertBefore(customDiv,document.getElementById('mainBlock'));
+
+//clear storage completely
+// chrome.storage.local.clear(function(){
+//   alert("Cleared storage");
+// });
