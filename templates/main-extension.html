@@ -2,23 +2,26 @@
   <div ng-if="allData | isEmpty">
     <span class="text-center text-info" style="font-size:18px;">No queries found!</span>
   </div>
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div ng-repeat="(date,queriesArray) in allData track by date">
+  <div ng-if="!(allData | isEmpty)">
+    
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div ng-repeat="(date,queriesArray) in allData track by date">
 
-        <h5>
-        <div class="panel-heading text-left" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{$index}}">
-            <a style="font-size:18px;">{{date}}</a>
-        </div>
-      </h5>
-        <div id="collapse{{$index}}" class="panel collapse" ng-class="{in : $index == 0}">
-          <div ng-repeat ="query in queriesArray track by $index">
-            <div class="panel-body text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
-              {{query}}
+          <h5>
+            <div class="panel-heading text-left" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{$index}}">
+              <a style="font-size:18px;">{{date}}</a>
+            </div>
+          </h5>
+          <div id="collapse{{$index}}" class="panel collapse" ng-class="{in : $index == 0}">
+            <div ng-repeat ="query in queriesArray track by $index">
+              <div class="panel-body text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
+                {{query}}
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>

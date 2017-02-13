@@ -11,9 +11,6 @@ app.directive("mainExtension",function($sce){
 
 app.filter("isEmpty",function(){
   return function(data) {
-    if(angular.equals({},data))
-      return true;
-    else
-      return false;
+    return angular.equals({},data);
   }
 })

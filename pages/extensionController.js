@@ -1,9 +1,9 @@
-app.controller("workbenchEnhancerController",function($scope,dataService){
+app.controller("workbenchEnhancerController",function($scope,$filter,dataService){
   $scope.addDataToStorage = function(event){
-    //event.preventDefault();
+    event.preventDefault();
     var date = new Date();
     var month = parseInt(date.getMonth(),10) + 1;
-    var todaysDate = date.getDate() + "-" + month + "-" + date.getFullYear();
+    var todaysDate = $filter("date")(new Date(),"dd MMM yyyy");
     //var todaysDate = "9-2-2017";
     chrome.storage.local.get(todaysDate,function(data){
       if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
