@@ -10,6 +10,14 @@
     </div>
 
     <div ng-if="!(allData | isEmpty)">
+      <div class="row" style="margin-top:6%">
+        <div class="col-xs-2 text-left" style="margin-top:2%">
+          <span style="font-size:15px;">Search</span>
+        </div>
+        <div class="col-xs-offset-1 col-xs-9">
+          <input type="text" class="form-control" ng-model="searchQuery"/>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="panel-group" id="accordion">
@@ -21,7 +29,7 @@
                     <a style="font-size:18px;">{{date}}</a>
                   </div>
                 </h5>
-                <div id="collapse{{$index}}" class="panel collapse">
+                <div id="collapse{{$index}}" class="panel collapse in">
                   <div ng-repeat ="query in queriesArray | filter: searchQuery track by $index">
                     <div class="panel-body text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
                       {{query}}
