@@ -1,4 +1,8 @@
 app.controller("workbenchEnhancerController",function($scope,$filter,dataService){
+  $scope.showExtension = false;
+
+  $scope.glyphArray = [];
+
   $scope.addDataToStorage = function(event){
     event.preventDefault();
     var date = new Date(); // Use for todays date
@@ -33,6 +37,17 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   $scope.setQueryText = function(event){
     $scope.textAreaVal = event.target.textContent.trim();
+  }
+
+  $scope.initGlyph = function(index){
+    $scope.glyphArray[index] = "glyphicon glyphicon-chevron-down";
+  }
+
+  $scope.toggleGlyph = function(index){
+    if($scope.glyphArray[index] == "glyphicon glyphicon-chevron-down")
+      $scope.glyphArray[index] = "glyphicon glyphicon-chevron-right";
+    else
+      $scope.glyphArray[index] = "glyphicon glyphicon-chevron-down";
   }
 });
 

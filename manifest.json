@@ -13,13 +13,13 @@
       "matches": ["https://workbench.developerforce.com/query.php*"],
       "css": [
         "styles/bootstrap_mod.css",
-        "styles/bootstrap.min.css",
-        "styles/sidebar.css"
+        "styles/bootstrap.css",
+        "styles/extension.css"
       ],
       "js": [
         "scripts/jquery.min.js",
-        "scripts/bootstrap.min.js",
         "scripts/angular.min.js",
+        "scripts/bootstrap.min.js",
         "pages/init.js",
         "pages/main-extension.js",
         "pages/extensionController.js"
@@ -49,6 +49,6 @@
       "web_accessible_resources": [
         "popup.html",
         "templates/main-extension.html",
-        "pages/temp.html"
+        "fonts/*"
       ]
     }

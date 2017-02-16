@@ -21,3 +21,8 @@ body.insertBefore(customDiv,document.getElementById('mainBlock'));
 // chrome.storage.local.clear(function(){
 //   alert("Cleared storage");
 // });
+
+//clear storage for specific key
+// chrome.storage.local.remove("16 Feb 2017",function(){
+//   alert("Removed");
+// })

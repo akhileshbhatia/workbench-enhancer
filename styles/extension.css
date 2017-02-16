@@ -1,0 +1,27 @@
+#extension{
+  left:0;
+  width: 19%;
+  height: auto;
+  border: 1px solid black;
+  border-left: none;
+  position: absolute;
+  overflow: hidden;
+}
+  /*-webkit-transition: width 0.1s ease;
+  -moz-transition: width 0.1s ease;
+  -o-transition: width 0.1s ease;
+  transition: width 0.1s ease;
+}*/
+
+/*#extension.in{
+  width: 240px;
+}*/
+.panel-heading{
+  /*background-color: #c4c4c4;*/
+  background-color: #d6d0d0;
+  cursor: pointer;
+}
+
+.panel{
+  border: none;
+}
