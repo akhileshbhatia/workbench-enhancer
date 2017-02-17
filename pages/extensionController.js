@@ -4,7 +4,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     isFirstDisabled: false
   };
   $scope.accordionArray = [];
-
+  
   $scope.addDataToStorage = function(event){
     event.preventDefault();
     var date = new Date(); // Use for todays date

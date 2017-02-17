@@ -25,3 +25,5 @@
 .panel{
   border: none;
 }
+
+.accordion-toggle:focus{outline: none;}
