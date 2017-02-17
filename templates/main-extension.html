@@ -1,57 +1,15 @@
-<!-- <div class="row">
-<div class="col-xs-1">
-<button type="button" class="btn btn-default" ng-click="showExtension = !showExtension">
-<span class="glyphicon glyphicon-chevron-right"></span>
-</button>
-</div>
-</div> -->
-<!-- <div id="extension" ng-class="{in : showExtension}"> -->
 <div id="extension">
-  <div class="row">
-    <div class="col-xs-offset-1 col-xs-10">
-      <div ng-if="allData | isEmpty">
-        <div class="row">
-          <div class="col-xs-12">
-            <span class="text-center text-info" style="font-size:18px;">No queries found!</span>
+    <uib-accordion close-others="true">
+      <uib-accordion-group ng-repeat="(date,queriesArray) in allData track by date" is-open="accordionArray[$index]">
+        <uib-accordion-heading>
+          <i class="pull-right glyphicon" ng-class="accordionArray[$index] ? 'glyphicon-chevron-down':'glyphicon-chevron-right'"></i>
+          {{date}}
+        </uib-accordion-heading>
+        <div ng-repeat ="query in queriesArray | filter: searchQuery track by $index">
+          <div class="text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
+            {{query}}
           </div>
         </div>
-      </div>
-
-      <div ng-if="!(allData | isEmpty)">
-        <div class="row" style="margin-top:6%">
-          <div class="col-xs-2 text-left" style="margin-top:2%">
-            <span style="font-size:15px;">Search</span>
-          </div>
-          <div class="col-xs-offset-1 col-xs-9">
-            <input type="text" class="form-control" ng-model="searchQuery"/>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="panel-group" id="accordion">
-              <div class="panel panel-default">
-                <div ng-repeat="(date,queriesArray) in allData track by date" ng-init="initGlyph($index)">
-                  <h5>
-                    <div class="panel-heading text-left" data-toggle="collapse" data-parent="#accordion"
-                    data-target="#collapse{{$index}}" ng-click="toggleGlyph($index)">
-                    <span ng-class="glyphArray[$index]">
-                      <a style="font-size:18px;">{{date}}</a>
-                    </span>
-                  </div>
-                </h5>
-                <div id="collapse{{$index}}" class="panel collapse in">
-                  <div ng-repeat ="query in queriesArray | filter: searchQuery track by $index">
-                    <div class="panel-body text-left" ng-click="setQueryText($event)" style="cursor:pointer;">
-                      {{query}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </uib-accordion-group>
+    </uib-accordion>
   </div>
-</div>
-</div>

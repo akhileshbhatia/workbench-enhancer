@@ -1,7 +1,9 @@
 app.controller("workbenchEnhancerController",function($scope,$filter,dataService){
-  $scope.showExtension = false;
-
-  $scope.glyphArray = [];
+  $scope.status = {
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
+  $scope.accordionArray = [];
 
   $scope.addDataToStorage = function(event){
     event.preventDefault();
@@ -38,18 +40,26 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   $scope.setQueryText = function(event){
     $scope.textAreaVal = event.target.textContent.trim();
   }
-
-  $scope.initGlyph = function(index){
-    $scope.glyphArray[index] = "glyphicon glyphicon-chevron-down";
-  }
-
-  $scope.toggleGlyph = function(index){
-    if($scope.glyphArray[index] == "glyphicon glyphicon-chevron-down")
-      $scope.glyphArray[index] = "glyphicon glyphicon-chevron-right";
-    else
-      $scope.glyphArray[index] = "glyphicon glyphicon-chevron-down";
-  }
 });
+
+// app.controller("workbenchEnhancerController",function($scope){
+//   $scope.groups = [
+//    {
+//      title: 'Dynamic Group Header - 1',
+//      content: 'Dynamic Group Body - 1'
+//    },
+//    {
+//      title: 'Dynamic Group Header - 2',
+//      content: 'Dynamic Group Body - 2'
+//    }
+//  ];
+//
+//  $scope.status = {
+//    isFirstOpen: true,
+//    isFirstDisabled: false
+//  };
+//  $scope.accordionArray = [];
+// })
 
 app.service("dataService",function($q){
   return{
