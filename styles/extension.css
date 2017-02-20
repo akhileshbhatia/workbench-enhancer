@@ -1,11 +1,12 @@
 #extension{
   left:0;
   width: 19%;
-  height: auto;
+  height: 100%;
   border: 1px solid black;
   border-left: none;
   position: absolute;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
   /*-webkit-transition: width 0.1s ease;
   -moz-transition: width 0.1s ease;
