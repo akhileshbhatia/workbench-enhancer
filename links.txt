@@ -1,5 +1,5 @@
 http://tutorials.jenkov.com/angularjs/custom-directives.html
 
-Read More/Read Less functionality
+https://github.com/doukasd/AngularJS-Components
 
 http://angular-ui.github.io/bootstrap/#!#%2Faccordion

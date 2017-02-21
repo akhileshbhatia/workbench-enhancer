@@ -5,7 +5,7 @@
 var body = document.getElementsByTagName('body')[0];
 body.setAttribute("ng-app","workbenchEnhancerApp");
 body.setAttribute("ng-controller","workbenchEnhancerController");
-
+body.setAttribute("ng-cloak","");
 var textarea = document.getElementById("soql_query_textarea");
 textarea.setAttribute("ng-model","textAreaVal");
 

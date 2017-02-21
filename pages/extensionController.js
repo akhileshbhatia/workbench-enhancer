@@ -41,8 +41,8 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   }
   getData(); //call on page load
 
-  $scope.setQueryText = function(event){
-    $scope.textAreaVal = event.target.textContent.trim();
+  $scope.setQueryText = function(text){
+    $scope.textAreaVal = text.trim();
   }
 });
 

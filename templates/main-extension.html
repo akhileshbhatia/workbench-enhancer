@@ -33,18 +33,19 @@
               <div ng-repeat ="info in storageData[date] | filter: searchQuery track by $index">
                 <div class="row">
                   <div class="col-xs-1" style="margin-left: -4%;"><b>{{info[0]}}</b></div>
-                  <div class="col-xs-11" style="text-align:left; padding-left:18%;cursor:pointer;"
-                  ng-click="setQueryText($event)">
-                    {{info[1]}}
-                  </div>
+                  <div class="col-xs-11 no-selection" style="text-align:left; padding-left:18%;cursor:pointer;">
+                    <span ng-dblclick="setQueryText(info[1])"
+                    dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
+                  </span>
                 </div>
               </div>
-            </uib-accordion-group>
-          </uib-accordion>
-        </div>
+            </div>
+          </uib-accordion-group>
+        </uib-accordion>
       </div>
     </div>
-
   </div>
+
+</div>
 </div>
 </div>
