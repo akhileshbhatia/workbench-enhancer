@@ -27,4 +27,10 @@
   border: none;
 }
 
-.accordion-toggle:focus{outline: none;}
+.accordion-toggle:focus{
+  outline: none;
+}
+
+.row{
+  padding-bottom: 4%;
+}

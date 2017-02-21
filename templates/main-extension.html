@@ -32,10 +32,9 @@
               </uib-accordion-heading>
               <div ng-repeat ="info in storageData[date] | filter: searchQuery track by $index">
                 <div class="row">
-                  <div class="col-xs-1">
-                    {{info[0]}}
-                  </div>
-                  <div class="col-xs-11" ng-click="setQueryText($event)" style="cursor:pointer;">
+                  <div class="col-xs-1" style="margin-left: -4%;"><b>{{info[0]}}</b></div>
+                  <div class="col-xs-11" style="text-align:left; padding-left:18%;cursor:pointer;"
+                  ng-click="setQueryText($event)">
                     {{info[1]}}
                   </div>
                 </div>
