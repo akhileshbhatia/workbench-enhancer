@@ -23,6 +23,6 @@ body.insertBefore(customDiv,document.getElementById('mainBlock'));
 // });
 
 //clear storage for specific key
-// chrome.storage.local.remove("16 Feb 2017",function(){
+// chrome.storage.local.remove("08 Jan 2017",function(){
 //   alert("Removed");
 // })

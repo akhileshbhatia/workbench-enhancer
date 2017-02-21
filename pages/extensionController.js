@@ -8,7 +8,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   $scope.addDataToStorage = function(event){
     event.preventDefault();
     var date = new Date(); // Use for todays date
-    //var date = new Date(2017,03,08); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
+    //var date = new Date(2017,00,08); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
     var todaysDate = $filter("date")(date,"dd MMM yyyy");
     var currentTime = $filter("date")(date,"HH:mm");
     var dataToSave = [currentTime,$scope.textAreaVal.trim()];

@@ -23,7 +23,7 @@
             <uib-accordion close-others="false">
               <uib-accordion-group ng-repeat="date in sortedDates" ng-init="accordionArray[$index] = true"
               is-open="accordionArray[$index]">
-              <uib-accordion-heading ng-click="accordionArray[$index]!=accordionArray[$index]">
+              <uib-accordion-heading ng-click="accordionArray[$index]= !accordionArray[$index]">
                 <div>
                   <span class="glyphicon pull-left"
                   ng-class="accordionArray[$index] ? 'glyphicon-chevron-down':'glyphicon-chevron-right'"></span>
