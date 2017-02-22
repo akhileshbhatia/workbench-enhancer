@@ -8,9 +8,9 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   $scope.addDataToStorage = function(event){
     event.preventDefault();
     var date = new Date(); // Use for todays date
-    //var date = new Date(2017,00,08); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
+    //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
     var todaysDate = $filter("date")(date,"dd MMM yyyy");
-    var currentTime = $filter("date")(date,"HH:mm");
+    var currentTime = Math.round(date/1000);
     var dataToSave = [currentTime,$scope.textAreaVal.trim()];
     chrome.storage.local.get(todaysDate,function(data){
       if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
@@ -43,6 +43,26 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   $scope.setQueryText = function(text){
     $scope.textAreaVal = text.trim();
+  }
+
+  $scope.deleteQuery = function(deleteFromDate,arrayToDelete){
+    // chrome.storage.local.get(deleteFromDate,function(data){
+    //   if(!angular.equals(data,{})){ //if some data is found for that date (just a safety check)
+    //     var queriesArray = data[deleteFromDate]; // using this instead of data, to take advantage of 2 way binding
+    //     var index = getIndexOf(arrayToDelete,queriesArray);
+    //     if(index!= -1){
+    //       queriesArray.splice(index,1);
+    //       data[deleteFromDate] = queriesArray;
+    //       chrome.storage.local.set(data,function(){
+    //         getData();
+    //       });
+    //     }
+    //   }
+    // });
+
+    var queriesArray = $scope.storageData[deleteFromDate];
+    var index = queriesArray.indexOf(arrayToDelete);
+    alert(index);
   }
 });
 
