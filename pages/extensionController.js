@@ -46,23 +46,28 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   }
 
   $scope.deleteQuery = function(deleteFromDate,arrayToDelete){
-    // chrome.storage.local.get(deleteFromDate,function(data){
-    //   if(!angular.equals(data,{})){ //if some data is found for that date (just a safety check)
-    //     var queriesArray = data[deleteFromDate]; // using this instead of data, to take advantage of 2 way binding
-    //     var index = getIndexOf(arrayToDelete,queriesArray);
-    //     if(index!= -1){
-    //       queriesArray.splice(index,1);
-    //       data[deleteFromDate] = queriesArray;
-    //       chrome.storage.local.set(data,function(){
-    //         getData();
-    //       });
-    //     }
-    //   }
-    // });
-
-    var queriesArray = $scope.storageData[deleteFromDate];
-    var index = queriesArray.indexOf(arrayToDelete);
-    alert(index);
+    var scopeQueriesArray = $scope.storageData[deleteFromDate];
+    var index = scopeQueriesArray.indexOf(arrayToDelete);
+    if(index != -1){
+      chrome.storage.local.get(deleteFromDate,function(data){
+        var storageQueriesArray = data[deleteFromDate];
+        storageQueriesArray.splice(index,1);
+        if(storageQueriesArray.length == 0){ //remove that key from storage if no data present for that date
+          chrome.storage.local.remove(deleteFromDate,function(){
+            getData();
+          })
+        }
+        else //when even a single query is present simply set the new data
+        {
+          chrome.storage.local.set(data,function(){
+            getData(); //update data on view
+          })
+        }
+      })
+    }
+    else{
+      console.log("No such data found in storage");
+    }
   }
 });
 
