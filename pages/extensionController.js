@@ -6,7 +6,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   $scope.accordionArray = [];
 
   $scope.addDataToStorage = function(event){
-    event.preventDefault();
+    //event.preventDefault();
     var date = new Date(); // Use for todays date
     //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
     var todaysDate = $filter("date")(date,"dd MMM yyyy");

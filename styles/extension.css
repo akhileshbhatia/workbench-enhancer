@@ -5,8 +5,8 @@
   border: 1px solid black;
   border-left: none;
   position: absolute;
-  overflow-y: scroll;
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 .panel-heading{
   /*background-color: #c4c4c4;*/
