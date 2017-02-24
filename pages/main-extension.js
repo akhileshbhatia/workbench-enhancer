@@ -55,6 +55,6 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
 
 app.filter("isEmpty",function(){
   return function(data) {
-    return angular.equals({},data);
+    return angular.equals({},data) || data == undefined;
   }
 })

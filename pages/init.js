@@ -6,18 +6,24 @@ var body = document.getElementsByTagName('body')[0];
 body.setAttribute("ng-app","workbenchEnhancerApp");
 body.setAttribute("ng-controller","workbenchEnhancerController");
 body.setAttribute("ng-cloak","");
-var textarea = document.getElementById("soql_query_textarea");
-textarea.setAttribute("ng-model","textAreaVal");
 
-var queryBtn = document.getElementsByName('querySubmit')[0];
+var pathname = window.location.pathname;
+if(pathname == "/query.php"){
+  var textarea = document.getElementById("soql_query_textarea");
+  var queryBtn = document.getElementsByName('querySubmit')[0];
+}
+else if(pathname == "/execute.php"){
+  var textarea = document.getElementById("scriptInput");
+  var queryBtn = document.getElementsByName('execute')[0];
+}
+textarea.setAttribute("ng-model","textAreaVal");
 queryBtn.setAttribute("ng-click","addDataToStorage($event)");
-queryBtn.setAttribute("ng-disabled","!(textAreaVal.length > 0)")
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");
 body.insertBefore(customDiv,document.getElementById('mainBlock'));
 
-//clear storage completely
+// //clear storage completely
 // chrome.storage.local.clear(function(){
 //   alert("Cleared storage");
 // });

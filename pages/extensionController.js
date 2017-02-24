@@ -5,34 +5,42 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   };
   $scope.accordionArray = [];
 
+  var pathname = window.location.pathname.replace("/","").replace(".php","");
+
   $scope.addDataToStorage = function(event){
-    //event.preventDefault();
-    var date = new Date(); // Use for todays date
-    //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
-    var todaysDate = $filter("date")(date,"dd MMM yyyy");
-    var currentTime = Math.round(date/1000);
-    var dataToSave = [currentTime,$scope.textAreaVal.trim()];
-    chrome.storage.local.get(todaysDate,function(data){
-      if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
-        data[todaysDate] = [dataToSave];
-      }
-      else{
-        data[todaysDate].unshift(dataToSave);
-      }
-      chrome.storage.local.set(data,function(){
-        getData(); //call to getData function again to refresh view
-      })
-    });
+    event.preventDefault();
+    if($scope.textAreaVal != ""){
+      var date = new Date(); // Use for todays date
+      //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
+      var todaysDate = $filter("date")(date,"dd MMM yyyy");
+      var currentTime = Math.round(date/1000);
+      var dataToSave = [currentTime,$scope.textAreaVal.trim()];
+      chrome.storage.local.get(pathname,function(data){
+        if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
+          data[pathname] = {};
+          data[pathname][todaysDate] = [dataToSave];
+        }
+        else{
+          data[pathname][todaysDate].unshift(dataToSave);
+        }
+        chrome.storage.local.set(data,function(){
+          getData(); //call to getData function again to refresh view
+        })
+      });
+    }
   }
 
   var getData = function(){
     var askForPromise = dataService.GetData();
     askForPromise.then(
       function(data){
-        $scope.storageData = data;
-        $scope.sortedDates = Object.keys($scope.storageData).sort(function(a,b){
+        //$scope.storageData = {};
+        $scope.storageData = data[pathname];
+        if($scope.storageData != undefined){
+          $scope.sortedDates = Object.keys($scope.storageData).sort(function(a,b){
           return (new Date(b) - new Date(a));
         });
+      }
       },
       function(){
         console.log("Some error in receiving data");

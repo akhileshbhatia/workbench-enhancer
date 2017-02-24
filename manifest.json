@@ -12,7 +12,6 @@
     {
       "matches": ["https://workbench.developerforce.com/query.php*"],
       "css": [
-        "styles/bootstrap_mod.css",
         "styles/bootstrap.min.css",
         "styles/extension.css"
       ],
@@ -30,11 +29,18 @@
     {
       "matches": ["https://workbench.developerforce.com/execute.php*"],
       "css": [
-        "styles/bootstrap_mod.css"
+        "styles/bootstrap.min.css",
+        "styles/extension.css"
       ],
       "js": [
         "scripts/jquery.min.js",
-        "pages/execute.js"
+        "scripts/bootstrap.min.js",
+        "scripts/angular.min.js",
+        "scripts/angular-animate.min.js",
+        "scripts/bootstrap-tpls.min.js",
+        "pages/init.js",
+        "pages/main-extension.js",
+        "pages/extensionController.js"
       ]
     },
     {
