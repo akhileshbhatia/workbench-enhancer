@@ -10,24 +10,8 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://workbench.developerforce.com/query.php*"],
-      "css": [
-        "styles/bootstrap.min.css",
-        "styles/extension.css"
-      ],
-      "js": [
-        "scripts/jquery.min.js",
-        "scripts/bootstrap.min.js",
-        "scripts/angular.min.js",
-        "scripts/angular-animate.min.js",
-        "scripts/bootstrap-tpls.min.js",
-        "pages/init.js",
-        "pages/main-extension.js",
-        "pages/extensionController.js"
-      ]
-    },
-    {
-      "matches": ["https://workbench.developerforce.com/execute.php*"],
+      "matches": ["https://workbench.developerforce.com/query.php*",
+        "https://workbench.developerforce.com/execute.php*"],
       "css": [
         "styles/bootstrap.min.css",
         "styles/extension.css"

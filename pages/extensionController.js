@@ -5,7 +5,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   };
   $scope.accordionArray = [];
 
-  var pathname = window.location.pathname.replace("/","").replace(".php","");
+  var pathname = dataService.GetPathName();
 
   $scope.addDataToStorage = function(event){
     event.preventDefault();
@@ -16,12 +16,14 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       var currentTime = Math.round(date/1000);
       var dataToSave = [currentTime,$scope.textAreaVal.trim()];
       chrome.storage.local.get(pathname,function(data){
-        if(angular.equals({},data)){ // //empty object means a new entry for that key will be made
+        if(angular.equals({},data[pathname])){ // if no such data found, create new empty object, if yes insert data
           data[pathname] = {};
-          data[pathname][todaysDate] = [dataToSave];
         }
-        else{
+        if(data[pathname].hasOwnProperty(todaysDate)){ // check if object has that key already
           data[pathname][todaysDate].unshift(dataToSave);
+        }
+        else{ // if key doesnt exist, create a new one
+          data[pathname][todaysDate] = [dataToSave];
         }
         chrome.storage.local.set(data,function(){
           getData(); //call to getData function again to refresh view
@@ -38,9 +40,9 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
         $scope.storageData = data[pathname];
         if($scope.storageData != undefined){
           $scope.sortedDates = Object.keys($scope.storageData).sort(function(a,b){
-          return (new Date(b) - new Date(a));
-        });
-      }
+            return (new Date(b) - new Date(a));
+          });
+        }
       },
       function(){
         console.log("Some error in receiving data");
@@ -54,39 +56,40 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   }
 
   $scope.deleteQuery = function(deleteFromDate,arrayToDelete){
+    //get the index of the data to delete from scope
     var scopeQueriesArray = $scope.storageData[deleteFromDate];
     var index = scopeQueriesArray.indexOf(arrayToDelete);
     if(index != -1){
-      chrome.storage.local.get(deleteFromDate,function(data){
-        var storageQueriesArray = data[deleteFromDate];
+      //delete that data from storage and refresh view
+      chrome.storage.local.get(pathname,function(data){
+        var storageQueriesArray = data[pathname][deleteFromDate];
         storageQueriesArray.splice(index,1);
-        if(storageQueriesArray.length == 0){ //remove that key from storage if no data present for that date
-          chrome.storage.local.remove(deleteFromDate,function(){
-            getData();
-          })
+        if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
+          delete data[pathname][deleteFromDate];
         }
-        else //when even a single query is present simply set the new data
-        {
-          chrome.storage.local.set(data,function(){
-            getData(); //update data on view
-          })
-        }
+        chrome.storage.local.set(data,function(){
+          getData(); //update data on view
+        })
       })
     }
     else{
-      console.log("No such data found in storage");
+      console.log("No such data found");
     }
   }
 });
 
 app.service("dataService",function($q){
+  var pathname = window.location.pathname.replace("/","").replace(".php","");
   return{
     GetData: function(){
       var defferdObj = $q.defer();
-      chrome.storage.local.get(null,function(data){
+      chrome.storage.local.get(pathname,function(data){
         defferdObj.resolve(data);
       })
       return defferdObj.promise;
+    },
+    GetPathName: function(){
+      return pathname;
     }
   }
 })
