@@ -16,7 +16,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       var currentTime = Math.round(date/1000);
       var dataToSave = [currentTime,$scope.textAreaVal.trim()];
       chrome.storage.local.get(pathname,function(data){
-        if(angular.equals({},data[pathname])){ // if no such data found, create new empty object, if yes insert data
+        if(angular.equals({},data[pathname])){ // if absolutely no data found, create new empty object
           data[pathname] = {};
         }
         if(data[pathname].hasOwnProperty(todaysDate)){ // check if object has that key already
