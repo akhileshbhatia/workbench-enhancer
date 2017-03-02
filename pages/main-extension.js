@@ -1,11 +1,11 @@
 //initialize angular application
 var app = angular.module("workbenchEnhancerApp",["ngAnimate","ui.bootstrap"]);
 
+//directive to show the extension div
 app.directive("mainExtension",function($sce){
   var mainExtension ={};
   mainExtension.restrict="A";
   mainExtension.templateUrl = $sce.trustAsResourceUrl(chrome.extension.getURL("templates/main-extension.html"));
-  //mainExtension.templateUrl = $sce.trustAsResourceUrl(chrome.extension.getURL("templates/angular-panel.html"));
   return mainExtension;
 });
 
@@ -53,8 +53,60 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
   };
 }]);
 
+//directive to toggle the extension div
+app.directive("toggleExtension",function(){
+  return{
+    link : function(scope,element,attrs){
+      scope.$watch(attrs.toggleExtension,function(show){
+        if(show){
+          element.css("left","0");
+        }
+        else{
+          element.css("left","-19%");
+        }
+      })
+    }
+  }
+})
+
+//directive to toggle the button
+app.directive("toggleButton",function(){
+  return{
+    link: function(scope,element,attrs){
+      scope.$watch(attrs.toggleButton,function(show){
+        if(show){
+          element.css("left","19%");
+          element.removeClass("glyphicon-chevron-right");
+          element.addClass("glyphicon-chevron-left");
+        }
+        else{
+          element.css("left","0");
+          element.removeClass("glyphicon-chevron-left");
+          element.addClass("glyphicon-chevron-right");
+        }
+      })
+    }
+  }
+})
+
 app.filter("isEmpty",function(){
   return function(data) {
     return angular.equals({},data) || data == undefined || data == null;
+  }
+})
+
+app.service("dataService",function($q){
+  var pathname = window.location.pathname.replace("/","").replace(".php","");
+  return{
+    GetData: function(){
+      var defferdObj = $q.defer();
+      chrome.storage.local.get(pathname,function(data){
+        defferdObj.resolve(data);
+      })
+      return defferdObj.promise;
+    },
+    GetPathName: function(){
+      return pathname;
+    }
   }
 })

@@ -1,8 +1,11 @@
 app.controller("workbenchEnhancerController",function($scope,$filter,dataService){
+  $scope.state = false;
+
   $scope.status = {
     isFirstOpen: true,
     isFirstDisabled: false
   };
+
   $scope.accordionArray = [];
 
   var pathname = dataService.GetPathName();
@@ -49,6 +52,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       }
     )
   }
+
   getData(); //call on page load
 
   $scope.setQueryText = function(text){
@@ -76,20 +80,5 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       console.log("No such data found");
     }
   }
-});
 
-app.service("dataService",function($q){
-  var pathname = window.location.pathname.replace("/","").replace(".php","");
-  return{
-    GetData: function(){
-      var defferdObj = $q.defer();
-      chrome.storage.local.get(pathname,function(data){
-        defferdObj.resolve(data);
-      })
-      return defferdObj.promise;
-    },
-    GetPathName: function(){
-      return pathname;
-    }
-  }
-})
+});

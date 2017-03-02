@@ -1,7 +1,9 @@
-<div id="extension">
+<span id="toggleButton" class="btn btn-default glyphicon glyphicon-chevron-right"
+  ng-click="state = !state" toggle-button="state">
+</span>
+<div id="extension" toggle-extension="state">
   <div class="row">
     <div class="col-xs-12">
-
       <div ng-if="(storageData | isEmpty)">
         <div class="row">
           <div class="col-xs-12">

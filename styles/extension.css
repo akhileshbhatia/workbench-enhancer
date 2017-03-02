@@ -1,5 +1,5 @@
 #extension{
-  left:0;
+  left: -19%;
   width: 19%;
   height: 100%;
   border: 1px solid black;
@@ -7,6 +7,7 @@
   position: absolute;
   overflow-x: auto;
   overflow-y: auto;
+  transition: 0.5s left;
 }
 .panel-heading{
   /*background-color: #c4c4c4;*/
@@ -39,4 +40,9 @@
   padding-left:14%;
   cursor:pointer;
   word-wrap: break-word;
+}
+#toggleButton{
+  position: absolute;
+  z-index: 1;
+  transition: 0.5s left;
 }
