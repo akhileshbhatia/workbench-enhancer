@@ -20,7 +20,7 @@ textarea.setAttribute("ng-model","textAreaVal");
 queryBtn.setAttribute("ng-click","addDataToStorage($event)");
 
 var customDiv = document.createElement("div");
-customDiv.setAttribute("main-extension","state");
+customDiv.setAttribute("main-extension","");
 body.insertBefore(customDiv,document.getElementById('mainBlock'));
 
 // //clear storage completely

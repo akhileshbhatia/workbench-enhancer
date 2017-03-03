@@ -54,6 +54,7 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
 }]);
 
 //directive to toggle the extension div
+//possible using ng-style as well but did this to learn dom manipulation
 app.directive("toggleExtension",function(){
   return{
     link : function(scope,element,attrs){
