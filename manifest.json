@@ -11,7 +11,8 @@
   "content_scripts": [
     {
       "matches": ["https://workbench.developerforce.com/query.php*",
-        "https://workbench.developerforce.com/execute.php*"],
+        "https://workbench.developerforce.com/execute.php*",
+        "https://workbench.developerforce.com/search.php*"],
       "css": [
         "styles/bootstrap.min.css",
         "styles/extension.css"

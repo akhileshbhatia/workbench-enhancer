@@ -10,9 +10,12 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   $scope.AddDataToStorage = function(event){
     // event.preventDefault();
+    if(pathname == "search"){
+      $scope.textAreaVal = document.getElementById("sosl_search_textarea").value.trim();
+    }
     if($scope.textAreaVal.trim() != ""){
       var date = new Date(); // Use for todays date
-      //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
+      //var date = new Date(2017,02,04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
       var todaysDate = $filter("date")(date,"dd MMM yyyy");
       var currentTime = Math.round(date/1000);
       var dataToSave = [currentTime,$scope.textAreaVal.trim()];
@@ -43,6 +46,10 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
           $scope.sortedDates = Object.keys($scope.storageData).sort(function(a,b){
             return (new Date(b) - new Date(a));
           });
+          //set the text area to the latest query in the storage
+          if($scope.sortedDates.length >=1){ //atleast one date present
+              $scope.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
+          }
         }
       },
       function(){

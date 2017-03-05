@@ -10,11 +10,15 @@ body.setAttribute("ng-cloak","");
 var pathname = window.location.pathname;
 if(pathname == "/query.php"){
   var textarea = document.getElementById("soql_query_textarea");
-  var queryBtn = document.getElementsByName('querySubmit')[0];
+  var queryBtn = document.getElementsByName("querySubmit")[0];
 }
 else if(pathname == "/execute.php"){
   var textarea = document.getElementById("scriptInput");
-  var queryBtn = document.getElementsByName('execute')[0];
+  var queryBtn = document.getElementsByName("execute")[0];
+}
+else if(pathname == "/search.php"){
+  var textarea = document.getElementById("sosl_search_textarea");
+  var queryBtn = document.getElementsByName("searchSubmit")[0];
 }
 textarea.setAttribute("ng-model","textAreaVal");
 queryBtn.setAttribute("ng-click","AddDataToStorage($event)");
