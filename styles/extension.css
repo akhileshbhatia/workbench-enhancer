@@ -7,7 +7,7 @@
   position: absolute;
   overflow-x: auto;
   overflow-y: auto;
-  transition: 0.5s left;
+  transition: 0.3s left;
 }
 .panel-heading{
   /*background-color: #c4c4c4;*/
@@ -44,5 +44,5 @@
 #toggleButton{
   position: absolute;
   z-index: 1;
-  transition: 0.5s left;
+  transition: 0.3s left;
 }

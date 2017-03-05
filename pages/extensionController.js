@@ -1,6 +1,4 @@
 app.controller("workbenchEnhancerController",function($scope,$filter,dataService){
-  $scope.state = false;
-
   $scope.status = {
     isFirstOpen: true,
     isFirstDisabled: false
@@ -19,7 +17,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       var currentTime = Math.round(date/1000);
       var dataToSave = [currentTime,$scope.textAreaVal.trim()];
       chrome.storage.local.get(pathname,function(data){
-        if(angular.equals({},data[pathname])){ // if absolutely no data found, create new empty object
+        if($filter("isEmpty")(data[pathname])){ // if absolutely no data found, create new empty object
           data[pathname] = {};
         }
         if(data[pathname].hasOwnProperty(todaysDate)){ // check if object has that key already
@@ -55,30 +53,70 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   getData(); //call on page load
 
-  $scope.setQueryText = function(text){
-    $scope.textAreaVal = text.trim();
-  }
+  var getExtensionState = function(){
+    var askForPromise = dataService.GetExtensionStates();
+    askForPromise.then(function(data){
+      if($filter("isEmpty")(data)){ //when no object for the key "extension_states" found,create the object
+      data["extension_states"]= {};
+      $scope.state = false;
+    }
+    if(data["extension_states"].hasOwnProperty(pathname)){
+      $scope.state = data["extension_states"][pathname];
+    }
+    else
+    {
+      $scope.state = false;
+    }
+    data["extension_states"][pathname] = $scope.state;
+    chrome.storage.local.set(data,function(){
 
-  $scope.deleteQuery = function(deleteFromDate,arrayToDelete){
-    //get the index of the data to delete from scope
-    var scopeQueriesArray = $scope.storageData[deleteFromDate];
-    var index = scopeQueriesArray.indexOf(arrayToDelete);
-    if(index != -1){
-      //delete that data from storage and refresh view
-      chrome.storage.local.get(pathname,function(data){
-        var storageQueriesArray = data[pathname][deleteFromDate];
-        storageQueriesArray.splice(index,1);
-        if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
-          delete data[pathname][deleteFromDate];
-        }
-        chrome.storage.local.set(data,function(){
-          getData(); //update data on view
-        })
+    })
+  },
+  function(err){
+    console.log("Following error in receiving extension states "+err);
+  })
+}
+
+getExtensionState(); //call on page load
+
+$scope.toggleExtension = function(){
+  $scope.state = !$scope.state;
+  var askForPromise = dataService.GetExtensionStates();
+  askForPromise.then(function(data){
+    data["extension_states"][pathname] = $scope.state;
+    chrome.storage.local.set(data,function(){
+
+    })
+  },
+  function(err){
+    console.log("Following error in receiving extension states while toggling "+err);
+  })
+}
+
+$scope.setQueryText = function(text){
+  $scope.textAreaVal = text.trim();
+}
+
+$scope.deleteQuery = function(deleteFromDate,arrayToDelete){
+  //get the index of the data to delete from scope
+  var scopeQueriesArray = $scope.storageData[deleteFromDate];
+  var index = scopeQueriesArray.indexOf(arrayToDelete);
+  if(index != -1){
+    //delete that data from storage and refresh view
+    chrome.storage.local.get(pathname,function(data){
+      var storageQueriesArray = data[pathname][deleteFromDate];
+      storageQueriesArray.splice(index,1);
+      if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
+        delete data[pathname][deleteFromDate];
+      }
+      chrome.storage.local.set(data,function(){
+        getData(); //update data on view
       })
-    }
-    else{
-      console.log("No such data found");
-    }
+    })
   }
+  else{
+    console.log("No such data found");
+  }
+}
 
 });

@@ -108,6 +108,13 @@ app.service("dataService",function($q){
     },
     GetPathName: function(){
       return pathname;
+    },
+    GetExtensionStates: function(){
+      var defferdObj = $q.defer();
+      chrome.storage.local.get("extension_states",function(data){
+          defferdObj.resolve(data);
+      });
+      return defferdObj.promise;
     }
   }
 })
