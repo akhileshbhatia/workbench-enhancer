@@ -8,7 +8,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   var pathname = dataService.GetPathName();
 
-  $scope.addDataToStorage = function(event){
+  $scope.AddDataToStorage = function(event){
     event.preventDefault();
     if($scope.textAreaVal != ""){
       var date = new Date(); // Use for todays date
@@ -27,13 +27,13 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
           data[pathname][todaysDate] = [dataToSave];
         }
         chrome.storage.local.set(data,function(){
-          getData(); //call to getData function again to refresh view
+          GetData(); //call to GetData function again to refresh view
         })
       });
     }
   }
 
-  var getData = function(){
+  var GetData = function(){
     var askForPromise = dataService.GetData();
     askForPromise.then(
       function(data){
@@ -51,72 +51,66 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     )
   }
 
-  getData(); //call on page load
+  GetData(); //call on page load
 
-  var getExtensionState = function(){
+  var GetOrSetExtensionState = function(get){
     var askForPromise = dataService.GetExtensionStates();
     askForPromise.then(function(data){
-      if($filter("isEmpty")(data)){ //when no object for the key "extension_states" found,create the object
-      data["extension_states"]= {};
-      $scope.state = false;
-    }
-    if(data["extension_states"].hasOwnProperty(pathname)){
-      $scope.state = data["extension_states"][pathname];
-    }
-    else
-    {
-      $scope.state = false;
-    }
-    data["extension_states"][pathname] = $scope.state;
-    chrome.storage.local.set(data,function(){
 
-    })
-  },
-  function(err){
-    console.log("Following error in receiving extension states "+err);
-  })
-}
-
-getExtensionState(); //call on page load
-
-$scope.toggleExtension = function(){
-  $scope.state = !$scope.state;
-  var askForPromise = dataService.GetExtensionStates();
-  askForPromise.then(function(data){
-    data["extension_states"][pathname] = $scope.state;
-    chrome.storage.local.set(data,function(){
-
-    })
-  },
-  function(err){
-    console.log("Following error in receiving extension states while toggling "+err);
-  })
-}
-
-$scope.setQueryText = function(text){
-  $scope.textAreaVal = text.trim();
-}
-
-$scope.deleteQuery = function(deleteFromDate,arrayToDelete){
-  //get the index of the data to delete from scope
-  var scopeQueriesArray = $scope.storageData[deleteFromDate];
-  var index = scopeQueriesArray.indexOf(arrayToDelete);
-  if(index != -1){
-    //delete that data from storage and refresh view
-    chrome.storage.local.get(pathname,function(data){
-      var storageQueriesArray = data[pathname][deleteFromDate];
-      storageQueriesArray.splice(index,1);
-      if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
-        delete data[pathname][deleteFromDate];
+      if(get){
+        if($filter("isEmpty")(data)){ //when no object for the key "extension_states" found,create the object
+        data["extension_states"]= {};
+        $scope.state = false;
       }
+      if(data["extension_states"].hasOwnProperty(pathname)){
+        $scope.state = data["extension_states"][pathname];
+      }
+      else
+      {
+        $scope.state = false;
+      }}
+
+      data["extension_states"][pathname] = $scope.state;
       chrome.storage.local.set(data,function(){
-        getData(); //update data on view
+
       })
+    },
+    function(err){
+      console.log("Following error in receiving extension states "+err);
     })
   }
-  else{
-    console.log("No such data found");
+
+  GetOrSetExtensionState(true); //call on page load, paramter "true" indicates that it is a get call
+
+  $scope.ToggleExtension = function(){
+    $scope.state = !$scope.state;
+    GetOrSetExtensionState(false); //paramter "false" indicates that it is a simple set call
   }
-}
+
+  $scope.SetQueryText = function(text){
+    $scope.textAreaVal = text.trim();
+  }
+
+  $scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
+    //get the index of the data to delete from scope
+    var scopeQueriesArray = $scope.storageData[deleteFromDate];
+    var index = scopeQueriesArray.indexOf(arrayToDelete);
+    if(index != -1){
+      //delete that data from storage and refresh view
+      chrome.storage.local.get(pathname,function(data){
+        var storageQueriesArray = data[pathname][deleteFromDate];
+        storageQueriesArray.splice(index,1);
+        if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
+          delete data[pathname][deleteFromDate];
+        }
+        chrome.storage.local.set(data,function(){
+          GetData(); //update data on view
+        })
+      })
+    }
+    else{
+      console.log("No such data found");
+    }
+  }
 
 });

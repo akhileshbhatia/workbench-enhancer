@@ -17,7 +17,7 @@ else if(pathname == "/execute.php"){
   var queryBtn = document.getElementsByName('execute')[0];
 }
 textarea.setAttribute("ng-model","textAreaVal");
-queryBtn.setAttribute("ng-click","addDataToStorage($event)");
+queryBtn.setAttribute("ng-click","AddDataToStorage($event)");
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");

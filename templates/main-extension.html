@@ -1,5 +1,5 @@
 <span id="toggleButton" class="btn btn-default glyphicon glyphicon-chevron-right"
-  ng-click="toggleExtension()" toggle-button="state">
+  ng-click="ToggleExtension()" toggle-button="state">
 </span>
 <div id="extension" toggle-extension="state">
   <div class="row">
@@ -37,12 +37,12 @@
                   <span class="col-xs-1" style="margin-left: -2%;"><b>{{info[0] * 1000 | date:'HH:mm'}}</b></span>
                   <!-- multiplying timestamp by 1000 to convert into milliseconds and get correct date -->
                   <span class="col-xs-9 no-selection query">
-                    <span ng-dblclick="setQueryText(info[1])"
+                    <span ng-dblclick="SetQueryText(info[1])"
                     dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
                   </span>
                 </span>
                 <span class="col-xs-1" style="padding-left: 8%">
-                  <span class="glyphicon glyphicon-trash" ng-click="deleteQuery(date,info)" style="cursor:pointer;"></span>
+                  <span class="glyphicon glyphicon-trash" ng-click="DeleteQuery(date,info)" style="cursor:pointer;"></span>
                 </span>
               </div>
             </div>
