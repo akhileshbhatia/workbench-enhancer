@@ -9,8 +9,8 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   var pathname = dataService.GetPathName();
 
   $scope.AddDataToStorage = function(event){
-    event.preventDefault();
-    if($scope.textAreaVal != ""){
+    // event.preventDefault();
+    if($scope.textAreaVal.trim() != ""){
       var date = new Date(); // Use for todays date
       //var date = new Date(2017,01,21); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
       var todaysDate = $filter("date")(date,"dd MMM yyyy");
@@ -58,7 +58,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     askForPromise.then(function(data){
 
       if(get){
-        if($filter("isEmpty")(data)){ //when no object for the key "extension_states" found,create the object
+        if($filter("isEmpty")(data["extension_states"])){ //when no object for the key "extension_states" found,create the object
         data["extension_states"]= {};
         $scope.state = false;
       }

@@ -58,12 +58,16 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
 app.directive("toggleExtension",function(){
   return{
     link : function(scope,element,attrs){
+      var body = element.parent().parent();
+      var mainBlock = body.find("div#mainBlock");
       scope.$watch(attrs.toggleExtension,function(show){
         if(show){
           element.css("left","0");
+          mainBlock.css("margin-left","29%");
         }
         else{
-          element.css("left","-19%");
+          element.css("left","-23%");
+          mainBlock.css("margin-left","");
         }
       })
     }
@@ -76,7 +80,7 @@ app.directive("toggleButton",function(){
     link: function(scope,element,attrs){
       scope.$watch(attrs.toggleButton,function(show){
         if(show){
-          element.css("left","19%");
+          element.css("left","23%");
           element.removeClass("glyphicon-chevron-right");
           element.addClass("glyphicon-chevron-left");
         }
