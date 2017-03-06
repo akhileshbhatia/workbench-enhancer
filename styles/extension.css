@@ -10,40 +10,49 @@
   overflow-y: auto;
   transition: 0.3s left;
 }
-.panel-heading{
+#extension .panel-heading{
   /*background-color: #c4c4c4;*/
   background-color: #d6d0d0;
   cursor: pointer;
 }
-.panel{
+#extension .panel{
   border: none;
 }
 .accordion-toggle:focus{
   outline: none;
 }
-.row{
+#extension .row{
   padding-bottom: 5%;
 }
-.collapse-text-toggle {
+#extension .collapse-text-toggle {
     font-size: 0.9em;
     color: #0000e6;
     cursor: pointer;
 }
-.collapse-text-toggle:hover {
+#extension .collapse-text-toggle:hover {
     text-decoration: underline;
 }
-.no-selection{
+#extension .no-selection{
   user-select: none;
   -webkit-user-select: none;
 }
-.query{
+#extension .query{
   text-align:left;
   padding-left:14%;
   cursor:pointer;
   word-wrap: break-word;
 }
-#toggleButton{
+#extension #toggleButton{
   position: absolute;
   z-index: 1;
   transition: 0.3s left;
+}
+
+/* Text editor's CSS settings */
+.ace_editor, .ace_editor *
+{
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
 }
