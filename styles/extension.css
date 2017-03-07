@@ -42,7 +42,7 @@
   cursor:pointer;
   word-wrap: break-word;
 }
-#extension #toggleButton{
+#toggleButton{
   position: absolute;
   z-index: 1;
   transition: 0.3s left;

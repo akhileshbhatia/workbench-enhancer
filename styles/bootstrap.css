@@ -276,7 +276,7 @@
         url(chrome-extension://__MSG_@@extension_id__/fonts/glyphicons-halflings-regular.ttf) format('truetype'), 
         url(chrome-extension://__MSG_@@extension_id__/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
 }
-#extension .glyphicon {
+.glyphicon {
   position: relative;
   top: 1px;
   display: inline-block;
@@ -537,10 +537,10 @@
 #extension .glyphicon-eject:before {
   content: "\e078";
 }
-#extension .glyphicon-chevron-left:before {
+.glyphicon-chevron-left:before {
   content: "\e079";
 }
-#extension .glyphicon-chevron-right:before {
+.glyphicon-chevron-right:before {
   content: "\e080";
 }
 #extension .glyphicon-plus-sign:before {
@@ -3099,7 +3099,7 @@
     font-size: 12px;
   }
 }
-#extension .btn {
+.btn {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -3120,31 +3120,31 @@
   border: 1px solid transparent;
   border-radius: 4px;
 }
-#extension .btn:focus,
-#extension .btn:active:focus,
-#extension .btn.active:focus,
-#extension .btn.focus,
-#extension .btn:active.focus,
-#extension .btn.active.focus {
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-#extension .btn:hover,
-#extension .btn:focus,
-#extension .btn.focus {
+.btn:hover,
+.btn:focus,
+.btn.focus {
   color: #333;
   text-decoration: none;
 }
-#extension .btn:active,
-#extension .btn.active {
+.btn:active,
+.btn.active {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-#extension .btn.disabled,
-#extension .btn[disabled],
-#extension fieldset[disabled] .btn {
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
   cursor: not-allowed;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
@@ -3155,60 +3155,60 @@
 #extension fieldset[disabled] a.btn {
   pointer-events: none;
 }
-#extension .btn-default {
+.btn-default {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
 }
-#extension .btn-default:focus,
-#extension .btn-default.focus {
+.btn-default:focus,
+.btn-default.focus {
   color: #333;
   background-color: #e6e6e6;
   border-color: #8c8c8c;
 }
-#extension .btn-default:hover {
+.btn-default:hover {
   color: #333;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
-#extension .btn-default:active,
-#extension .btn-default.active,
-#extension .open > .dropdown-toggle.btn-default {
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
   color: #333;
   background-color: #e6e6e6;
   border-color: #adadad;
 }
-#extension .btn-default:active:hover,
-#extension .btn-default.active:hover,
-#extension .open > .dropdown-toggle.btn-default:hover,
-#extension .btn-default:active:focus,
-#extension .btn-default.active:focus,
-#extension .open > .dropdown-toggle.btn-default:focus,
-#extension .btn-default:active.focus,
-#extension .btn-default.active.focus,
-#extension .open > .dropdown-toggle.btn-default.focus {
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
   color: #333;
   background-color: #d4d4d4;
   border-color: #8c8c8c;
 }
-#extension .btn-default:active,
-#extension .btn-default.active,
-#extension .open > .dropdown-toggle.btn-default {
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
   background-image: none;
 }
-#extension .btn-default.disabled:hover,
-#extension .btn-default[disabled]:hover,
-#extension fieldset[disabled] .btn-default:hover,
-#extension .btn-default.disabled:focus,
-#extension .btn-default[disabled]:focus,
-#extension fieldset[disabled] .btn-default:focus,
-#extension .btn-default.disabled.focus,
-#extension .btn-default[disabled].focus,
-#extension fieldset[disabled] .btn-default.focus {
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus {
   background-color: #fff;
   border-color: #ccc;
 }
-#extension .btn-default .badge {
+.btn-default .badge {
   color: #fff;
   background-color: #333;
 }
@@ -6452,26 +6452,26 @@
 }
 #extension .carousel-control .icon-prev,
 #extension .carousel-control .icon-next,
-#extension .carousel-control .glyphicon-chevron-left,
-#extension .carousel-control .glyphicon-chevron-right {
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
   position: absolute;
   top: 50%;
   z-index: 5;
   display: inline-block;
   margin-top: -10px;
 }
-#extension .carousel-control .icon-prev,
-#extension .carousel-control .glyphicon-chevron-left {
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
   left: 50%;
   margin-left: -10px;
 }
-#extension .carousel-control .icon-next,
-#extension .carousel-control .glyphicon-chevron-right {
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
   right: 50%;
   margin-right: -10px;
 }
-#extension .carousel-control .icon-prev,
-#extension .carousel-control .icon-next {
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
   width: 20px;
   height: 20px;
   font-family: serif;
@@ -6528,8 +6528,8 @@
   text-shadow: none;
 }
 @media screen and (min-width: 768px) {
-  #extension .carousel-control .glyphicon-chevron-left,
-  #extension .carousel-control .glyphicon-chevron-right,
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right,
   #extension .carousel-control .icon-prev,
   #extension .carousel-control .icon-next {
     width: 30px;
@@ -6537,11 +6537,11 @@
     margin-top: -10px;
     font-size: 30px;
   }
-  #extension .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-left,
   #extension .carousel-control .icon-prev {
     margin-left: -10px;
   }
-  #extension .carousel-control .glyphicon-chevron-right,
+  .carousel-control .glyphicon-chevron-right,
   #extension .carousel-control .icon-next {
     margin-right: -10px;
   }
