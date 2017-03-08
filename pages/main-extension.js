@@ -94,6 +94,19 @@ app.directive("toggleButton",function(){
   }
 })
 
+app.directive("updateModel",function(){
+  return{
+    link : function(scope,element,attrs){
+      var table = element.closest("table");
+      element.on("click",function(){
+        scope.$apply(function(){
+          scope.textAreaVal = table.find("textarea").val().trim();
+        })
+      })
+    }
+  }
+})
+
 app.filter("isEmpty",function(){
   return function(data) {
     return angular.equals({},data) || data == undefined || data == null;

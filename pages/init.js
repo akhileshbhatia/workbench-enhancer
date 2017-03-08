@@ -22,6 +22,7 @@ else if(pathname == "/search.php"){
 }
 textarea.setAttribute("ng-model","textAreaVal");
 queryBtn.setAttribute("ng-click","AddDataToStorage($event)");
+queryBtn.setAttribute("update-model","");
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");
