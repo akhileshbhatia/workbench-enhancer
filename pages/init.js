@@ -36,3 +36,68 @@ body.insertBefore(customDiv,document.getElementById('mainBlock'));
 // chrome.storage.local.remove("08 Jan 2017",function(){
 //   alert("Removed");
 // })
+
+// Code for Text Editor
+var editorNode = null;
+var editableArea = null;
+
+// Create a wrapper for the Ace Editor
+var editorNode = document.createElement("div");
+var editableArea = document.getElementById("soql_query_textarea");
+// Insert it just above the original editable area
+editableArea.parentNode.insertBefore(editorNode, editableArea);
+// Give it an ID
+editorNode.setAttribute("id", "_aceAnywhereEditor");
+// editorNode.setAttribute("id", "soql_query_textarea");
+// editableArea.setAttribute("id", "but_happiness");
+// Set inital content from the original editable area
+editorNode.innerHTML = editableArea.value;
+// Same height
+editorNode.style.height = "111px";
+// Same width
+editorNode.style.width = "744px";
+// Hide the original editable area
+// editableArea.style.display = "none";
+
+
+//Import Ace from a CDN
+var aceJS = document.createElement("script");
+//aceJS.src = "//cdnjs.cloudflare.com/ajax/libs/ace/1.1.2/ace.js";
+aceJS.src = "//cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js";
+aceJS.setAttribute("charset", "utf-8");
+
+//When the script it finally loaded
+aceJS.onload = function()
+{
+  var aceExtLanguageTools = document.createElement("script");
+  aceExtLanguageTools.src = "//cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js";
+  aceExtLanguageTools.onload = function()
+  {
+    var loadAce = document.createElement("script");
+    loadAce.innerHTML =
+    '\
+      var editableArea = document.getElementById("'+editableArea.id+'")\n\
+      ace.require("ace/ext/language_tools");\n\
+      var editor = ace.edit("'+editorNode.id+'");\n\
+      editor.setShowPrintMargin(false);\n\
+      editor.$blockScrolling = Infinity;\n\
+      var beautify = ace.require("ace/ext/beautify");\n\
+      editor.getSession().setMode("ace/mode/sql");\n\
+      editor.setOptions(\n\
+      {\n\
+        enableBasicAutocompletion: true,\n\
+        fontFamily: "tahoma",\n\
+        fontSize: "14pt"\n\
+      });\n\
+      editableArea.addEventListener("change", function(e)\n\
+      {\n\
+        editor.setValue(editableArea.value, 1);\n\
+        editor.clearSelection();\n\
+      });\n\
+    ';
+
+    document.head.appendChild(loadAce);
+  };
+  document.head.appendChild(aceExtLanguageTools);
+};
+document.head.appendChild(aceJS);
