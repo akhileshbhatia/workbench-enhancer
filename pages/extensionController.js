@@ -11,7 +11,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   var pathname = dataService.GetPathName();
 
   $scope.AddDataToStorage = function(event){
-    event.preventDefault();
+    // event.preventDefault();
     if($scope.textAreaVal.trim() != ""){
       var date = new Date(); // Use for todays date
       //var date = new Date(2017,02,04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
