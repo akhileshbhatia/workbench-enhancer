@@ -41,21 +41,23 @@ body.insertBefore(customDiv,document.getElementById('mainBlock'));
 var editorNode = null;
 var editableArea = null;
 
-//Create a wrapper for the Ace Editor
+// Create a wrapper for the Ace Editor
 var editorNode = document.createElement("div");
 var editableArea = document.getElementById("soql_query_textarea");
-//Insert it just above the original editable area
+// Insert it just above the original editable area
 editableArea.parentNode.insertBefore(editorNode, editableArea);
-//Give it an ID
+// Give it an ID
 editorNode.setAttribute("id", "_aceAnywhereEditor");
-//Set inital content from the original editable area
+// editorNode.setAttribute("id", "soql_query_textarea");
+// editableArea.setAttribute("id", "but_happiness");
+// Set inital content from the original editable area
 editorNode.innerHTML = editableArea.value;
-//Same height
+// Same height
 editorNode.style.height = "111px";
-//Same width
+// Same width
 editorNode.style.width = "744px";
-//Hide the original editable area
-editableArea.style.display = "none";
+// Hide the original editable area
+// editableArea.style.display = "none";
 
 
 //Import Ace from a CDN
@@ -76,7 +78,8 @@ aceJS.onload = function()
     '\
       var editableArea = document.getElementById("'+editableArea.id+'")\n\
       ace.require("ace/ext/language_tools");\n\
-      var editor = ace.edit("_aceAnywhereEditor");\n\
+      var editor = ace.edit("'+editorNode.id+'");\n\
+      editor.setShowPrintMargin(false);\n\
       editor.$blockScrolling = Infinity;\n\
       var beautify = ace.require("ace/ext/beautify");\n\
       editor.getSession().setMode("ace/mode/sql");\n\
@@ -86,9 +89,10 @@ aceJS.onload = function()
         fontFamily: "tahoma",\n\
         fontSize: "14pt"\n\
       });\n\
-      editor.getSession().on("change", function(e)\n\
+      editableArea.addEventListener("change", function(e)\n\
       {\n\
-        editableArea.innerHTML = editor.getSession().getValue();\n\
+        editor.setValue(editableArea.value, 1);\n\
+        editor.clearSelection();\n\
       });\n\
     ';
 
