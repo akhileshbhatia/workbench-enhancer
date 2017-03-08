@@ -5,7 +5,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   };
 
   $scope.textAreaVal = "";
-  
+
   $scope.accordionArray = [];
 
   var pathname = dataService.GetPathName();
@@ -120,3 +120,10 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   }
 
 });
+
+
+app.filter("isEmpty",function(){
+  return function(data) {
+    return angular.equals({},data) || data == undefined || data == null;
+  }
+})

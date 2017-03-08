@@ -24,8 +24,9 @@
         "scripts/angular-animate.min.js",
         "scripts/bootstrap-tpls.min.js",
         "pages/init.js",
-        "pages/main-extension.js",
-        "pages/extensionController.js"
+        "pages/directives.js",
+        "pages/services.js",
+        "pages/controller.js"
       ]
     },
     {
@@ -41,7 +42,7 @@
       "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
       "web_accessible_resources": [
         "popup.html",
-        "templates/main-extension.html",
+        "templates/extension.html",
         "fonts/*"
       ]
     }
