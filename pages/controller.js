@@ -31,7 +31,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
           data[pathname][todaysDate] = [dataToSave];
         }
         chrome.storage.local.set(data,function(){
-          
+
         })
       });
     }
@@ -124,6 +124,12 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     }
   }
 
+  $scope.OpenAllPanels = function(searchQuery){
+    //doing this open a panel if its closed while searching
+    if(searchQuery.length > 1){
+      $scope.accordionArray.fill(true);
+    }
+  }
 });
 
 
