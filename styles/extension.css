@@ -9,6 +9,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   transition: 0.3s left;
+  z-index: 999;
+  background-color: white;
 }
 #extension .panel-heading{
   /*background-color: #c4c4c4;*/
@@ -48,7 +50,7 @@
 }
 #toggleButton{
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   transition: 0.3s left;
 }
 
