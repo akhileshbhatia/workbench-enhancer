@@ -33,7 +33,7 @@
                 </div>
               </uib-accordion-heading>
               <div ng-repeat ="info in storageData[date] | filter: searchQuery track by $index">
-                <div class="row">
+                <div id="queryEntry" class="row">
                   <span class="col-xs-1" style="margin-left: -2%;"><b>{{info[0] * 1000 | date:'HH:mm'}}</b></span>
                   <!-- multiplying timestamp by 1000 to convert into milliseconds and get correct date -->
                   <span class="col-xs-9 no-selection query">
