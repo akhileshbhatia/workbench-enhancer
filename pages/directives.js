@@ -19,6 +19,11 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
       // start collapsed
       scope.collapsed = true;
 
+      scope.ToggleQueryView = function(){
+        scope.collapsed = !scope.collapsed;
+        scope.readMoreLessBtn.clicked = true;
+      }
+
       // wait for changes on the text
       attrs.$observe('ddTextCollapseText', function(text) {
         // get the length from the attributes
@@ -36,7 +41,7 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
           var secondSpan = $compile('<span ng-if="!collapsed">' + secondPart + '</span>')(scope);
           var moreIndicatorSpan = $compile('<span ng-if="collapsed">... </span>')(scope);
           var lineBreak = $compile('<br ng-if="!collapsed">')(scope);
-          var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="collapsed = !collapsed">({{collapsed ? "more" : "less"}})</span>')(scope);
+          var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="ToggleQueryView()">({{collapsed ? "more" : "less"}})</span>')(scope);
 
           // and add the new ones we created
           element.append(firstSpan);

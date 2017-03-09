@@ -6,6 +6,8 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
 
   $scope.textAreaVal = "";
 
+  $scope.readMoreLessBtn = {"clicked" : false};
+
   $scope.accordionArray = [];
 
   var pathname = dataService.GetPathName();
@@ -29,7 +31,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
           data[pathname][todaysDate] = [dataToSave];
         }
         chrome.storage.local.set(data,function(){
-          GetData(); //call to GetData function again to refresh view
+          
         })
       });
     }
@@ -47,7 +49,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
           });
           //set the text area to the latest query in the storage
           if($scope.sortedDates.length >=1){ //atleast one date present
-              $scope.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
+            $scope.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
           }
         }
       },
@@ -94,7 +96,10 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
   }
 
   $scope.SetQueryText = function(text){
-    $scope.textAreaVal = text.trim();
+    if(!$scope.readMoreLessBtn.clicked){
+        $scope.textAreaVal = text.trim();
+    }
+    $scope.readMoreLessBtn.clicked = false;
   }
 
   $scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
