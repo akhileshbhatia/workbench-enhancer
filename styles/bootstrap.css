@@ -107,12 +107,12 @@
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
-#extension pre {
+pre {
   overflow: auto;
 }
 #extension code,
 #extension kbd,
-#extension pre,
+pre,
 #extension samp {
   font-family: monospace, monospace;
   font-size: 1em;
@@ -220,7 +220,7 @@
   #extension a[href^="javascript:"]:after {
     content: "";
   }
-  #extension pre,
+pre,
   #extension blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
@@ -1537,7 +1537,7 @@
 }
 #extension code,
 #extension kbd,
-#extension pre,
+pre,
 #extension samp {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -1564,7 +1564,7 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-#extension pre {
+pre {
   display: block;
   padding: 9.5px;
   margin: 0 0 10px;
@@ -1577,7 +1577,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-#extension pre code {
+pre code {
   padding: 0;
   font-size: inherit;
   color: inherit;
@@ -3158,7 +3158,7 @@ fieldset[disabled] .btn {
 .btn-default {
   color: #333;
   background-color: #fff;
-  border-color: #ccc !important;
+  border-color: #ccc;
 }
 .btn-default:focus,
 .btn-default.focus {
