@@ -18,6 +18,9 @@
 #extension .panel{
   border: none;
 }
+#extension .panel-body{
+  padding-bottom: 0px;
+}
 .accordion-toggle:focus{
   outline: none;
 }
@@ -41,6 +44,7 @@
   padding-left:14%;
   cursor:pointer;
   word-wrap: break-word;
+  top: -2px;
 }
 #toggleButton{
   position: fixed;
@@ -48,9 +52,13 @@
   transition: 0.3s left;
 }
 
+span.ng-scope{
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 14px;
+}
+
 /* Text editor's CSS settings */
-.ace_editor, .ace_editor *
-{
+.ace_editor, .ace_editor *{
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
   font-size: 15px !important;
   font-weight: 400 !important;
