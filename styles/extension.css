@@ -38,10 +38,6 @@
 #extension .collapse-text-toggle:hover {
     text-decoration: underline;
 }
-#extension .no-selection{
-  user-select: none;
-  -webkit-user-select: none;
-}
 #extension .query{
   text-align:left;
   padding-left:14%;
