@@ -3,7 +3,7 @@
   "version": "0.1",
   "manifest_version": 2,
 
-  "description": "An extension to add much needed improvements to https://workbench.developerforce.com",
+  "description": "An extension to add much needed improvements to Salesforce Workbench",
   "icons":{
     "16":"icons/icon16.png",
     "48":"icons/icon48.png",
