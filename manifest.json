@@ -3,7 +3,7 @@
   "version": "0.1",
   "manifest_version": 2,
 
-  "description": "It does something.",
+  "description": "An extension to add much needed improvements to https://workbench.developerforce.com",
   "icons":{
     "16":"icons/icon16.png",
     "48":"icons/icon48.png",
