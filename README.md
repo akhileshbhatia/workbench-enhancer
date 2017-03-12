@@ -1,6 +1,6 @@
 # Workbench Enhancer
 
-An extension to add much needed improvements to workbench.developerforce.com.
+An extension to add much needed improvements to https://workbench.developerforce.com.
 
 #### Feature list:
 
