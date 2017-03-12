@@ -11,6 +11,9 @@
   transition: 0.3s left;
   z-index: 999;
   background-color: white;
+  margin-top: -8px;
+  /*font-family: 'PT Sans';*/
+  /*src: url(chrome-extension://__MSG_@@extension_id__/fonts/PT_Sans-Web-Bold.ttf);*/
 }
 #extension .panel-heading{
   /*background-color: #c4c4c4;*/
@@ -47,17 +50,28 @@
 }
 #toggleButton{
   position: fixed;
+  top:0;
   z-index: 999;
   transition: 0.3s left;
 }
 
+@font-face {
+  font-family: 'PT Sans';
+  src: url('chrome-extension://__MSG_@@extension_id__/fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+}
+
 span.ng-scope{
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "PT Sans", sans-serif;
   font-size: 14px;
+  font-style: normal;
 }
 
 #extension #queryEntry:hover {
   background-color: #e4e4e4;
+}
+
+.hidden-panel-heading .panel-heading{
+  display: none;
 }
 
 /* Text editor's CSS settings */
