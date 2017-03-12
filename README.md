@@ -2,11 +2,13 @@
 
 An extension to add much needed improvements to https://workbench.developerforce.com.
 
+
 #### Feature list:
 
  * Records the queries and executed code for future use.
  * Simply reuse previous queries on a single click.
  * Search through the queries.
+
 
 #### Features to be implemented soon:
 
@@ -19,15 +21,11 @@ An extension to add much needed improvements to https://workbench.developerforce
 Do register an issue [here][issues]. If you can solve any of the issues, then feel free to submit a [pull request][merge].
 
 
-
 ## Creators
 
-* Akhilesh Bhatia
-  * [GitHub][ab-gh]
+* Akhilesh Bhatia - [GitHub][ab-gh]
+* Jason Estibeiro - [GitHub][je-gh], [StackOverflow][je-so]
 
-* Jason Estibeiro
-  * [GitHub][je-gh]
-  * [StackOverflow][je-so]
 
 
 [issues]:https://github.com/akhileshbhatia/new-workbench/issues
