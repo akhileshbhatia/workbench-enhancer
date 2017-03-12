@@ -10,7 +10,7 @@ An extension to add much needed improvements to https://workbench.developerforce
 
 #### Features to be implemented soon:
 
- * Add systax highlighting and code completion to textarea in _query_ page as well as _execute_ page.
+ * Add syntax highlighting and code completion to textarea in _query_ page as well as _execute_ page.
  * Ability to group or save _favourite_ queries or snippets as a collection.
 
 
