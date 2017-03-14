@@ -37,9 +37,8 @@
                 <div id="queryEntry" class="row" style="padding-bottom:2%;margin-bottom:0px;">
                   <span class="col-xs-1" style="margin-left: -2%;"><b>{{info[0] * 1000 | date:'HH:mm'}}</b></span>
                   <!-- multiplying timestamp by 1000 to convert into milliseconds and get correct date -->
-                  <span class="col-xs-9 query">
-                    <span ng-click="SetQueryText(info[1])"
-                    dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
+                  <span class="col-xs-9 query" ng-click="SetQueryText(info[1])">
+                    <span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
                   </span>
                 </span>
                 <span class="col-xs-1" style="padding-left: 8%">
