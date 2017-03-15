@@ -1,7 +1,14 @@
 <span id="toggleButton" class="btn btn-default glyphicon glyphicon-chevron-right"
-  ng-click="ToggleExtension()" toggle-button="state">
+ng-click="ToggleExtension()" toggle-button="state">
 </span>
 <div id="extension" toggle-extension="state">
+  <div class="row" style="margin-bottom: -4%;">
+    <div class="col-xs-2">
+      <a href="http://jrod.in/workbench-enhancer/" target="_blank">
+        <span class="glyphicon glyphicon-question-sign"></span>
+      </a>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12">
       <div ng-if="(storageData | isEmpty)">
@@ -39,19 +46,19 @@
                   <!-- multiplying timestamp by 1000 to convert into milliseconds and get correct date -->
                   <span class="col-xs-9 query" ng-click="SetQueryText(info[1])">
                     <span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
+                    </span>
                   </span>
-                </span>
-                <span class="col-xs-1" style="padding-left: 8%">
-                  <span class="glyphicon glyphicon-trash" ng-click="DeleteQuery(date,info)" style="cursor:pointer;"></span>
-                </span>
+                  <span class="col-xs-1" style="padding-left: 8%">
+                    <span class="glyphicon glyphicon-trash" ng-click="DeleteQuery(date,info)" style="cursor:pointer;"></span>
+                  </span>
+                </div>
               </div>
-            </div>
-          </uib-accordion-group>
-        </uib-accordion>
+            </uib-accordion-group>
+          </uib-accordion>
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
 </div>
 </div>
