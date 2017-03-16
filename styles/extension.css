@@ -33,6 +33,14 @@
   margin-bottom: 5%;
   padding-top: 8px;
 }
+#extension header .row{
+  margin-bottom: -4%;
+  background-color: #ece3e3;
+  border: 1px solid;
+  padding-top: 4%;
+  padding-bottom: 1%;
+  margin-bottom: -3%;
+}
 #extension .collapse-text-toggle {
   font-size: 0.9em;
   color: #0000e6;

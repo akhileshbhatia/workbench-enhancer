@@ -2,13 +2,18 @@
 ng-click="ToggleExtension()" toggle-button="state">
 </span>
 <div id="extension" toggle-extension="state">
-  <div class="row" style="margin-bottom: -4%;">
-    <div class="col-xs-2">
-      <a href="http://jrod.in/workbench-enhancer/" target="_blank">
-        <span class="glyphicon glyphicon-question-sign"></span>
-      </a>
+  <header>
+    <div class="row">
+      <div class="col-xs-2">
+        <a href="http://jrod.in/workbench-enhancer/" target="_blank">
+          <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+      </div>
+      <div class="col-xs-8" style="margin-top:-3.5%; margin-left:0%;">
+        <h4>Workbench Enhancer</h4>
+      </div>
     </div>
-  </div>
+  </header>
   <div class="row">
     <div class="col-xs-12">
       <div ng-if="(storageData | isEmpty)">
