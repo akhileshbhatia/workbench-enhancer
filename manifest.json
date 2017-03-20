@@ -1,6 +1,6 @@
 {
   "name": "Workbench Enhancer Beta",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "manifest_version": 2,
 
   "description": "An extension to add much needed improvements to Salesforce Workbench",
