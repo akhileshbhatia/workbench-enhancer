@@ -82,6 +82,12 @@ span.ng-scope{
   display: none;
 }
 
+#extension .navbar-brand {
+  transform: translateX(-50%);
+  left: 53%;
+  position: absolute;
+}
+
 /* Text editor's CSS settings */
 .ace_editor, .ace_editor *{
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;

@@ -3,18 +3,28 @@ ng-click="ToggleExtension()" toggle-button="state">
 </span>
 <div id="extension" toggle-extension="state">
   <header>
-    <div class="row">
-      <div class="col-xs-2">
-        <a href="http://jrod.in/workbench-enhancer/" target="_blank">
-          <span class="glyphicon glyphicon-question-sign"></span>
-        </a>
-      </div>
-      <div class="col-xs-8" style="margin-top:-3.5%; margin-left:0%;">
-        <h4>Workbench Enhancer</h4>
+    <div class="container-fluid">
+      <div class="navbar navbar-default">
+        <div class="container-fluid">
+
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Workbench Enhancer</a>
+          </div>
+        
+          <div id="navbar" class="navbar-collapse collapse small">
+            <ul class="nav navbar-nav navbar-left" style="left: 0px;position: absolute;">
+              <li><a href="http://jrod.in/workbench-enhancer" target="_blank" title="Home Page"><span style="font-size:1.5em;" class="glyphicon glyphicon-info-sign"></span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="right: 15px;position: absolute;">
+              <li><a href="#"><span style="font-size:1.5em;display: none;" class="glyphicon glyphicon-cog" title="Settings"></span></a></li>
+            </ul>
+          </div>
+
+        </div>
       </div>
     </div>
   </header>
-  <div class="row">
+  <div class="row" style="padding-top: 0px;">
     <div class="col-xs-12">
       <div ng-if="(storageData | isEmpty)">
         <div class="row">

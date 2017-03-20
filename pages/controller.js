@@ -68,7 +68,7 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
       if(get){
         if($filter("isEmpty")(data["extension_states"])){ //when no object for the key "extension_states" found,create the object
         data["extension_states"]= {};
-        $scope.state = false;
+        $scope.state = true;
       }
       if(data["extension_states"].hasOwnProperty(pathname)){
         $scope.state = data["extension_states"][pathname];
