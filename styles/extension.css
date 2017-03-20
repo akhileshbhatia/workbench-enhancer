@@ -86,6 +86,8 @@ span.ng-scope{
   transform: translateX(-50%);
   left: 53%;
   position: absolute;
+  font-size: 16px;
+  padding-top: 5px;
 }
 
 /* Text editor's CSS settings */
