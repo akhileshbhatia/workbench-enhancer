@@ -124,6 +124,22 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     }
   }
 
+  var SetWatches = function(){
+    switch (pathname) {
+      case "query":
+            $scope.$watchGroup(['querySelect','queryOrderBy','querySort','queryNulls',
+                                'queryLimit','queryFilter','queryFilterCondition','queryFilterValue'],
+                                function(){
+                                  console.dir(textarea);
+                                })
+            break;
+      default:
+            break;
+    }
+  }
+
+  SetWatches();
+
   $scope.OpenAllPanels = function(searchQuery){
     //doing this opens a panel if its closed while searching
     if(searchQuery.length >= 1){
