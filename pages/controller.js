@@ -3,15 +3,28 @@ app.controller("workbenchEnhancerController",function($scope,$filter,dataService
     isFirstOpen: true,
     isFirstDisabled: false
   };
-
   $scope.textAreaVal = "";
-
   $scope.readMoreLessBtn = {"clicked" : false};
-
   $scope.accordionArray = [];
-
   var pathname = dataService.GetPathName();
 
+  $scope.InitializeModelsForPath = function(){
+    switch (pathname) {
+      case "query":
+            $scope.querySelect = "";
+            $scope.queryOrderBy = "";
+            $scope.querySort = "";
+            $scope.queryNulls = "";
+            $scope.queryLimit = "";
+            $scope.queryFilter = "";
+            $scope.queryFilterCondition = "";
+            $scope.queryFilterValue = "";
+            break;
+      default:
+            break;
+
+    }
+  }
   $scope.AddDataToStorage = function(event){
     // event.preventDefault();
     if($scope.textAreaVal.trim() != ""){
