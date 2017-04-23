@@ -26,29 +26,29 @@ textarea.setAttribute("ng-model","textAreaVal");
 queryBtn.setAttribute("ng-click","AddDataToStorage($event)");
 queryBtn.setAttribute("update-model","");
 
-AddModels();
+//AddModels();
 
 var customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension","");
 body.insertBefore(customDiv,document.getElementById('mainBlock'));
 
-function AddModels(){
-  switch (pathname) {
-    case "query":
-          document.getElementById("QB_field_sel").setAttribute("ng-model","querySelect");
-          document.getElementById("QB_orderby_field").setAttribute("ng-model","queryOrderBy");
-          document.getElementById("QB_orderby_sort").setAttribute("ng-model","querySort");
-          document.getElementById("QB_nulls").setAttribute("ng-model","queryNulls");
-          document.getElementById("QB_limit_txt").setAttribute("ng-model","queryLimit");
-          document.getElementById("QB_filter_field_0").setAttribute("ng-model","queryFilter");
-          document.getElementById("QB_filter_compOper_0").setAttribute("ng-model","queryFilterCondition");
-          document.getElementById("QB_filter_value_0").setAttribute("ng-model","queryFilterValue");
-          break;
-
-    default:
-          break;
-  }
-}
+// function AddModels(){
+//   switch (pathname) {
+//     case "query":
+//           document.getElementById("QB_field_sel").setAttribute("ng-model","querySelect");
+//           document.getElementById("QB_orderby_field").setAttribute("ng-model","queryOrderBy");
+//           document.getElementById("QB_orderby_sort").setAttribute("ng-model","querySort");
+//           document.getElementById("QB_nulls").setAttribute("ng-model","queryNulls");
+//           document.getElementById("QB_limit_txt").setAttribute("ng-model","queryLimit");
+//           document.getElementById("QB_filter_field_0").setAttribute("ng-model","queryFilter");
+//           document.getElementById("QB_filter_compOper_0").setAttribute("ng-model","queryFilterCondition");
+//           document.getElementById("QB_filter_value_0").setAttribute("ng-model","queryFilterValue");
+//           break;
+//
+//     default:
+//           break;
+//   }
+// }
 // //clear storage completely
 // chrome.storage.local.clear(function(){
 //   alert("Cleared storage");

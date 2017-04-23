@@ -33,12 +33,12 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
 
         if (text.length > maxLength) {
           // split the text in two parts, the first always showing
-          var firstPart = String(text).substring(0, maxLength);
-          var secondPart = String(text).substring(maxLength, text.length);
+          scope.firstPart = String(text).substring(0, maxLength);
+          scope.secondPart = String(text).substring(maxLength, text.length);
 
           // create some new html elements to hold the separate info
-          var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-          var secondSpan = $compile('<span ng-if="!collapsed">' + secondPart + '</span>')(scope);
+          var firstSpan = $compile('<span ng-bind="firstPart"></span>')(scope);
+          var secondSpan = $compile('<span ng-if="!collapsed" ng-bind="secondPart"></span>')(scope);
           var moreIndicatorSpan = $compile('<span ng-if="collapsed">... </span>')(scope);
           var lineBreak = $compile('<br ng-if="!collapsed">')(scope);
           var toggleButton = $compile('<span class="collapse-text-toggle" ng-click="ToggleQueryView()">({{collapsed ? "more" : "less"}})</span>')(scope);
@@ -51,7 +51,7 @@ app.directive('ddTextCollapse', ['$compile', function($compile) {
           element.append(toggleButton);
         }
         else {
-          element.append(text);
+          element.text(text);
         }
       });
     }
