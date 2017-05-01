@@ -4,9 +4,9 @@
 //initializes the current html to link to angular application by adding ng-app,ng-controller and custom directive
 var body = document.getElementsByTagName('body')[0];
 body.setAttribute("ng-app","workbenchEnhancerApp");
-body.setAttribute("ng-controller","workbenchEnhancerController");
+body.setAttribute("ng-controller","baseController");
 body.setAttribute("ng-cloak","");
-body.setAttribute("ng-init","InitializeModelsForPath()");
+//body.setAttribute("ng-init","InitializeModelsForPath()");
 
 var pathname = window.location.pathname.replace("/","").replace(".php","");;
 

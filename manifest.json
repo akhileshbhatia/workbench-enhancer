@@ -30,12 +30,15 @@
         "scripts/jquery.min.js",
         "scripts/bootstrap.min.js",
         "scripts/angular.min.js",
+        "scripts/angular-route.min.js",
         "scripts/angular-animate.min.js",
         "scripts/bootstrap-tpls.min.js",
         "pages/init.js",
         "pages/directives.js",
+        "pages/routeConfig.js",
         "pages/services.js",
-        "pages/controller.js"
+        "pages/baseController.js",
+        "pages/allDatacontroller.js"
       ]
     },
     {
@@ -51,7 +54,9 @@
       "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
       "web_accessible_resources": [
         "popup.html",
-        "templates/extension.html",
+        "templates/base.html",
+        "templates/allData.html",
+        "templates/temp.html",
         "fonts/*",
         "icons/*"
       ]

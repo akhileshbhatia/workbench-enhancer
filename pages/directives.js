@@ -1,11 +1,11 @@
 //initialize angular application
-var app = angular.module("workbenchEnhancerApp",["ngAnimate","ui.bootstrap"]);
+var app = angular.module("workbenchEnhancerApp",["ngAnimate","ui.bootstrap","ngRoute"]);
 
 //directive to show the extension div
 app.directive("mainExtension",function($sce){
   var mainExtension ={};
   mainExtension.restrict="A";
-  mainExtension.templateUrl = $sce.trustAsResourceUrl(chrome.extension.getURL("templates/extension.html"));
+  mainExtension.templateUrl = $sce.trustAsResourceUrl(chrome.extension.getURL("templates/base.html"));
   return mainExtension;
 });
 

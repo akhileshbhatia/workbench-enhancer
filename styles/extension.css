@@ -90,6 +90,22 @@ span.ng-scope{
   padding-top: 5px;
 }
 
+#extension .navbar-nav > li > a {
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+}
+#extension .navbar {
+  min-height:40px !important;
+}
+#extension .navbar-center{
+  position: absolute;
+  left: 20%;
+  font-size: 13px;
+}
+#pageNav{
+  margin-top: 2%;
+}
+
 /* Text editor's CSS settings */
 .ace_editor, .ace_editor *{
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;

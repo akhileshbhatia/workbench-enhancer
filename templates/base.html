@@ -1,0 +1,38 @@
+<span id="toggleButton" class="btn btn-default glyphicon glyphicon-chevron-right"
+ng-click="ToggleExtension()" toggle-button="state">
+</span>
+<div id="extension" toggle-extension="state">
+  <header>
+    <div class="container-fluid" style="height: 50px;">
+      <div class="navbar navbar-default" style="height:50px;">
+        <div class="container-fluid">
+
+          <div class="navbar-header">
+            <a class="navbar-brand" style="cursor:pointer;">Workbench Enhancer</a>
+          </div>
+
+          <div id="navbar" class="navbar-collapse collapse small">
+            <ul class="nav navbar-nav navbar-left" style="left: 0px;position: absolute;">
+              <li><a href="http://jrod.in/workbench-enhancer" target="_blank" title="Home Page"><span style="font-size:1.5em;" class="glyphicon glyphicon-info-sign"></span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="right: 15px;position: absolute;">
+              <li><a href="#"><span style="font-size:1.5em;display: none;" class="glyphicon glyphicon-cog" title="Settings"></span></a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-default" id="pageNav">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-center">
+          <li class="active"><a href="#">All</a></li>
+          <li><a href="#">Bookmarked</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <div ng-view>/div>
+</div>
