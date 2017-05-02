@@ -8,7 +8,7 @@ body.setAttribute("ng-controller","baseController");
 body.setAttribute("ng-cloak","");
 //body.setAttribute("ng-init","InitializeModelsForPath()");
 
-var pathname = window.location.pathname.replace("/","").replace(".php","");;
+var pathname = window.location.pathname.replace("/","").replace(".php","").replace("#","");
 
 if(pathname == "query"){
   var textarea = document.getElementById("soql_query_textarea");
@@ -22,8 +22,8 @@ else if(pathname == "search"){
   var textarea = document.getElementById("sosl_search_textarea");
   var queryBtn = document.getElementsByName("searchSubmit")[0];
 }
-textarea.setAttribute("ng-model","textAreaVal");
-queryBtn.setAttribute("ng-click","AddDataToStorage($event)");
+textarea.setAttribute("ng-model","allDataObj.textAreaVal");
+queryBtn.setAttribute("ng-click","allDataObj.AddDataToStorage($event)");
 queryBtn.setAttribute("update-model","");
 
 //AddModels();

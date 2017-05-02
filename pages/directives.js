@@ -2,10 +2,10 @@
 var app = angular.module("workbenchEnhancerApp",["ngAnimate","ui.bootstrap","ngRoute"]);
 
 //directive to show the extension div
-app.directive("mainExtension",function($sce){
+app.directive("mainExtension",function(){
   var mainExtension ={};
   mainExtension.restrict="A";
-  mainExtension.templateUrl = $sce.trustAsResourceUrl(chrome.extension.getURL("templates/base.html"));
+  mainExtension.templateUrl = chrome.extension.getURL("templates/base.html");
   return mainExtension;
 });
 
@@ -105,7 +105,7 @@ app.directive("updateModel",function(){
       var table = element.closest("table");
       element.on("click",function(){
         scope.$apply(function(){
-          scope.textAreaVal = table.find("textarea").val().trim();
+          scope.allDataObj.textAreaVal = table.find("textarea").val().trim();
         })
       })
     }

@@ -3,41 +3,41 @@ app.controller("allDataController",function($scope,$filter,dataService){
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  $scope.textAreaVal = "";
+  $scope.allDataObj.textAreaVal = "";
   $scope.readMoreLessBtn = {"clicked" : false};
   $scope.accordionArray = [];
   var pathname = dataService.GetPathName();
 
-  // $scope.InitializeModelsForPath = function(){
-  //   switch (pathname) {
-  //     case "query":
-  //     $scope.querySelect = "";
-  //     $scope.queryOrderBy = "";
-  //     $scope.querySort = "";
-  //     $scope.queryNulls = "";
-  //     $scope.queryLimit = "";
-  //     $scope.queryFilter = "";
-  //     $scope.queryFilterCondition = "";
-  //     $scope.queryFilterValue = "";
-  //     break;
-  //     default:
-  //     break;
-  //
-  //   }
-  // }
-  $scope.AddDataToStorage = function(event){
+// $scope.InitializeModelsForPath = function(){
+//     switch (pathname) {
+//       case "query":
+//       $scope.querySelect = "";
+//       $scope.queryOrderBy = "";
+//       $scope.querySort = "";
+//       $scope.queryNulls = "";
+//       $scope.queryLimit = "";
+//       $scope.queryFilter = "";
+//       $scope.queryFilterCondition = "";
+//       $scope.queryFilterValue = "";
+//       break;
+//       default:
+//       break;
+//
+//     }
+//   }
+  $scope.allDataObj.AddDataToStorage = function(event){
     // event.preventDefault();
-    if($scope.textAreaVal.trim() != ""){
+    if($scope.allDataObj.textAreaVal.trim() != ""){
       var date = new Date(); // Use for todays date
       //var date = new Date(2017,02,04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
       var todaysDate = $filter("date")(date,"dd MMM yyyy");
       var currentTime = Math.round(date/1000);
-      var dataToSave = [currentTime,$scope.textAreaVal.trim()];
+      var dataToSave = [currentTime,$scope.allDataObj.textAreaVal.trim()];
       chrome.storage.local.get(pathname,function(data){
         if($filter("isEmpty")(data[pathname])){ // if absolutely no data found, create new empty object
           data[pathname] = {};
         }
-        if(data[pathname].hasOwnProperty(todaysDate)){ // check if object has that key already
+        if(data[pathname].hasOwnProperty(todaysDate)){ // check if object has that key already, if it does, add the data
           data[pathname][todaysDate].unshift(dataToSave);
         }
         else{ // if key doesnt exist, create a new one
@@ -62,7 +62,7 @@ app.controller("allDataController",function($scope,$filter,dataService){
           });
           //set the text area to the latest query in the storage
           if($scope.sortedDates.length >=1){ //atleast one date present
-            $scope.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
+            $scope.allDataObj.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
           }
         }
       },
@@ -77,7 +77,7 @@ app.controller("allDataController",function($scope,$filter,dataService){
 
 $scope.SetQueryText = function(text){
   if(!$scope.readMoreLessBtn.clicked){
-    $scope.textAreaVal = text.trim();
+    $scope.allDataObj.textAreaVal = text.trim();
   }
   $scope.readMoreLessBtn.clicked = false;
 }
@@ -118,7 +118,7 @@ $scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
 //   }
 // }
 //
-// SetWatches();
+//  SetWatches();
 
 $scope.OpenAllPanels = function(searchQuery){
   //doing this opens a panel if its closed while searching

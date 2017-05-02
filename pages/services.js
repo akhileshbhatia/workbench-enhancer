@@ -1,5 +1,5 @@
 app.service("dataService",function($q){
-  var pathname = window.location.pathname.replace("/","").replace(".php","");
+  var pathname = window.location.pathname.replace("/","").replace(".php","").replace("#","");
   return{
     GetData: function(){
       var defferdObj = $q.defer();

@@ -43,4 +43,6 @@ $scope.ToggleExtension = function(){
   $scope.state = !$scope.state;
   SetExtensionState();
 }
+
+$scope.allDataObj = {}; //creating an object for all calling allDataController methods using prototypical inheritance
 })
