@@ -28,8 +28,12 @@ ng-click="ToggleExtension()" toggle-button="state">
   <nav class="navbar navbar-default" id="pageNav">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-center">
-          <li class="active"><a href="#/">All</a></li>
-          <li><a href="#bookmarks">Bookmarked</a></li>
+          <li ng-class = "isAllLinkActive ? 'active' : ''" ng-click = "isAllLinkActive = true;">
+            <a href="#/">All</a>
+          </li>
+          <li ng-class = "isAllLinkActive ? '' : 'active'" ng-click = "isAllLinkActive = false;">
+            <a href="#bookmarks">Bookmarked</a>
+          </li>
         </ul>
     </div>
   </nav>

@@ -1,4 +1,6 @@
 app.controller("baseController",function($scope,$filter,dataService){
+  $scope.isAllLinkActive = true;
+
   var GetExtensionState = function(){
     var askForPromise = dataService.GetExtensionStates();
     askForPromise.then(function(data){
