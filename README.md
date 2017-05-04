@@ -2,6 +2,9 @@
 
 An extension to add much needed improvements to https://workbench.developerforce.com.
 
+#### Install
+
+Install Workbench Enhancer from [Chrome Web Store][chrome-link]. Will be available for other browsers soon.
 
 #### Feature list:
 
@@ -27,7 +30,7 @@ Do register an issue [here][issues]. If you can solve any of the issues, then fe
 * Jason Estibeiro - [GitHub][je-gh], [StackOverflow][je-so]
 
 
-
+[chrome-link]:https://chrome.google.com/webstore/detail/workbench-enhancer-beta/aeildolmfjhmlbbambcaobkjkhppphod
 [issues]:https://github.com/akhileshbhatia/new-workbench/issues
 [merge]:https://github.com/akhileshbhatia/new-workbench/pulls
 [ab-gh]:https://github.com/akhileshbhatia
