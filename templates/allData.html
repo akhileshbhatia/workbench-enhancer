@@ -31,14 +31,17 @@
             </uib-accordion-heading>
             <div ng-repeat ="info in storageData[date] | filter: searchQuery track by $index">
               <div id="queryEntry" class="row" style="padding-bottom:2%;margin-bottom:0px;">
-                <span class="col-xs-1" style="margin-left: -2%;"><b>{{info[0] * 1000 | date:'HH:mm'}}</b></span>
+                <span class="col-xs-2" style="margin-left: -3%; width: 13%;"><b>{{info[0] * 1000 | date:'hh:mma'}}</b></span>
                 <!-- multiplying timestamp by 1000 to convert into milliseconds and get correct date -->
-                <span class="col-xs-9 query" ng-click="SetQueryText(info[1])">
+                <span class="col-xs-8 query" ng-click="SetQueryText(info[1])">
                   <span dd-text-collapse dd-text-collapse-max-length="50" dd-text-collapse-text="{{info[1]}}">
                   </span>
                 </span>
-                <span class="col-xs-1" style="padding-left: 8%">
-                  <span class="glyphicon glyphicon-trash" ng-click="DeleteQuery(date,info)" style="cursor:pointer;"></span>
+                <span class="col-xs-1">
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </span>
+                <span class="col-xs-1" style="padding-left: 6%">
+                  <span class="glyphicon glyphicon-remove" ng-click="DeleteQuery(date,info)"></span>
                 </span>
               </div>
             </div>

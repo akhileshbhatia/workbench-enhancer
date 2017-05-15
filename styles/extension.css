@@ -105,6 +105,20 @@ span.ng-scope{
 #pageNav{
   margin-top: 2%;
 }
+#extension .glyphicon-star-empty{
+  -webkit-transition-duration: 1s;
+}
+#extension .glyphicon-remove{
+  -webkit-transition-duration: 1s;
+}
+#extension .glyphicon-star-empty:hover{
+  cursor: pointer;
+  -webkit-transform : rotate(180deg);
+}
+#extension .glyphicon-remove:hover{
+  cursor: pointer;
+  -webkit-transform : rotate(180deg);
+}
 
 /* Text editor's CSS settings */
 .ace_editor, .ace_editor *{
