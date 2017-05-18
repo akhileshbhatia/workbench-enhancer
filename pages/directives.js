@@ -111,3 +111,15 @@ app.directive("updateModel",function(){
     }
   }
 })
+
+app.directive("bookmarkIcon",function(){
+  return{
+    restrict: "A",
+    scope: true,
+    link: function(scope,element,attrs){
+      attrs.$observe("properties",function(propertiesObj){
+        console.log(propertiesObj);
+      })
+    }
+  }
+})
