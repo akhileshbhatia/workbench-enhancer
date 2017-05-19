@@ -112,13 +112,19 @@ app.directive("updateModel",function(){
   }
 })
 
-app.directive("bookmarkIcon",function(){
+app.directive("bookmarkIcon",function($compile){
   return{
     restrict: "A",
     scope: true,
     link: function(scope,element,attrs){
-      attrs.$observe("properties",function(propertiesObj){
-        console.log(propertiesObj);
+      attrs.$observe("properties",function(properties){
+        var propertiesObj = angular.fromJson(properties); //deserializing string to json
+        if(propertiesObj.isBookmarked){
+          element.append($compile('<span class="col-xs-1"><span class="glyphicon glyphicon-star"></span></span>')(scope));
+        }
+        else{
+          element.append($compile('<span class="col-xs-1"><span class="glyphicon glyphicon-star-empty"></span></span>')(scope));
+        }
       })
     }
   }

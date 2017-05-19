@@ -32,9 +32,9 @@ app.controller("allDataController",function($scope,$filter,dataService){
       //var date = new Date(2017,02,04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
       var todaysDate = $filter("date")(date,"dd MMM yyyy");
       var currentTime = Math.round(date/1000);
-      var propertiesObj = {};
-      propertiesObj["isBookmarked"] = false;
-      var dataToSave = [currentTime,$scope.allDataObj.textAreaVal.trim(),propertiesObj];
+      var properties = {};
+      properties["isBookmarked"] = false;
+      var dataToSave = [currentTime,$scope.allDataObj.textAreaVal.trim(),properties];
       chrome.storage.local.get(pathname,function(data){
         if($filter("isEmpty")(data[pathname])){ // if absolutely no data found, create new empty object
           data[pathname] = {};
