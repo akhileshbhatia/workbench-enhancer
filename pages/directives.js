@@ -14,7 +14,7 @@ app.directive("mainExtension",function(){
 app.directive('ddTextCollapse', ['$compile', function($compile) {
   return {
     restrict: 'A',
-    scope: true,
+    scope: true, //inherting the scope
     link: function(scope, element, attrs) {
       // start collapsed
       scope.collapsed = true;
@@ -125,6 +125,11 @@ app.directive("bookmarkIcon",function($compile){
         else{
           element.append($compile('<span class="col-xs-1"><span class="glyphicon glyphicon-star-empty"></span></span>')(scope));
         }
+      })
+
+      element.on("click",function(){
+        var propertiesObj = angular.fromJson(attrs.properties);
+        propertiesObj.isBookmarked = propertiesObj.isBookmarked ? false : true;
       })
     }
   }
