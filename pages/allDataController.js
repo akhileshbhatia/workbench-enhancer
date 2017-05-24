@@ -105,7 +105,24 @@ $scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
     console.log("No such data found");
   }
 }
-
+$scope.GetBookmarkIconType = function(properties){
+  var propertiesObj = angular.fromJson(properties);
+  if(propertiesObj.isBookmarked)
+    return "glyphicon-star";
+  else {
+    return "glyphicon-star-empty";
+  }
+}
+$scope.ToggleBookmarkState = function(date,arrayToChange){
+  var scopeQueriesArray = $scope.storageData[date];
+  var index = scopeQueriesArray.indexOf(arrayToChange);
+  if(index!= -1){
+    var newBookmarkState = !(arrayToChange[2].isBookmarked) ; //new state is opposite of current bookmarked state;
+    chrome.storage.local.get(pathname,function(data){
+      var storageQueriesArray = data[pathname][date];
+    })
+  }
+}
 // var SetWatches = function(){
 //   switch (pathname) {
 //     case "query":

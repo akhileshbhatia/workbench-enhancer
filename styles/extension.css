@@ -119,7 +119,13 @@ span.ng-scope{
   cursor: pointer;
   -webkit-transform : rotate(180deg);
 }
-
+#extension .glyphicon-star{
+  -webkit-transition-duration: 1s;
+}
+#extension .glyphicon-star:hover{
+  cursor: pointer;
+  -webkit-transform: rotate(180deg);
+}
 /* Text editor's CSS settings */
 .ace_editor, .ace_editor *{
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
