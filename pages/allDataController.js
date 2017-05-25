@@ -8,23 +8,23 @@ app.controller("allDataController",function($scope,$filter,dataService){
   $scope.accordionArray = [];
   var pathname = dataService.GetPathName();
 
-// $scope.InitializeModelsForPath = function(){
-//     switch (pathname) {
-//       case "query":
-//       $scope.querySelect = "";
-//       $scope.queryOrderBy = "";
-//       $scope.querySort = "";
-//       $scope.queryNulls = "";
-//       $scope.queryLimit = "";
-//       $scope.queryFilter = "";
-//       $scope.queryFilterCondition = "";
-//       $scope.queryFilterValue = "";
-//       break;
-//       default:
-//       break;
-//
-//     }
-//   }
+  // $scope.InitializeModelsForPath = function(){
+  //     switch (pathname) {
+  //       case "query":
+  //       $scope.querySelect = "";
+  //       $scope.queryOrderBy = "";
+  //       $scope.querySort = "";
+  //       $scope.queryNulls = "";
+  //       $scope.queryLimit = "";
+  //       $scope.queryFilter = "";
+  //       $scope.queryFilterCondition = "";
+  //       $scope.queryFilterValue = "";
+  //       break;
+  //       default:
+  //       break;
+  //
+  //     }
+  //   }
   $scope.allDataObj.AddDataToStorage = function(event){
     // event.preventDefault();
     if($scope.allDataObj.textAreaVal.trim() != ""){
@@ -77,74 +77,82 @@ app.controller("allDataController",function($scope,$filter,dataService){
   GetData(); //call on page load
 
 
-$scope.SetQueryText = function(text){
-  if(!$scope.readMoreLessBtn.clicked){
-    $scope.allDataObj.textAreaVal = text.trim();
+  $scope.SetQueryText = function(text){
+    if(!$scope.readMoreLessBtn.clicked){
+      $scope.allDataObj.textAreaVal = text.trim();
+    }
+    $scope.readMoreLessBtn.clicked = false;
   }
-  $scope.readMoreLessBtn.clicked = false;
-}
 
-$scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
-  //get the index of the data to delete from scope
-  var scopeQueriesArray = $scope.storageData[deleteFromDate];
-  var index = scopeQueriesArray.indexOf(arrayToDelete);
-  if(index != -1){
-    //delete that data from storage and refresh view
-    chrome.storage.local.get(pathname,function(data){
-      var storageQueriesArray = data[pathname][deleteFromDate];
-      storageQueriesArray.splice(index,1);
-      if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
-        delete data[pathname][deleteFromDate];
+  $scope.DeleteQuery = function(deleteFromDate,arrayToDelete){
+    if(confirm("Are you sure you want to delete the query?")){
+      //get the index of the data to delete from scope
+      var scopeQueriesArray = $scope.storageData[deleteFromDate];
+      var index = scopeQueriesArray.indexOf(arrayToDelete);
+      if(index != -1){
+        //delete that data from storage and refresh view
+        chrome.storage.local.get(pathname,function(data){
+          var storageQueriesArray = data[pathname][deleteFromDate];
+          storageQueriesArray.splice(index,1);
+          if(storageQueriesArray.length == 0){ //delete that key from storage if no data present for that date
+            delete data[pathname][deleteFromDate];
+          }
+          chrome.storage.local.set(data,function(){
+            GetData(); //update data on view
+          })
+        })
       }
-      chrome.storage.local.set(data,function(){
-        GetData(); //update data on view
-      })
-    })
+      else{
+        console.log("No such data found");
+      }
+    }
   }
-  else{
-    console.log("No such data found");
-  }
-}
-$scope.GetBookmarkIconType = function(properties){
-  var propertiesObj = angular.fromJson(properties);
-  if(propertiesObj.isBookmarked)
+  $scope.GetBookmarkIconType = function(properties){
+    var propertiesObj = angular.fromJson(properties);
+    if(propertiesObj.isBookmarked)
     return "glyphicon-star";
-  else {
-    return "glyphicon-star-empty";
+    else {
+      return "glyphicon-star-empty";
+    }
   }
-}
-$scope.ToggleBookmarkState = function(date,arrayToChange){
-  var scopeQueriesArray = $scope.storageData[date];
-  var index = scopeQueriesArray.indexOf(arrayToChange);
-  if(index!= -1){
-    var newBookmarkState = !(arrayToChange[2].isBookmarked) ; //new state is opposite of current bookmarked state;
-    chrome.storage.local.get(pathname,function(data){
-      var storageQueriesArray = data[pathname][date];
-    })
+  $scope.ToggleBookmarkState = function(date,arrayToChange){
+    var scopeQueriesArray = $scope.storageData[date];
+    var index = scopeQueriesArray.indexOf(arrayToChange);
+    if(index!= -1){
+      chrome.storage.local.get(pathname,function(data){
+        var selectedArray = data[pathname][date][index];
+        selectedArray[2].isBookmarked = !selectedArray[2].isBookmarked; //new state is opposite of current bookmarked state;
+        chrome.storage.local.set(data,function(){
+          GetData();
+        })
+      })
+    }
   }
-}
-// var SetWatches = function(){
-//   switch (pathname) {
-//     case "query":
-//           $scope.$watchGroup(['querySelect','queryOrderBy','querySort','queryNulls',
-//                               'queryLimit','queryFilter','queryFilterCondition','queryFilterValue'],
-//                               function(){
-//                                 console.dir(textarea);
-//                               })
-//           break;
-//     default:
-//           break;
-//   }
-// }
-//
-//  SetWatches();
+  $scope.MakeSearchQuery = function(){
+    $scope.searchQuery = $scope.interimSearchQuery;
+  }
+  // var SetWatches = function(){
+  //   switch (pathname) {
+  //     case "query":
+  //           $scope.$watchGroup(['querySelect','queryOrderBy','querySort','queryNulls',
+  //                               'queryLimit','queryFilter','queryFilterCondition','queryFilterValue'],
+  //                               function(){
+  //                                 console.dir(textarea);
+  //                               })
+  //           break;
+  //     default:
+  //           break;
+  //   }
+  // }
+  //
+  //  SetWatches();
 
-$scope.OpenAllPanels = function(searchQuery){
-  //doing this opens a panel if its closed while searching
-  if(searchQuery.length >= 1){
-    $scope.accordionArray.fill(true);
+  $scope.OpenAllPanels = function(searchQuery){
+    //doing this opens a panel if its closed while searching
+    if(searchQuery.length >= 1){
+      $scope.accordionArray.fill(true);
+    }
   }
-}
 });
 
 
