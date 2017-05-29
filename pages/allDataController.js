@@ -123,36 +123,54 @@ app.controller("allDataController",function($scope,$filter,dataService){
         var selectedArray = data[pathname][date][index];
         selectedArray[2].isBookmarked = !selectedArray[2].isBookmarked; //new state is opposite of current bookmarked state;
         chrome.storage.local.set(data,function(){
-          GetData();
+          AddToBookmarks(arrayToChange[1]);
         })
       })
     }
   }
-  $scope.MakeSearchQuery = function(){
-    $scope.searchQuery = $scope.interimSearchQuery;
-  }
-  // var SetWatches = function(){
-  //   switch (pathname) {
-  //     case "query":
-  //           $scope.$watchGroup(['querySelect','queryOrderBy','querySort','queryNulls',
-  //                               'queryLimit','queryFilter','queryFilterCondition','queryFilterValue'],
-  //                               function(){
-  //                                 console.dir(textarea);
-  //                               })
-  //           break;
-  //     default:
-  //           break;
-  //   }
-  // }
-  //
-  //  SetWatches();
 
-  $scope.OpenAllPanels = function(searchQuery){
-    //doing this opens a panel if its closed while searching
-    if(searchQuery.length >= 1){
-      $scope.accordionArray.fill(true);
-    }
+  var AddToBookmarks = function(queryToAdd){
+    chrome.storage.local.get("bookmarkedQueries",function(data){
+      if($filter("isEmpty")(data["bookmarkedQueries"])){ // if absolutely no data found, create new array
+        data["bookmarkedQueries"] = [];
+      }
+      var index = data["bookmarkedQueries"].indexOf(queryToAdd);
+      if(index == -1){ //add to storage only when it doesn't already exists
+        data["bookmarkedQueries"].unshift(queryToAdd); //add data to beginning of array for easy retrieal in bookmarks tab
+        chrome.storage.local.set(data,function(){
+          GetData(); //update view
+        })
+      }
+      else{
+        GetData(); //simply update view
+      }
+    })
   }
+$scope.MakeSearchQuery = function(){
+  $scope.searchQuery = $scope.interimSearchQuery;
+}
+// var SetWatches = function(){
+//   switch (pathname) {
+//     case "query":
+//           $scope.$watchGroup(['querySelect','queryOrderBy','querySort','queryNulls',
+//                               'queryLimit','queryFilter','queryFilterCondition','queryFilterValue'],
+//                               function(){
+//                                 console.dir(textarea);
+//                               })
+//           break;
+//     default:
+//           break;
+//   }
+// }
+//
+//  SetWatches();
+
+$scope.OpenAllPanels = function(searchQuery){
+  //doing this opens a panel if its closed while searching
+  if(searchQuery.length >= 1){
+    $scope.accordionArray.fill(true);
+  }
+}
 });
 
 
