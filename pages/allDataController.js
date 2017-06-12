@@ -123,31 +123,39 @@ app.controller("allDataController",function($scope,$filter,dataService){
         var selectedArray = data[pathname][date][index];
         selectedArray[2].isBookmarked = !selectedArray[2].isBookmarked; //new state is opposite of current bookmarked state;
         chrome.storage.local.set(data,function(){
-          AddToBookmarks(arrayToChange[1]);
+          AddOrRemoveFromBookmarks(selectedArray[1],selectedArray[2].isBookmarked);
         })
       })
     }
   }
 
-  var AddToBookmarks = function(queryToAdd){
+  var AddOrRemoveFromBookmarks = function(query,bookmarkStatus){
     chrome.storage.local.get("bookmarkedQueries",function(data){
       if($filter("isEmpty")(data["bookmarkedQueries"])){ // if absolutely no data found, create new array
         data["bookmarkedQueries"] = [];
       }
-      var index = data["bookmarkedQueries"].indexOf(queryToAdd);
+      var index = data["bookmarkedQueries"].indexOf(query);
       if(index == -1){ //add to storage only when it doesn't already exists
-        data["bookmarkedQueries"].unshift(queryToAdd); //add data to beginning of array for easy retrieal in bookmarks tab
+        if(bookmarkStatus){ //safety check
+          data["bookmarkedQueries"].unshift(query); //add data to beginning of array for easy retriveal in bookmarks tab
+          chrome.storage.local.set(data,function(){
+            GetData(); //update view
+          })
+        }
+    }
+    else{
+      //check if user wants to remove the bookmarkedQuery
+      if(!bookmarkStatus){
+        data["bookmarkedQueries"].splice(index,1);
         chrome.storage.local.set(data,function(){
-          GetData(); //update view
+          GetData();
         })
       }
       else{
-        GetData(); //simply update view
+        GetData(); //simply update view, not sure when will the execution come here
       }
-    })
-  }
-$scope.MakeSearchQuery = function(){
-  $scope.searchQuery = $scope.interimSearchQuery;
+    }
+  })
 }
 // var SetWatches = function(){
 //   switch (pathname) {
