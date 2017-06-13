@@ -123,38 +123,25 @@ app.controller("allDataController",function($scope,$filter,dataService){
         var selectedArray = data[pathname][date][index];
         selectedArray[2].isBookmarked = !selectedArray[2].isBookmarked; //new state is opposite of current bookmarked state;
         chrome.storage.local.set(data,function(){
-          AddOrRemoveFromBookmarks(selectedArray[1],selectedArray[2].isBookmarked);
+          AddOrRemoveFromBookmarks(date,selectedArray);
         })
       })
     }
   }
 
-  var AddOrRemoveFromBookmarks = function(query,bookmarkStatus){
+  var AddOrRemoveFromBookmarks = function(date,array){
     chrome.storage.local.get("bookmarkedQueries",function(data){
-      if($filter("isEmpty")(data["bookmarkedQueries"])){ // if absolutely no data found, create new array
-        data["bookmarkedQueries"] = [];
+      var dataToSave = [array[0],array[1]]; //timestamp,query
+      if($filter("isEmpty")(data["bookmarkedQueries"])){ // if object not found, create new object
+        data["bookmarkedQueries"] = {};
       }
-      var index = data["bookmarkedQueries"].indexOf(query);
-      if(index == -1){ //add to storage only when it doesn't already exists
-        if(bookmarkStatus){ //safety check
-          data["bookmarkedQueries"].unshift(query); //add data to beginning of array for easy retriveal in bookmarks tab
-          chrome.storage.local.set(data,function(){
-            GetData(); //update view
-          })
-        }
-    }
-    else{
-      //check if user wants to remove the bookmarkedQuery
-      if(!bookmarkStatus){
-        data["bookmarkedQueries"].splice(index,1);
-        chrome.storage.local.set(data,function(){
-          GetData();
-        })
+      if(data[bookmarkedQueries].hasOwnProperty(date)){ //check if that date is already present as key
+        //if it does then check if the query already exists for that date
+
       }
       else{
-        GetData(); //simply update view, not sure when will the execution come here
+        data[bookmarkedQueries][date] = [dataToSave];
       }
-    }
   })
 }
 // var SetWatches = function(){
