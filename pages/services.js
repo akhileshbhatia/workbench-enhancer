@@ -1,20 +1,20 @@
-app.service("dataService",function($q){
-  var pathname = window.location.pathname.replace("/","").replace(".php","").replace("#","");
-  return{
-    GetData: function(){
-      var defferdObj = $q.defer();
-      chrome.storage.local.get(pathname,function(data){
+app.service("dataService", function ($q) {
+  const pathname = window.location.pathname.replace("/", "").replace(".php", "").replace("#", "");
+  return {
+    GetData: function () {
+      const defferdObj = $q.defer();
+      chrome.storage.local.get(pathname, function (data) {
         defferdObj.resolve(data);
       })
       return defferdObj.promise;
     },
-    GetPathName: function(){
+    GetPathName: function () {
       return pathname;
     },
-    GetExtensionStates: function(){
-      var defferdObj = $q.defer();
-      chrome.storage.local.get("extension_states",function(data){
-          defferdObj.resolve(data);
+    GetExtensionStates: function () {
+      const defferdObj = $q.defer();
+      chrome.storage.local.get("extension_states", function (data) {
+        defferdObj.resolve(data);
       });
       return defferdObj.promise;
     }
