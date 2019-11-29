@@ -2,53 +2,37 @@
 //select id,name from account
 
 //initializes the current html to link to angular application by adding ng-app,ng-controller and custom directive
-var body = document.getElementsByTagName('body')[0];
-body.setAttribute("ng-app","workbenchEnhancerApp");
-body.setAttribute("ng-controller","baseController");
-body.setAttribute("ng-cloak","");
-//body.setAttribute("ng-init","InitializeModelsForPath()");
+const body = document.getElementsByTagName('body')[0];
+body.setAttribute("ng-app", "workbenchEnhancerApp");
+body.setAttribute("ng-controller", "baseController");
+body.setAttribute("ng-cloak", "");
 
-var pathname = window.location.pathname.replace("/","").replace(".php","").replace("#","");
+const pathname = window.location.pathname.replace("/", "").replace(".php", "").replace("#", "");
+let textarea, queryBtn;
 
-if(pathname == "query"){
-  var textarea = document.getElementById("soql_query_textarea");
-  var queryBtn = document.getElementsByName("querySubmit")[0];
+switch (pathname) {
+  case "query":
+    textarea = document.getElementById("soql_query_textarea");
+    queryBtn = document.getElementsByName("querySubmit")[0];
+    break;
+
+  case "execute":
+    textarea = document.getElementById("scriptInput");
+    queryBtn = document.getElementsByName("execute")[0];
+
+  case "search":
+    textarea = document.getElementById("sosl_search_textarea");
+    queryBtn = document.getElementsByName("searchSubmit")[0];
 }
-else if(pathname == "execute"){
-  var textarea = document.getElementById("scriptInput");
-  var queryBtn = document.getElementsByName("execute")[0];
-}
-else if(pathname == "search"){
-  var textarea = document.getElementById("sosl_search_textarea");
-  var queryBtn = document.getElementsByName("searchSubmit")[0];
-}
-textarea.setAttribute("ng-model","allDataObj.textAreaVal");
-queryBtn.setAttribute("ng-click","allDataObj.AddDataToStorage($event)");
-queryBtn.setAttribute("update-model","");
 
-//AddModels();
+textarea.setAttribute("ng-model", "allDataObj.textAreaVal");
+queryBtn.setAttribute("ng-click", "allDataObj.AddDataToStorage($event)");
+queryBtn.setAttribute("update-model", "");
 
-var customDiv = document.createElement("div");
-customDiv.setAttribute("main-extension","");
-body.insertBefore(customDiv,document.getElementById('mainBlock'));
+const customDiv = document.createElement("div");
+customDiv.setAttribute("main-extension", "");
+body.insertBefore(customDiv, document.getElementById('mainBlock'));
 
-// function AddModels(){
-//   switch (pathname) {
-//     case "query":
-//           document.getElementById("QB_field_sel").setAttribute("ng-model","querySelect");
-//           document.getElementById("QB_orderby_field").setAttribute("ng-model","queryOrderBy");
-//           document.getElementById("QB_orderby_sort").setAttribute("ng-model","querySort");
-//           document.getElementById("QB_nulls").setAttribute("ng-model","queryNulls");
-//           document.getElementById("QB_limit_txt").setAttribute("ng-model","queryLimit");
-//           document.getElementById("QB_filter_field_0").setAttribute("ng-model","queryFilter");
-//           document.getElementById("QB_filter_compOper_0").setAttribute("ng-model","queryFilterCondition");
-//           document.getElementById("QB_filter_value_0").setAttribute("ng-model","queryFilterValue");
-//           break;
-//
-//     default:
-//           break;
-//   }
-// }
 // //clear storage completely
 // chrome.storage.local.clear(function(){
 //   alert("Cleared storage");
