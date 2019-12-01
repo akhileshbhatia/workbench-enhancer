@@ -2,26 +2,29 @@
   "name": "Workbench Enhancer Beta",
   "version": "0.1.3",
   "manifest_version": 2,
-
   "description": "An extension to add much needed improvements to Salesforce Workbench",
-  "icons":{
-    "16":"icons/icon16.png",
-    "48":"icons/icon48.png",
-    "128":"icons/icon128.png"
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "permissions": [
     "cookies",
     "storage"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "content_scripts": [
     {
-      "matches": ["https://workbench.developerforce.com/query.php*",
+      "matches": [
+        "https://workbench.developerforce.com/query.php*",
         "https://workbench.developerforce.com/execute.php*",
-        "https://workbench.developerforce.com/search.php*"],
+        "https://workbench.developerforce.com/search.php*"
+      ],
       "css": [
         "styles/bootstrap.css",
         "styles/extension.css"
@@ -33,31 +36,34 @@
         "scripts/angular-route.min.js",
         "scripts/angular-animate.min.js",
         "scripts/bootstrap-tpls.min.js",
-        "pages/init.js",
-        "pages/directives.js",
-        "pages/services.js",
-        "pages/baseController.js",
-        "pages/allDatacontroller.js",
-        "pages/routeConfig.js"
+        "js/init.js",
+        "js/directives.js",
+        "js/services.js",
+        "js/baseController.js",
+        "js/allDatacontroller.js",
+        "js/routeConfig.js"
       ]
     },
     {
-      "matches": ["https://workbench.developerforce.com/login.php*"],
+      "matches": [
+        "https://workbench.developerforce.com/login.php*"
+      ],
       "css": [
         "styles/bootstrap_mod.css"
       ],
       "js": [
         "scripts/jquery.min.js",
-        "pages/login.js"
-      ]
-      }],
-      "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
-      "web_accessible_resources": [
-        "popup.html",
-        "templates/base.html",
-        "templates/allData.html",
-        "templates/temp.html",
-        "fonts/*",
-        "icons/*"
+        "js/login.js"
       ]
     }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'none'",
+  "web_accessible_resources": [
+    "popup.html",
+    "views/base.html",
+    "views/allData.html",
+    "views/temp.html",
+    "fonts/*",
+    "icons/*"
+  ]
+}
