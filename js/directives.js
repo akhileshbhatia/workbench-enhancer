@@ -5,7 +5,7 @@ const app = angular.module("workbenchEnhancerApp", ["ngAnimate", "ui.bootstrap",
 app.directive("mainExtension", function () {
   const mainExtension = {};
   mainExtension.restrict = "A";
-  mainExtension.templateUrl = chrome.extension.getURL("templates/base.html");
+  mainExtension.templateUrl = chrome.extension.getURL("views/base.html");
   return mainExtension;
 });
 

@@ -5,7 +5,7 @@ app.config(function ($routeProvider, $sceDelegateProvider) {
 
   $routeProvider
     .when("/", {
-      templateUrl: chrome.extension.getURL("templates/allData.html"),
+      templateUrl: chrome.extension.getURL("views/allData.html"),
       controller: "allDataController"
     })
     .otherwise({
