@@ -40,7 +40,7 @@
         "js/directives.js",
         "js/services.js",
         "js/baseController.js",
-        "js/allDatacontroller.js",
+        "js/allDataController.js",
         "js/routeConfig.js"
       ]
     },
