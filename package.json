@@ -1,0 +1,21 @@
+{
+  "name": "workbench-enhancer",
+  "version": "1.0.0",
+  "description": "An extension for improvements over workbench.developerforce.com",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akhileshbhatia/workbench-enhancer.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
+  },
+  "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
+}
