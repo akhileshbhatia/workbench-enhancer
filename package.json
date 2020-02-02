@@ -2,6 +2,7 @@
   "name": "workbench-enhancer",
   "version": "1.0.0",
   "description": "An extension for improvements over workbench.developerforce.com",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/akhileshbhatia/workbench-enhancer.git"
   },
-  "author": "",
+  "author": "Akhilesh Bhatia, Jason Estibeiro",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
@@ -17,5 +18,11 @@
   "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
   "dependencies": {
     "gulp": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4"
   }
 }
