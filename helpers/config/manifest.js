@@ -1,4 +1,4 @@
-{
+export const manifest = {
   "name": "Workbench Enhancer Beta",
   "version": "0.1.3",
   "manifest_version": 2,
@@ -36,16 +36,7 @@
         "scripts/angular-route.min.js",
         "scripts/angular-animate.min.js",
         "scripts/bootstrap-tpls.min.js",
-        "js/init.js",
-        "js/controllers/all_data_controller.js",
-        "js/controllers/base_controller.js",
-        "js/directives/main_extension_dir.js",
-        "js/directives/text_collapse_dir.js",
-        "js/directives/toggle_button_dir.js",
-        "js/directives/toggle_extension_dir.js",
-        "js/directives/update_model_dir.js",
-        "js/route_config.js",
-        "js/services/data_service.js"
+        "js/init.js"
       ]
     },
     {

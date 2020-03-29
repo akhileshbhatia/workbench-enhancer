@@ -33,6 +33,9 @@ const customDiv = document.createElement("div");
 customDiv.setAttribute("main-extension", "");
 body.insertBefore(customDiv, document.getElementById('mainBlock'));
 
+//initialize angular application
+const app = angular.module("workbenchEnhancerApp", ["ngAnimate", "ui.bootstrap", "ngRoute"]);
+
 // //clear storage completely
 // chrome.storage.local.clear(function(){
 //   alert("Cleared storage");
