@@ -46,4 +46,5 @@ app.controller("baseController", function ($scope, $filter, dataService) {
   }
 
   $scope.allDataObj = {}; //creating an object for all calling allDataController methods using prototypical inheritance
-})
+});
+

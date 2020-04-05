@@ -14,13 +14,10 @@ const filesAndFoldersToCopy = [
   'README.md'
 ]
 
-
 gulp.task('copy', () => {
   return gulp.src(filesAndFoldersToCopy, { base: '.' }).pipe(gulp.dest('./build'));
 });
 
-gulp.task('build-manifest', async () => {
-  return buildManifest();
-});
+gulp.task('build-manifest', buildManifest);
 
 gulp.task('create-build', gulp.series('build-manifest', 'copy'));

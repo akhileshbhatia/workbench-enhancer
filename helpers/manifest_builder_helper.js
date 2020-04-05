@@ -2,14 +2,20 @@ const glob = require('glob');
 const manifest = require('./config/manifest');
 const { writeFileSync } = require('fs');
 
-module.exports = () => {
-    try {
+const readAllJsFiles = () => {
+    return new Promise((resolve, reject) => {
         glob('js/**/!(login.js|init.js)*', { nodir: true }, (err, files) => {
-            if (err) throw err;
-            manifest.content_scripts[0].js.push(...files);
-            writeFileSync('manifest.json', JSON.stringify(manifest, null, 2), 'utf8');
+            return err ? reject('Error in reading js files ', err.message) : resolve(files);
         });
+    })
+}
+
+module.exports = async () => {
+    try {
+        const jsFiles = await readAllJsFiles();
+        manifest.content_scripts[0].js.push(...jsFiles);
+        writeFileSync('manifest.json', JSON.stringify(manifest, null, 2), 'utf-8');
     } catch (err) {
-        console.log('Error in reading js files ', err.message);
+        console.log(err);
     }
-};
+}
