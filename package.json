@@ -9,13 +9,14 @@
     "type": "git",
     "url": "git+https://github.com/akhileshbhatia/workbench-enhancer.git"
   },
-  "author": "",
+  "author": "Akhilesh Bhatia, Jason Estibeiro",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
   },
   "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
-  "dependencies": {
+  "devDependencies": {
+    "glob": "^7.1.6",
     "gulp": "^4.0.2"
   }
 }

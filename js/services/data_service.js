@@ -19,4 +19,4 @@ app.service("dataService", function ($q) {
       return defferdObj.promise;
     }
   }
-})
+});

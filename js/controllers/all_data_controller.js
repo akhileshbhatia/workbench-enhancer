@@ -100,4 +100,4 @@ app.filter("isEmpty", function () {
   return function (data) {
     return angular.equals({}, data) || data == undefined || data == null;
   }
-})
+});

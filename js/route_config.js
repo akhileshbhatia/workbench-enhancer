@@ -11,4 +11,4 @@ app.config(function ($routeProvider, $sceDelegateProvider) {
     .otherwise({
       redirectTo: "/"
     });
-})
+});
