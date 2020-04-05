@@ -101,4 +101,3 @@ app.filter("isEmpty", function () {
     return angular.equals({}, data) || data == undefined || data == null;
   }
 });
-
