@@ -2,7 +2,6 @@
   "name": "workbench-enhancer",
   "version": "1.0.0",
   "description": "An extension for improvements over workbench.developerforce.com",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,10 +15,9 @@
     "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
   },
   "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
-  "dependencies": {
+  "devDependencies": {
+    "glob": "^7.1.6",
     "gulp": "^4.0.2"
   },
-  "devDependencies": {
-    "glob": "^7.1.6"
-  }
+  "dependencies": {}
 }

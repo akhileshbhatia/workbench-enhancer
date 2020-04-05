@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const buildManifest = require('./helpers/manifest_builder_helper');
+
 const filesAndFoldersToCopy = [
   'fonts/**',
   'icons/**',
@@ -11,6 +13,14 @@ const filesAndFoldersToCopy = [
   'manifest.json',
   'README.md'
 ]
+
+
 gulp.task('copy', () => {
-  return gulp.src(filesAndFoldersToCopy, {base: '.'}).pipe(gulp.dest('./build'));
+  return gulp.src(filesAndFoldersToCopy, { base: '.' }).pipe(gulp.dest('./build'));
 });
+
+gulp.task('build-manifest', async () => {
+  return buildManifest();
+});
+
+gulp.task('create-build', gulp.series('build-manifest', 'copy'));
