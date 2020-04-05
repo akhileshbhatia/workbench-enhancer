@@ -9,5 +9,4 @@ gulp.task('copy', () => {
 
 gulp.task('build-manifest', buildManifest);
 
-
 gulp.task('default', gulp.series('copy', 'build-manifest'));
