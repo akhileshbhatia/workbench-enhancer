@@ -1,22 +1,22 @@
-app.service("dataService", function ($q) {
-  const pathname = window.location.pathname.replace("/", "").replace(".php", "").replace("#", "");
+app.service("dataService", function () {
   return {
-    GetData: function () {
-      const defferdObj = $q.defer();
-      chrome.storage.local.get(pathname, function (data) {
-        defferdObj.resolve(data);
-      })
-      return defferdObj.promise;
-    },
-    GetPathName: function () {
-      return pathname;
-    },
-    GetExtensionStates: function () {
-      const defferdObj = $q.defer();
-      chrome.storage.local.get("extension_states", function (data) {
-        defferdObj.resolve(data);
+    getData: () => {
+      return new Promise((resolve, reject) => {
+        try {
+          chrome.storage.local.get(pathname, (data) => resolve(data[pathname]));
+        } catch (err) {
+          reject(err);
+        }
       });
-      return defferdObj.promise;
+    },
+    getExtensionStates: () => {
+      return new Promise((resolve, reject) => {
+        try {
+          chrome.storage.local.get('extension_states', (data) => resolve(data));
+        } catch (err) {
+          reject(err);
+        }
+      });
     }
   }
 });

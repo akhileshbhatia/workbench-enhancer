@@ -1,93 +1,74 @@
-app.controller("allDataController", function ($scope, $filter, dataService) {
+app.controller('allDataController', function ($scope, $filter, dataService) {
   $scope.status = {
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  $scope.allDataObj.textAreaVal = "";
-  $scope.readMoreLessBtn = { "clicked": false };
+  $scope.allDataObj.textAreaVal = '';
+  $scope.readMoreLessBtn = { 'clicked': false };
   $scope.accordionArray = [];
-  const pathname = dataService.GetPathName();
+  let queries;
 
-  $scope.allDataObj.AddDataToStorage = function (event) {
-    // event.preventDefault();
-    if ($scope.allDataObj.textAreaVal.trim() != "") {
+  $scope.allDataObj.addDataToStorage = function () {
+    if ($scope.allDataObj.textAreaVal.trim() != '') {
       const date = new Date(); // Use for todays date
-      //var date = new Date(2017,02,04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
-      const todaysDate = $filter("date")(date, "dd MMM yyyy");
+      // var date = new Date(2017, 02, 04); //new Date(yyyy,mm,dd). Use for specific dates. Months ordered from 0 in javascript
+      const todaysDate = $filter('date')(date, 'dd MMM yyyy');
       const currentTime = Math.round(date / 1000);
       const dataToSave = [currentTime, $scope.allDataObj.textAreaVal.trim()];
       chrome.storage.local.get(pathname, function (data) {
-        if ($filter("isEmpty")(data[pathname])) { // if absolutely no data found, create new empty object
+        if ($filter('isEmpty')(data[pathname])) { // if absolutely no data found, create new empty object
           data[pathname] = {};
         }
         if (data[pathname].hasOwnProperty(todaysDate)) { // check if object has that key already, if it does, add the data
           data[pathname][todaysDate].unshift(dataToSave);
-        }
-        else { // if key doesnt exist, create a new one
+        } else { // if key doesnt exist, create a new one
           data[pathname][todaysDate] = [dataToSave];
         }
-        chrome.storage.local.set(data, function () {
-
-        })
+        chrome.storage.local.set(data);
       });
     }
-  }
+  };
 
-  const GetData = function () {
-    const askForPromise = dataService.GetData();
-    askForPromise.then(
-      function (data) {
-        //$scope.storageData = {};
-        $scope.storageData = data[pathname];
-        if ($scope.storageData != undefined) {
-          $scope.sortedDates = Object.keys($scope.storageData).sort(function (a, b) {
-            return (new Date(b) - new Date(a));
-          });
-          //set the text area to the latest query in the storage
-          if ($scope.sortedDates.length >= 1) { //atleast one date present
-            $scope.allDataObj.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
-          }
-        }
-      },
-      function () {
-        console.log("Some error in receiving data");
+  const getData = async () => {
+    try {
+      queries = await dataService.getData();
+    } catch (err) {
+      console.log('Error in obtaining data from storage ', err);
+    }
+    $scope.storageData = queries;
+    if ($scope.storageData != undefined) {
+      $scope.sortedDates = Object.keys($scope.storageData).sort((a, b) => new Date(b) - new Date(a));
+      //set the text area to the latest query in the storage
+      if ($scope.sortedDates.length >= 1) { //atleast one date present
+        $scope.allDataObj.textAreaVal = $scope.storageData[$scope.sortedDates[0]][0][1];
       }
-    )
-  }
+    }
+  };
 
-  GetData(); //call on page load
+  getData(); //to be called on page load. Cannot be converted to IIFE because needs to called when a query is deleted as well
 
-
-  $scope.SetQueryText = function (text) {
+  $scope.setQueryText = function (text) {
     if (!$scope.readMoreLessBtn.clicked) {
       $scope.allDataObj.textAreaVal = text.trim();
     }
     $scope.readMoreLessBtn.clicked = false;
-  }
+  };
 
-  $scope.DeleteQuery = function (deleteFromDate, arrayToDelete) {
-    //get the index of the data to delete from scope
-    const scopeQueriesArray = $scope.storageData[deleteFromDate];
-    const index = scopeQueriesArray.indexOf(arrayToDelete);
-    if (index != -1) {
-      //delete that data from storage and refresh view
-      chrome.storage.local.get(pathname, function (data) {
-        let storageQueriesArray = data[pathname][deleteFromDate];
-        storageQueriesArray.splice(index, 1);
-        if (storageQueriesArray.length == 0) { //delete that key from storage if no data present for that date
-          delete data[pathname][deleteFromDate];
-        }
-        chrome.storage.local.set(data, function () {
-          GetData(); //update data on view
-        })
-      })
-    }
-    else {
-      console.log("No such data found");
+  $scope.deleteQuery = (deleteFromDate, arrayToDelete) => {
+    const index = queries[deleteFromDate].indexOf(arrayToDelete);
+    if (index !== -1) {
+      queries[deleteFromDate].splice(index, 1);
+      if (queries[deleteFromDate].length == 0) {
+        delete queries[deleteFromDate];
+      }
+      $scope.storageData = queries;
+      chrome.storage.local.set({ [pathname]: queries });
+    } else {
+      console.log('No such query found');
     }
   }
 
-  $scope.OpenAllPanels = function (searchQuery) {
+  $scope.openAllPanels = function (searchQuery) {
     //doing this opens a panel if its closed while searching
     if (searchQuery.length >= 1) {
       $scope.accordionArray.fill(true);
@@ -96,8 +77,4 @@ app.controller("allDataController", function ($scope, $filter, dataService) {
 });
 
 
-app.filter("isEmpty", function () {
-  return function (data) {
-    return angular.equals({}, data) || data == undefined || data == null;
-  }
-});
+app.filter('isEmpty', () => (data) => angular.equals({}, data) || data == undefined || data == null);
