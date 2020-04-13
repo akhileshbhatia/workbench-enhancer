@@ -2,7 +2,7 @@
 //possible using ng-style as well but did this to learn dom manipulation
 app.directive('toggleExtension', function () {
   return {
-    link: function (scope, element, attrs) {
+    link: (scope, element, attrs) => {
       const body = element.parent().parent();
       const mainBlock = body.find('div#mainBlock');
       scope.$watch(attrs.toggleExtension, function (show) {

@@ -1,7 +1,7 @@
 //directive to toggle the button
 app.directive('toggleButton', function () {
   return {
-    link: function (scope, element, attrs) {
+    link: (scope, element, attrs) => {
       scope.$watch(attrs.toggleButton, function (show) {
         if (show) {
           element.css('left', '23%');

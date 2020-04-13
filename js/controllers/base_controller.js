@@ -21,7 +21,7 @@ app.controller('baseController', function ($scope, $filter, dataService) {
     dataService.setExtensionState(stateInfo);
   })(); //IIFE because we need the extension states as soon as we load the page
 
-  $scope.toggleExtensionState = function () {
+  $scope.toggleExtensionState = () => {
     $scope.state = !$scope.state;
     stateInfo['extension_states'][pathname] = $scope.state;
     dataService.setExtensionState(stateInfo);
