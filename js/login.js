@@ -1,5 +1,5 @@
-$('#loginBtn').parent().prepend(`<button id='dev' type='button' class='btn btn-sm btn-primary'>Dev</button>`);
-$('#loginBtn').parent().prepend(`<button id='prod' type='button' class='btn btn-sm btn-primary'>Prod</button>`);
+$('#loginBtn').parent().prepend('<button id="dev" type="button" class="btn btn-sm btn-primary">Dev</button>');
+$('#loginBtn').parent().prepend('<button id="prod" type="button" class="btn btn-sm btn-primary">Prod</button>');
 
 $('#prod').click(() => {
   $('#oauth_env').val('login.salesforce.com');

@@ -18,13 +18,13 @@ app.controller('baseController', function ($scope, $filter, dataService) {
 
     stateInfo['extension_states'][pathname] = $scope.state;
 
-    chrome.storage.local.set(stateInfo);
+    dataService.setExtensionState(stateInfo);
   })(); //IIFE because we need the extension states as soon as we load the page
 
   $scope.toggleExtensionState = function () {
     $scope.state = !$scope.state;
     stateInfo['extension_states'][pathname] = $scope.state;
-    chrome.storage.local.set(stateInfo);
+    dataService.setExtensionState(stateInfo);
   };
 
   $scope.allDataObj = {}; //creating an object for all calling allDataController methods using prototypical inheritance
