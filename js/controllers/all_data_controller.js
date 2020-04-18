@@ -18,12 +18,12 @@ app.controller('allDataController', function ($scope, $filter, dataService) {
       /* 
         Deep copying just to update the data into chrome storage.
         Could have updated the scope object directly but there is no need to do that
-        because the page will be refreshed anyway, so getData will update the scope object.
+        because the page will be refreshed anyway, so the IIFE will update the scope object.
         This helps prevent an uneccesary run of the angularjs digest cycle
       */
-      if (queries.hasOwnProperty(todaysDate)) {
-        queries[todaysDate].unshift(dataToSave);
-      }
+
+      //if data for that date already exists, prepend the new data otherwise create the object for that date and save the data into it
+      queries.hasOwnProperty(todaysDate) ? queries[todaysDate].unshift(dataToSave) : queries[todaysDate] = [dataToSave];
       dataService.setData(queries);
     }
   };
@@ -34,7 +34,7 @@ app.controller('allDataController', function ($scope, $filter, dataService) {
     }
   }
 
-  const getData = async () => {
+  (async () => {
     try {
       $scope.queryDetails = await dataService.getData();
     } catch (err) {
@@ -44,9 +44,7 @@ app.controller('allDataController', function ($scope, $filter, dataService) {
       $scope.sortedDates = Object.keys($scope.queryDetails).sort((a, b) => new Date(b) - new Date(a));
       updateTextAreaWithLatestQuery();
     }
-  };
-
-  getData(); //to be called on page load. Cannot be converted to IIFE because needs to called when a query is deleted as well
+  })();//IIFE to get all the data from chrome storage on page load
 
   $scope.setQueryText = (text) => {
     if (!$scope.readMoreLessBtn.clicked) {
