@@ -37,7 +37,6 @@ app.controller('allDataController', function ($scope, $filter, dataService) {
   (async () => {
     try {
       $scope.queryDetails = await dataService.getData();
-      console.log($scope.queryDetails);
     } catch (err) {
       console.log('Error in obtaining data from storage ', err);
     }
