@@ -14,7 +14,7 @@ app.controller('allDataController', function ($scope, $filter, dataService) {
       const todaysDate = $filter('date')(date, 'dd MMM yyyy');
       const currentTime = Math.round(date / 1000);
       const dataToSave = [currentTime, $scope.allDataObj.textAreaVal.trim()];
-      const queries = JSON.parse(JSON.stringify($scope.queryDetails));// deep copy
+      const queries = JSON.parse(JSON.stringify($scope.queryDetails || {}));// deep copy
       /* 
         Deep copying just to update the data into chrome storage.
         Could have updated the scope object directly but there is no need to do that
