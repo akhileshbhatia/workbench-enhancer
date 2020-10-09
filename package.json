@@ -1,22 +1,31 @@
 {
-  "name": "workbench-enhancer",
+  "name": "wb-enhancer-react-typescript",
   "version": "1.0.0",
-  "description": "An extension for improvements over workbench.developerforce.com",
+  "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack -w --config webpack.dev.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akhileshbhatia/workbench-enhancer.git"
+  "keywords": [],
+  "author": "Akhilesh Bhatia",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
-  "author": "Akhilesh Bhatia, Jason Estibeiro",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
-  },
-  "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
   "devDependencies": {
-    "glob": "^7.1.6",
-    "gulp": "^4.0.2"
+    "@types/chrome": "0.0.121",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "css-loader": "^3.6.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.0.9"
   }
 }
