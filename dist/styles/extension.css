@@ -1,0 +1,115 @@
+#extension{
+  left: -23%;
+  width: 23%;
+  height: 100%;
+  border: 1px solid black;
+  border-left: none;
+  border-top: none;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: 0.3s left;
+  z-index: 999;
+  background-color: white;
+  margin-top: -8px;
+  /*font-family: 'PT Sans';*/
+  /*src: url(chrome-extension://__MSG_@@extension_id__/fonts/PT_Sans-Web-Bold.ttf);*/
+}
+#extension .panel-heading{
+  /*background-color: #c4c4c4;*/
+  background-color: #d6d0d0;
+  cursor: pointer;
+}
+#extension .panel{
+  border: none;
+}
+#extension .panel-body{
+  padding-bottom: 0px;
+}
+.accordion-toggle:focus{
+  outline: none;
+}
+#extension .row{
+  margin-bottom: 5%;
+  padding-top: 8px;
+}
+#extension header .row{
+  margin-bottom: -4%;
+  background-color: #ece3e3;
+  border: 1px solid;
+  padding-top: 4%;
+  padding-bottom: 1%;
+  margin-bottom: -3%;
+}
+#extension .collapse-text-toggle {
+  font-size: 0.9em;
+  color: #0000e6;
+  cursor: pointer;
+}
+#extension .collapse-text-toggle:hover {
+    text-decoration: underline;
+}
+#extension .query{
+  text-align:left;
+  padding-left:14%;
+  cursor:pointer;
+  word-wrap: break-word;
+  top: -2px;
+}
+#toggleButton{
+  position: fixed;
+  top:0;
+  z-index: 999;
+  transition: 0.3s left;
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  src: url('chrome-extension://__MSG_@@extension_id__/fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+}
+
+span.ng-scope{
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+}
+
+#extension #queryEntry:hover {
+  background-color: #e4e4e4;
+}
+
+.hidden-panel-heading .panel-heading{
+  display: none;
+}
+
+#extension .navbar-brand {
+  transform: translateX(-50%);
+  left: 53%;
+  position: absolute;
+  font-size: 16px;
+  padding-top: 5px;
+}
+
+#extension .navbar-nav > li > a {
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+}
+#extension .navbar {
+  min-height:40px !important;
+}
+#extension .navbar-center{
+  position: absolute;
+  left: 20%;
+  font-size: 13px;
+}
+#pageNav{
+  margin-top: 2%;
+}
+
+/* Text editor's CSS settings */
+.ace_editor, .ace_editor *{
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
