@@ -7,9 +7,16 @@
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akhileshbhatia/workbench-enhancer.git"
+  },
   "author": "Akhilesh Bhatia, Jason Estibeiro",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akhileshbhatia/workbench-enhancer/issues"
+  },
+  "homepage": "https://github.com/akhileshbhatia/workbench-enhancer#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
