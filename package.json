@@ -1,7 +1,7 @@
 {
-  "name": "wb-enhancer-react-typescript",
+  "name": "workbench-enhancer",
   "version": "1.0.0",
-  "description": "",
+  "description": "An extension for improvements over workbench.developerforce.com",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
