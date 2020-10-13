@@ -1,15 +1,16 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "target": "ES6",
-        "jsx": "react",
-        "module": "ES6",
-        "sourceMap": true,
-        "rootDir": "src",
-        "outDir": "dist/js",
-        "lib": [
-            "DOM",
-            "ES6"
-        ]
-    }
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "target": "ES6",
+    "jsx": "react",
+    "module": "ES6",
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "dist/js",
+    "lib": [
+      "DOM",
+      "ES6"
+    ]
+  }
 }
