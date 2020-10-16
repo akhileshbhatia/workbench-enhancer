@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './app.scss';
 import { Drawer, IconButton, makeStyles, Theme } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 
@@ -46,7 +46,7 @@ export function App(props) {
         edge="end"
         className={clsx(classes.menuButton, drawerOpen && classes.hide)}
       >
-        <MenuIcon />
+        <ChevronRight />
       </IconButton>
       <Drawer
         className={classes.drawer}
