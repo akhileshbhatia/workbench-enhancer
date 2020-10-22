@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export function App(props) {
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  console.log(props);
 
   return (
     <div className={classes.root}>
@@ -62,16 +63,6 @@ export function App(props) {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        {
-          Object.keys(props.query).map(date => (
-            <div key={date}>
-              <h3>{date}</h3>
-              {
-                props.query[date].map(info => <div key={info[0]}>{info[1]}</div>)
-              }
-            </div>
-          ))
-        }
       </Drawer>
     </div >
   )
