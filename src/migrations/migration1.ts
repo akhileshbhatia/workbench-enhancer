@@ -9,6 +9,9 @@ class Migration1 implements Migration {
 
   async shouldUpgrade() {
     this.allData = await getDataForPath(null); // 'null' gets all the data for all paths
+    if (this.allData.hasOwnProperty('extension_states')) {
+      delete this.allData['extension_states']; // no need to migrate extension_states
+    }
     let doUpgrade = false;
     const allKeys = Object.keys(this.allData);
     if (allKeys.length > 0) {
