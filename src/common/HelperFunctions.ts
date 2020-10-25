@@ -43,10 +43,10 @@ export function deserializeToMap(data: any) {
 
 export function deserializeData(data: string) {
   const dateMap = deserializeToMap(data);
-  const outputMap = new Map();
+  const finalMap = new Map();
   for (const [date, info] of dateMap.entries()) {
     const newValue = deserializeToMap(info);
-    outputMap.set(date, newValue);
+    finalMap.set(date, newValue);
   }
-  return outputMap;
+  return { output: finalMap };
 }
