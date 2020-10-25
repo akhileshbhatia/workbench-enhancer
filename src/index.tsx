@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
-import { deserializeDataForPath } from './common/HelperFunctions';
+import { deserializeData } from './common/HelperFunctions';
 
 const id = 'wb-enhancer-app';
 let container = document.createElement('div');
@@ -28,7 +28,7 @@ const tempData = {
 
 chrome.storage.local.get('query', (data) => {
   // If else block is temporary
-  const output = deserializeDataForPath(data.query);
+  const output = deserializeData(data.query);
   console.log(output);
   // if (false && data.query && Object.keys(data.query).length > 0) {
   //   ReactDOM.render(<App {...data} />, document.getElementById(id));

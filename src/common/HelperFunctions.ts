@@ -41,7 +41,7 @@ export function deserializeToMap(data: any) {
   return new Map(JSON.parse(data));
 }
 
-export function deserializeDataForPath(data: string) {
+export function deserializeData(data: string) {
   const dateMap = deserializeToMap(data);
   const outputMap = new Map();
   for (const [date, info] of dateMap.entries()) {

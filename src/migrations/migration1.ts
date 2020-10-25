@@ -35,8 +35,6 @@ class Migration1 implements Migration {
       }
       await setDataToPath(path, serializeMap(dateMap));
     }
-    const insertedData: any = await getDataForPath('query');
-    console.log(new Map(JSON.parse((insertedData.query))));
   }
 }
 
