@@ -1,7 +1,9 @@
 export function getDataForPath(path: string) {
   return new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.get(path, (data) => resolve(data));
+      chrome.storage.local.get(path, (data) => {
+        path === null ? resolve(data) : resolve(data[path]);
+      });
     } catch (err) {
       reject(err);
     }

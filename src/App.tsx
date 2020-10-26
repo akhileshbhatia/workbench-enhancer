@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export function App(props) {
+  const { output, defaultDrawerState } = props;
   const classes: Record<string, string> = useStyles();
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const { output } = props;
+  const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
 
   return (
     <div className={classes.root}>
