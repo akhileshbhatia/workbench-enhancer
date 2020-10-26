@@ -6,11 +6,14 @@ import { getDataForPath, clearStorage, setDataToPath, serializeMap } from '../co
  */
 class Migration1 implements Migration {
   private allData: Object;
+  private extensionState: Object;
+  private statesKey = 'extension_states';
 
   async shouldUpgrade() {
     this.allData = await getDataForPath(null); // 'null' gets all the data for all paths
-    if (this.allData.hasOwnProperty('extension_states')) {
-      delete this.allData['extension_states']; // no need to migrate extension_states
+    if (this.allData.hasOwnProperty(this.statesKey)) {
+      this.extensionState = this.allData[this.statesKey];
+      delete this.allData[this.statesKey]; // no need to migrate extension_states
     }
     let doUpgrade = false;
     const allKeys = Object.keys(this.allData);
@@ -37,6 +40,9 @@ class Migration1 implements Migration {
         dateMap.set(currentDate, serializeMap(timeQueryMap));
       }
       await setDataToPath(path, serializeMap(dateMap));
+      if (Object.keys(this.extensionState).length) {
+        await setDataToPath(this.statesKey, this.extensionState);
+      }
     }
   }
 }

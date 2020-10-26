@@ -18,7 +18,7 @@ export function clearStorage() {
   });
 }
 
-export function setDataToPath(path: string, data: string) {
+export function setDataToPath(path: string, data: string | Object) {
   return new Promise((resolve, reject) => {
     try {
       chrome.storage.local.set({ [path]: data }, () => {
@@ -49,4 +49,9 @@ export function deserializeData(data: string) {
     finalMap.set(date, newValue);
   }
   return { output: finalMap };
+}
+
+export function getFormattedTime(timestamp: string): string {
+  const date = new Date(+timestamp * 1000);
+  return `${date.getHours()}:${date.getMinutes()}`;
 }

@@ -14,3 +14,5 @@ chrome.storage.local.get(path, (data) => {
   ReactDOM.render(<App {...deserializeData(data[path])} />, container);
 });
 
+chrome.storage.local.get('extension_states', (data) => console.log(data));
+
