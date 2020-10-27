@@ -34,10 +34,10 @@ class Migration1 implements Migration {
       const dateMap = new Map<string, string>();
       const sortedDates = Object.keys(data).sort((a, b) => new Date(b).valueOf() - new Date(a).valueOf());
       for (const currentDate of sortedDates) {
-        const timeQueryMap = new Map<number, string>();
-        // Set timestamp as key and query as value in timeQueryMap
-        data[currentDate].map(info => timeQueryMap.set(info[0], info[1]));
-        dateMap.set(currentDate, serializeMap(timeQueryMap));
+        const timeDetailsMap = new Map<number, object>();
+        // Set key as timestamp and a obj with 'data' set to query/search value
+        data[currentDate].map(info => timeDetailsMap.set(info[0], { data: info[1] }));
+        dateMap.set(currentDate, serializeMap(timeDetailsMap));
       }
       await setDataToPath(path, serializeMap(dateMap));
       if (Object.keys(this.extensionState).length) {

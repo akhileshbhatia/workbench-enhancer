@@ -69,10 +69,10 @@ export function App(props) {
             <div key={date}>
               <h3>{date}</h3>
               {
-                [...output.get(date).entries()].map(([time, query]) => (
+                [...output.get(date).entries()].map(([time, details]) => (
                   <div key={time}>
                     <span><b>{getFormattedTime(time)}</b></span>
-                    <span>{query}</span>
+                    <span>{details.data}</span>
                   </div>
                 ))
               }
