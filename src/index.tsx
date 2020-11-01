@@ -5,12 +5,12 @@ import { deserializeData, getDataForPath } from './common/HelperFunctions';
 
 (async () => {
   const appId = 'wb-enhancer-app';
-  let container = document.createElement('div');
+  const container = document.createElement('div');
   container.setAttribute('id', appId);
   document.body.insertBefore(container, document.getElementById('mainBlock'));
 
   const currentPathName = window.location.pathname.replace('/', '').replace('.php', '').replace('#', '');
-  const data = await getDataForPath(currentPathName) as string;
+  const data = await getDataForPath(currentPathName) as unknown as string;
   const extensionStates = await getDataForPath('extension_states');
   const props = {
     ...deserializeData(data),

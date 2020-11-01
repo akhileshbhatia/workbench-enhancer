@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import './app.scss';
 import { Drawer, IconButton, makeStyles, Theme } from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export function App(props) {
+export function App(props): ReactElement {
   const { output, defaultDrawerState } = props;
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);

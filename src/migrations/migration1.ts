@@ -5,8 +5,8 @@ import { getDataForPath, clearStorage, setDataToPath, serializeMap } from '../co
  * new data structure into map
  */
 class Migration1 implements Migration {
-  private allData: Object;
-  private extensionState: Object;
+  private allData: Record<string, any>;
+  private extensionState: Record<string, any>;
   private statesKey = 'extension_states';
 
   async shouldUpgrade() {
@@ -34,12 +34,12 @@ class Migration1 implements Migration {
       const dateMap = new Map<string, string>();
       const sortedDates = Object.keys(data).sort((a, b) => new Date(b).valueOf() - new Date(a).valueOf());
       for (const currentDate of sortedDates) {
-        const timeDetailsMap = new Map<number, object>();
+        const timeDetailsMap = new Map<number, Record<string, unknown>>();
         // Set key as timestamp and a obj with 'data' set to query/search value
         data[currentDate].map(info => timeDetailsMap.set(info[0], { data: info[1] }));
-        dateMap.set(currentDate, serializeMap(timeDetailsMap));
+        dateMap.set(currentDate, serializeMap<number, Record<string, unknown>>(timeDetailsMap));
       }
-      await setDataToPath(path, serializeMap(dateMap));
+      await setDataToPath(path, serializeMap<string, string>(dateMap));
       if (Object.keys(this.extensionState).length) {
         await setDataToPath(this.statesKey, this.extensionState);
       }
@@ -47,7 +47,7 @@ class Migration1 implements Migration {
   }
 }
 
-export async function migration1() {
+export async function migration1(): Promise<void> {
   const migration1 = new Migration1();
   if (await migration1.shouldUpgrade()) {
     await migration1.upgrade();

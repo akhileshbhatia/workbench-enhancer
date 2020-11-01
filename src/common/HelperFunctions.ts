@@ -1,4 +1,4 @@
-export function getDataForPath(path: string) {
+export function getDataForPath(path: string): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     try {
       chrome.storage.local.get(path, (data) => {
@@ -10,7 +10,7 @@ export function getDataForPath(path: string) {
   });
 }
 
-export function clearStorage() {
+export function clearStorage(): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
       chrome.storage.local.clear(() => resolve());
@@ -20,7 +20,7 @@ export function clearStorage() {
   });
 }
 
-export function setDataToPath(path: string, data: string | Object) {
+export function setDataToPath(path: string, data: any): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
       chrome.storage.local.set({ [path]: data }, () => {
@@ -35,19 +35,19 @@ export function setDataToPath(path: string, data: string | Object) {
   });
 }
 
-export function serializeMap(map) {
+export function serializeMap<keyType, valueType>(map: Map<keyType, valueType>): string {
   return JSON.stringify(Array.from(map.entries()));
 }
 
-export function deserializeToMap(data: any) {
+export function deserializeToMap<keyType, valueType>(data: string): Map<keyType, valueType> {
   return new Map(JSON.parse(data));
 }
 
-export function deserializeData(data: string) {
-  const dateMap = deserializeToMap(data);
+export function deserializeData(data: string): { output: Map<string, Map<number, Record<string, unknown>>> } {
+  const dateMap = deserializeToMap<string, string>(data);
   const finalMap = new Map();
   for (const [date, info] of dateMap.entries()) {
-    const newValue = deserializeToMap(info);
+    const newValue = deserializeToMap<number, Record<string, unknown>>(info);
     finalMap.set(date, newValue);
   }
   return { output: finalMap };
