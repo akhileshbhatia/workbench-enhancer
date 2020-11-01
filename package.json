@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "An extension for improvements over workbench.developerforce.com",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
     "lint": "eslint . --ext .ts --ext .tsx"
