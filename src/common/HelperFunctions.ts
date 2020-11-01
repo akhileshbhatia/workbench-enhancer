@@ -53,7 +53,7 @@ export function deserializeData(data: string): { output: Map<string, Map<number,
   return { output: finalMap };
 }
 
-export function getFormattedTime(timestamp: string): string {
+export function getFormattedTime(timestamp: string): any {
   const date = new Date(+timestamp * 1000);
   return `${date.getHours()}:${date.getMinutes()}`;
 }
