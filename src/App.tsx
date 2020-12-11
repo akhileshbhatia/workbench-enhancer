@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import './app.scss';
 import { Drawer, IconButton, makeStyles, Theme } from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
+import { getFormattedTime } from './common/HelperFunctions';
 
 const drawerWidth = 240;
 
@@ -33,9 +34,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export function App(props) {
+export function App(props): ReactElement {
+  const { output, defaultDrawerState } = props;
   const classes: Record<string, string> = useStyles();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
 
   return (
     <div className={classes.root}>
@@ -63,11 +65,16 @@ export function App(props) {
           </IconButton>
         </div>
         {
-          Object.keys(props.query).map(date => (
+          [...output.keys()].map(date => (
             <div key={date}>
               <h3>{date}</h3>
               {
-                props.query[date].map(info => <div key={info[0]}>{info[1]}</div>)
+                [...output.get(date).entries()].map(([time, details]) => (
+                  <div key={time}>
+                    <span><b>{getFormattedTime(time)}</b></span>
+                    <span>{details.data}</span>
+                  </div>
+                ))
               }
             </div>
           ))

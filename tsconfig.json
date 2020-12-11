@@ -4,13 +4,13 @@
     "moduleResolution": "node",
     "target": "ES6",
     "jsx": "react",
-    "module": "ES6",
+    "module": "ES2020",
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "dist/js",
     "lib": [
-      "DOM",
-      "ES6"
+      "es2017",
+      "dom"
     ]
   }
 }

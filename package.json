@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "An extension for improvements over workbench.developerforce.com",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
-    "watch": "webpack -w --config webpack.dev.js"
+    "watch": "webpack -w --config webpack.dev.js",
+    "lint": "eslint . --ext .ts --ext .tsx"
+  },
+  "pre-commit": {
+    "run": "lint"
   },
   "repository": {
     "type": "git",
@@ -28,7 +31,11 @@
     "@types/chrome": "0.0.121",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
     "css-loader": "^3.6.0",
+    "eslint": "^7.12.1",
+    "pre-commit": "^1.2.2",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.0",
     "style-loader": "^1.2.1",

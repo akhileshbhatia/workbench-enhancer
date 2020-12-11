@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src/index.tsx')
+    main: path.join(__dirname, 'src/index.tsx'),
+    background: path.join(__dirname, 'src/background.ts')
   },
   output: {
     path: path.join(__dirname, 'dist/js'),
@@ -12,7 +13,7 @@ module.exports = {
     rules: [
       {
         exclude: /node_modules/,
-        test: /\.tsx$/,
+        test: /\.(ts|tsx)?$/,
         use: 'ts-loader'
       },
       {

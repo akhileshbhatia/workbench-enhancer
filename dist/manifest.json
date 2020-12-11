@@ -22,5 +22,11 @@
         "js/main.js"
       ]
     }
-  ]
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  }
 }
