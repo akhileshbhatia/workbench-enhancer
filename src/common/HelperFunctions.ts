@@ -44,16 +44,35 @@ export function deserializeToMap<keyType, valueType>(data: string): Map<keyType,
 }
 
 export function deserializeData(data: string): { output: Map<string, Map<number, Record<string, unknown>>> } {
-  const dateMap = deserializeToMap<string, string>(data);
   const finalMap = new Map();
-  for (const [date, info] of dateMap.entries()) {
-    const newValue = deserializeToMap<number, Record<string, unknown>>(info);
-    finalMap.set(date, newValue);
+  if (data) {
+    const dateMap = deserializeToMap<string, string>(data);
+    for (const [date, info] of dateMap.entries()) {
+      const newValue = deserializeToMap<number, Record<string, unknown>>(info);
+      finalMap.set(date, newValue);
+    }
   }
   return { output: finalMap };
 }
 
-export function getFormattedTime(timestamp: string): string {
+export function getHoursAndMinsFromTimestamp(timestamp: string): string {
   const date = new Date(+timestamp * 1000);
-  return `${date.getHours()}:${date.getMinutes()}`;
+  // Pad 0 to hours and mins in case they are single digit
+  const hours = String(date.getHours()).padStart(2, '0');
+  const mins = String(date.getMinutes()).padStart(2, '0');
+  return `${hours}:${mins}`;
+}
+
+export function getFormattedDateAndTimestamp(): {
+  formattedDate: string,
+  timestamp: number
+} {
+  const todaysDate = new Date();
+  const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(todaysDate);
+  const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(todaysDate);
+  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(todaysDate);
+  return {
+    formattedDate: `${day} ${month} ${year}`,
+    timestamp: Math.round(<number><unknown>todaysDate / 1000)
+  }
 }
