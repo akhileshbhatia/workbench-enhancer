@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+import App from './App';
 import { deserializeData, getDataForPath } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
 import { addToStorage } from './AddToStorage';
@@ -8,6 +8,7 @@ import { addToStorage } from './AddToStorage';
 (async () => {
   const container = document.createElement('div');
   container.setAttribute('id', appId);
+  container.style.height = '0px';
   document.body.insertBefore(container, document.getElementById(mainBlockId));
 
   const currentPathName = window.location.pathname.replace('/', '').replace('.php', '').replace('#', '');

@@ -1,17 +1,27 @@
 import React, { ReactElement, useState } from 'react';
 import './app.scss';
-import { Drawer, IconButton, makeStyles, Theme } from '@material-ui/core';
+import {
+  Drawer,
+  IconButton,
+  makeStyles,
+  Theme,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
+} from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
-import { getHoursAndMinsFromTimestamp } from './common/HelperFunctions';
 import { updateExtensionState } from './AddToStorage';
+import QueryDetails from './QueryDetails';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    width: '100%'
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -35,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export function App(props): ReactElement {
+export default function App(props): ReactElement {
   const { output, defaultDrawerState, currentPathName } = props;
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
@@ -72,17 +82,20 @@ export function App(props): ReactElement {
         </div>
         {
           [...output.keys()].map(date => (
-            <div key={date}>
-              <h3>{date}</h3>
+            <Accordion key={date}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+              >
+                <div className='accordion-heading'>{date}</div>
+              </AccordionSummary>
               {
-                [...output.get(date).entries()].map(([time, details]) => (
-                  <div key={time}>
-                    <span><b>{getHoursAndMinsFromTimestamp(time)}</b></span>
-                    <span>{details.data}</span>
-                  </div>
+                [...output.get(date).entries()].map((entry, index) => (
+                  <AccordionDetails key={index}>
+                    <QueryDetails {...entry} />
+                  </AccordionDetails>
                 ))
               }
-            </div>
+            </Accordion>
           ))
         }
       </Drawer>

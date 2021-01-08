@@ -15,10 +15,12 @@ export function addToStorage(
   const newDataForPath = new Map<string, string>();
 
   queryBtn.onclick = async () => {
+    const data = textarea.value.trim();
+    if (!data) {
+      return; // If textarea is empty, do nothing
+    }
     const { formattedDate, timestamp: newTimestamp } = getFormattedDateAndTimestamp();
-    const newData = {
-      data: textarea.value
-    };
+    const newData = { data };
     let currentTimeDetailsMap = new Map<number, Record<string, unknown>>();
     if (existingDataForPath.has(formattedDate)) {
       currentTimeDetailsMap = existingDataForPath.get(formattedDate);

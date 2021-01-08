@@ -1,7 +1,6 @@
 $primary-color: darkblue;
 $background-color: #BADA55;
 
-// Chrome applies an 8px margin by default (gross).
 body {
     margin: 0px;
 }
@@ -12,4 +11,58 @@ body {
 
 span {
   margin-right: 6px;
+}
+
+.accordion-heading {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 35px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: start;
+}
+
+.column-flex-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.column-flex-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.column-flex-3 {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.column-flex-4 {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.column-flex-5 {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+
+.column-flex-6 {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
