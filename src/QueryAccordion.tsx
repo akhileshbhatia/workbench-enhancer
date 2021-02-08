@@ -11,7 +11,7 @@ export default function QueryAccordion(props): ReactElement {
     setAccordionState(!openAccordion);
   }
   return (
-    <Accordion expanded={openAccordion || !!searchTerm}>
+    <Accordion className="accordion" expanded={openAccordion || !!searchTerm}>
       <AccordionSummary
         className="accordion-summary"
         expandIcon={<ExpandMoreIcon />}

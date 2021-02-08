@@ -4,6 +4,11 @@ $background-color: #e8e8e8;
 body {
     margin: 0px;
 }
+
+.accordion {
+  margin-bottom: 0 !important;
+}
+
 .accordion-summary{
   &:hover {
     background-color: $background-color;

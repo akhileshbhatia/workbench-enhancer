@@ -45,8 +45,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end'
   },
-  formMargin: {
-    margin: theme.spacing(1)
+  inputField: {
+    margin: theme.spacing(1),
+    width: '90%',
+    height: '70px'
   }
 }));
 
@@ -91,28 +93,29 @@ export default function App(props): ReactElement {
           </IconButton>
         </div>
         <div>
-          <FormControl className={classes.formMargin}>
-            <TextField
-              variant="outlined"
-              value={searchTerm}
-              onChange={handleSearchTermUpdate}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </FormControl>
+          <TextField
+            variant="outlined"
+            className={classes.inputField}
+            value={searchTerm}
+            onChange={handleSearchTermUpdate}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              )
+            }}
+          />
         </div>
-        {
-          [...output.keys()].map(date => {
-            const entries = [...output.get(date).entries()];
-            const props = { date, entries, searchTerm };
-            return <QueryAccordion key={date} {...props} />
-          })
-        }
+        <div>
+          {
+            [...output.keys()].map(date => {
+              const entries = [...output.get(date).entries()];
+              const props = { date, entries, searchTerm };
+              return <QueryAccordion key={date} {...props} />;
+            })
+          }
+        </div>
       </Drawer>
     </div >
   )
