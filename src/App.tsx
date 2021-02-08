@@ -1,20 +1,22 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, ChangeEvent } from 'react';
 import './app.scss';
 import {
   Drawer,
   IconButton,
   makeStyles,
   Theme,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
+  TextField,
+  FormControl,
+  InputAdornment
 } from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SearchIcon from '@material-ui/icons/Search';
+
 import clsx from 'clsx';
-import { updateExtensionState } from './AddToStorage';
-import QueryDetails from './QueryDetails';
+import { updateExtensionState } from './UpdateStorage';
+import QueryAccordion from './QueryAccordion';
+
 
 const drawerWidth = 240;
 
@@ -43,16 +45,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end'
   },
+  formMargin: {
+    margin: theme.spacing(1)
+  }
 }));
 
 export default function App(props): ReactElement {
   const { output, defaultDrawerState, currentPathName } = props;
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
     await updateExtensionState(currentPathName, newState);
+  }
+
+  const handleSearchTermUpdate = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   }
 
   return (
@@ -80,23 +90,28 @@ export default function App(props): ReactElement {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        <div>
+          <FormControl className={classes.formMargin}>
+            <TextField
+              variant="outlined"
+              value={searchTerm}
+              onChange={handleSearchTermUpdate}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                )
+              }}
+            />
+          </FormControl>
+        </div>
         {
-          [...output.keys()].map(date => (
-            <Accordion key={date}>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <div className='accordion-heading'>{date}</div>
-              </AccordionSummary>
-              {
-                [...output.get(date).entries()].map((entry, index) => (
-                  <AccordionDetails key={index}>
-                    <QueryDetails {...entry} />
-                  </AccordionDetails>
-                ))
-              }
-            </Accordion>
-          ))
+          [...output.keys()].map(date => {
+            const entries = [...output.get(date).entries()];
+            const props = { date, entries, searchTerm };
+            return <QueryAccordion key={date} {...props} />
+          })
         }
       </Drawer>
     </div >

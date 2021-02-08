@@ -1,25 +1,20 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import './app.scss';
 import { getHoursAndMinsFromTimestamp } from './common/HelperFunctions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/StarBorder';
-import QueryText from './QueryText';
+import QueryData from './QueryData';
 
 export default function QueryDetails(props): ReactElement {
   const [time, details] = Object.values(props);
-  const [showMore, changeShowMore] = useState(true);
-  const propsForQueryText = {
-    details,
-    showMore,
-    changeShowMore
-  }
+  const updateTextArea = () => document.querySelector('textarea').value = details.data;
   return (
     <div className='row'>
       <div className='column-flex-2'>
         <b>{getHoursAndMinsFromTimestamp(time)}</b>
       </div>
-      <div className='column-flex-6'>
-        <QueryText {...propsForQueryText} />
+      <div className='column-flex-6 cursor-pointer' onClick={() => updateTextArea()}>
+        <QueryData {...details} />
       </div>
       <div className='column-flex-1 cursor-pointer'>
         <DeleteIcon />

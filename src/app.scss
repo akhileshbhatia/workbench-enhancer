@@ -19,6 +19,13 @@ span {
   margin-left: 35px;
 }
 
+.accordion-details {
+  padding: 8px 8px 16px !important;
+  &:hover {
+    background-color: #e8e8e8;
+  }
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -37,6 +44,8 @@ span {
   display: flex;
   flex-direction: column;
   flex: 2;
+  padding-right: 4%;
+  margin-left: -5px;
 }
 
 .column-flex-3 {
@@ -61,6 +70,7 @@ span {
   display: flex;
   flex-direction: column;
   flex: 6;
+  word-break: break-all;
 }
 
 .cursor-pointer {
