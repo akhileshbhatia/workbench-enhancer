@@ -13,13 +13,13 @@ export default function QueryDetails(props): ReactElement {
       <div className='column-flex-2'>
         <b>{getHoursAndMinsFromTimestamp(time)}</b>
       </div>
-      <div className='column-flex-6 cursor-pointer' onClick={() => updateTextArea()}>
+      <div className='column-flex-6' onClick={() => updateTextArea()}>
         <QueryData {...details} />
       </div>
-      <div className='column-flex-1 cursor-pointer'>
+      <div className='column-flex-1'>
         <DeleteIcon />
       </div>
-      <div className='column-flex-1 cursor-pointer'>
+      <div className='column-flex-1'>
         <StarIcon />
       </div>
     </div>

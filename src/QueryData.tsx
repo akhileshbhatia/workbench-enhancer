@@ -12,14 +12,14 @@ export default function QueryData(props): ReactElement {
     return (
       <Fragment>
         {props.data.substr(0, 50)}
-        ...<Link className='cursor-pointer' onClick={() => changeShowMore(false)}>Show More</Link>
+        ...<Link onClick={() => changeShowMore(false)}>Show More</Link>
       </Fragment>
     )
   } else {
     return (
       <Fragment>
         {props.data}
-        <Link className='cursor-pointer' onClick={() => changeShowMore(true)}>Show Less</Link>
+        <Link onClick={() => changeShowMore(true)}>Show Less</Link>
       </Fragment>
     )
   }

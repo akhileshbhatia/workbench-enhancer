@@ -12,8 +12,12 @@ export default function QueryAccordion(props): ReactElement {
   }
   return (
     <Accordion expanded={openAccordion || !!searchTerm}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} onClick={() => toggleAccordionState()}>
-        <div className="accordion-heading cursor-pointer">{date}</div>
+      <AccordionSummary
+        className="accordion-summary"
+        expandIcon={<ExpandMoreIcon />}
+        onClick={() => toggleAccordionState()}
+      >
+        <div className="accordion-heading">{date}</div>
       </AccordionSummary>
       {
         entries.map((entry, index) => (
