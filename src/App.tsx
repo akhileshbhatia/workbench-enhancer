@@ -6,7 +6,6 @@ import {
   makeStyles,
   Theme,
   TextField,
-  FormControl,
   InputAdornment
 } from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
@@ -92,7 +91,10 @@ export default function App(props): ReactElement {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <div>
+        <div hidden={output.size !== 0}>
+          <h2>Please add queries/searches to see them here!</h2>
+        </div>
+        <div hidden={output.size === 0}>
           <TextField
             variant="outlined"
             className={classes.inputField}
