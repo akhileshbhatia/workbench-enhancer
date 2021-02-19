@@ -6,12 +6,12 @@ import StarIcon from '@material-ui/icons/StarBorder';
 import QueryData from './QueryData';
 
 export default function QueryDetails(props): ReactElement {
-  const [time, details] = Object.values(props);
+  const { timestamp, details } = props;
   const updateTextArea = () => document.querySelector('textarea').value = details.data;
   return (
     <div className='row'>
       <div className='column-flex-2'>
-        <b>{getHoursAndMinsFromTimestamp(time)}</b>
+        <b>{getHoursAndMinsFromTimestamp(timestamp)}</b>
       </div>
       <div className='column-flex-6' onClick={() => updateTextArea()}>
         <QueryData {...details} />
