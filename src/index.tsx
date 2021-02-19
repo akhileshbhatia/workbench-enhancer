@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { deserializeData, getDataForPath } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
-import { listenerForAddToStorage } from './UpdateStorage';
+import { addToStorage } from './UpdateStorage';
 
 (async () => {
   const container = document.createElement('div');
@@ -15,7 +15,17 @@ import { listenerForAddToStorage } from './UpdateStorage';
   const data = await getDataForPath(currentPathName) as unknown as string;
   const extensionStates = await getDataForPath(extensionStateKey);
   const deserializedData = deserializeData(data);
-  listenerForAddToStorage(deserializedData.output, currentPathName);
+
+  const queryBtn: HTMLElement = document.querySelector(`input[name='${currentPathName}Submit']`);
+  const textarea: HTMLTextAreaElement = document.querySelector('textarea');
+  queryBtn.onclick = () => {
+    const data = textarea.value.trim();
+    if (!data) {
+      return; // If textarea is empty, do nothing
+    }
+    addToStorage(deserializedData.output, currentPathName, { data });
+  }
+
   const props = {
     ...deserializedData,
     defaultDrawerState: (extensionStates && extensionStates[currentPathName]) ?? true,
