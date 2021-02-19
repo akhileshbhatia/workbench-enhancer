@@ -18,12 +18,12 @@ import { addToStorage } from './UpdateStorage';
 
   const queryBtn: HTMLElement = document.querySelector(`input[name='${currentPathName}Submit']`);
   const textarea: HTMLTextAreaElement = document.querySelector('textarea');
-  queryBtn.onclick = () => {
+  queryBtn.onclick = async () => {
     const data = textarea.value.trim();
     if (!data) {
       return; // If textarea is empty, do nothing
     }
-    addToStorage(deserializedData.output, currentPathName, { data });
+    await addToStorage(deserializedData.output, currentPathName, { data });
   }
 
   const props = {
