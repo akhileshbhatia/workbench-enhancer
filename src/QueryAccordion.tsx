@@ -15,6 +15,7 @@ export default function QueryAccordion(props): ReactElement {
     // At this point, we can be sure that entry is an array with length atleast 2
     return !searchTerm || (!!entry[1].data && entry[1].data.includes(searchTerm));
   }
+
   return (
     <Accordion className="accordion" expanded={openAccordion || !!searchTerm}>
       <AccordionSummary
@@ -32,7 +33,8 @@ export default function QueryAccordion(props): ReactElement {
             if (Array.isArray(entry) && entry.length >= 2 && doesDataMatchToSearch(entry)) {
               const queryDetailsProps = {
                 timestamp: entry[0],
-                details: entry[1]
+                details: entry[1],
+                handleDelete: (timestamp: string) => props.handleDelete(timestamp, date)
               };
               return (
                 <AccordionDetails key={index} className="accordion-details">

@@ -13,7 +13,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
-import { updateExtensionState } from './UpdateStorage';
+import { updateExtensionState } from './StorageServices';
+import { setDataToPath, serializeMap } from './common/HelperFunctions';
 import QueryAccordion from './QueryAccordion';
 
 
@@ -56,6 +57,7 @@ export default function App(props): ReactElement {
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
   const [searchTerm, setSearchTerm] = useState('');
+  const [allData, setAllData] = useState(output);
 
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
@@ -64,6 +66,22 @@ export default function App(props): ReactElement {
 
   const handleSearchTermUpdate = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+  }
+
+  const handleDelete = async (timestamp: string, dateToDeleteFrom: string) => {
+    const detailsMap = allData.get(dateToDeleteFrom);
+    detailsMap.delete(timestamp);
+    if (detailsMap.size > 0) {
+      allData.set(dateToDeleteFrom, detailsMap); // Reset the new map for the same date
+    } else {
+      allData.delete(dateToDeleteFrom); // remove the date if it has no data
+    }
+    setAllData(() => new Map([...allData]));
+    const dataToStore = new Map<string, string>();
+    for (const [date, details] of allData.entries()) {
+      dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
+    }
+    await setDataToPath(currentPathName, serializeMap<string, string>(dataToStore));
   }
 
   return (
@@ -91,10 +109,10 @@ export default function App(props): ReactElement {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <div hidden={output.size !== 0}>
+        <div hidden={allData.size !== 0}>
           <h2>Please add queries/searches to see them here!</h2>
         </div>
-        <div hidden={output.size === 0}>
+        <div hidden={allData.size === 0}>
           <TextField
             variant="outlined"
             className={classes.inputField}
@@ -111,9 +129,9 @@ export default function App(props): ReactElement {
         </div>
         <div>
           {
-            [...output.keys()].map(date => {
-              const entries = [...output.get(date).entries()];
-              const props = { date, entries, searchTerm };
+            [...allData.keys()].map(date => {
+              const entries = [...allData.get(date).entries()];
+              const props = { date, entries, searchTerm, handleDelete };
               return <QueryAccordion key={date} {...props} />;
             })
           }
