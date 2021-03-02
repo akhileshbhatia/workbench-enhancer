@@ -16,7 +16,7 @@ export default function QueryDetails(props): ReactElement {
       <div className='column-flex-6' onClick={() => updateTextArea()}>
         <QueryData {...details} />
       </div>
-      <div className='column-flex-1'>
+      <div className='column-flex-1' onClick={() => props.handleDelete(timestamp)}>
         <DeleteIcon />
       </div>
       <div className='column-flex-1'>

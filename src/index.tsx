@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { deserializeData, getDataForPath } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
-import { addToStorage } from './UpdateStorage';
+import { addToStorage } from './StorageServices';
 
 (async () => {
   const container = document.createElement('div');
