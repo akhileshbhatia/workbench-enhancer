@@ -43,4 +43,3 @@ export async function updateExtensionState(currentPathName: string, newState: bo
   currentExtensionStates[currentPathName] = newState;
   await setDataToPath(extensionStateKey, currentExtensionStates);
 }
-
