@@ -44,11 +44,3 @@ export async function updateExtensionState(currentPathName: string, newState: bo
   await setDataToPath(extensionStateKey, currentExtensionStates);
 }
 
-export async function deleteFromStorage(currentPathName: string,
-  date: string,
-  timestamp: string,
-  dataForPath: Map<string, Map<number, Record<string, unknown>>>): Promise<void> {
-  const dateMap = dataForPath.get(date);
-  dateMap.delete(+timestamp);
-  dataForPath.set(date, dateMap); // Replaces data at exact same position
-}
