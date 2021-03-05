@@ -4,10 +4,17 @@ import { getHoursAndMinsFromTimestamp } from './common/HelperFunctions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/StarBorder';
 import QueryData from './QueryData';
+import { ChromeStorageQueryData } from './common/Types'
 
-export default function QueryDetails(props): ReactElement {
+type QueryDetailsProps = {
+  timestamp: number,
+  details: ChromeStorageQueryData,
+  handleDelete: (timestamp: number) => Promise<void>
+}
+export default function QueryDetails(props: QueryDetailsProps): ReactElement {
   const { timestamp, details } = props;
   const updateTextArea = () => document.querySelector('textarea').value = details.data;
+  details['test'] = 'test-value';
   return (
     <div className='row'>
       <div className='column-flex-2'>

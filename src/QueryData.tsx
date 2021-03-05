@@ -1,12 +1,17 @@
 import React, { ReactElement, Fragment, useState } from 'react';
 import { Link } from '@material-ui/core';
 import './app.scss';
+import { ChromeStorageQueryData } from './common/Types'
 
-export default function QueryData(props): ReactElement {
+export default function QueryData(props: ChromeStorageQueryData): ReactElement {
   const [showMore, changeShowMore] = useState(true);
 
   if (props.data.length <= 50) {
-    return props.data;
+    return (
+      <Fragment>
+        {props.data}
+      </Fragment>
+    );
   }
   if (showMore) {
     return (

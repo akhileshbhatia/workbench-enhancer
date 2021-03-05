@@ -14,8 +14,9 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
 import { updateExtensionState } from './StorageServices';
-import { setDataToPath, serializeMap } from './common/HelperFunctions';
+import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
 import QueryAccordion from './QueryAccordion';
+import { QueryDataMap } from './common/Types';
 
 
 const drawerWidth = 240;
@@ -52,7 +53,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export default function App(props): ReactElement {
+type AppProps = {
+  output: QueryDataMap,
+  defaultDrawerState: boolean,
+  currentPathName: string
+};
+
+export default function App(props: AppProps): ReactElement {
   const { output, defaultDrawerState, currentPathName } = props;
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
@@ -68,7 +75,7 @@ export default function App(props): ReactElement {
     setSearchTerm(event.target.value);
   }
 
-  const handleDelete = async (timestamp: string, dateToDeleteFrom: string) => {
+  const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
     const detailsMap = allData.get(dateToDeleteFrom);
     detailsMap.delete(timestamp);
     if (detailsMap.size > 0) {
@@ -81,7 +88,7 @@ export default function App(props): ReactElement {
     for (const [date, details] of allData.entries()) {
       dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
     }
-    await setDataToPath(currentPathName, serializeMap<string, string>(dataToStore));
+    await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
   }
 
   return (

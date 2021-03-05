@@ -3,8 +3,16 @@ import './app.scss';
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QueryDetails from './QueryDetails';
+import { ChromeStorageQueryData } from './common/Types';
 
-export default function QueryAccordion(props): ReactElement {
+type QueryAccordionProps = {
+  date: string,
+  searchTerm: string,
+  handleDelete: (timestamp: number, date: string) => Promise<void>,
+  entries: [number, ChromeStorageQueryData][]
+}
+
+export default function QueryAccordion(props: QueryAccordionProps): ReactElement {
   const { date, entries, searchTerm } = props;
   const [openAccordion, setAccordionState] = useState(false);
   const toggleAccordionState = () => {
@@ -34,7 +42,7 @@ export default function QueryAccordion(props): ReactElement {
               const queryDetailsProps = {
                 timestamp: entry[0],
                 details: entry[1],
-                handleDelete: (timestamp: string) => props.handleDelete(timestamp, date)
+                handleDelete: (timestamp) => props.handleDelete(timestamp, date)
               };
               return (
                 <AccordionDetails key={index} className="accordion-details">

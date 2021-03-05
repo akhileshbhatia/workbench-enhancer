@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { deserializeData, getDataForPath } from './common/HelperFunctions';
+import { deserializeData, getDataFromChromeStorage } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
 import { addToStorage } from './StorageServices';
 
@@ -12,8 +12,8 @@ import { addToStorage } from './StorageServices';
   document.body.insertBefore(container, document.getElementById(mainBlockId));
 
   const currentPathName = window.location.pathname.replace('/', '').replace('.php', '').replace('#', '');
-  const data = await getDataForPath(currentPathName) as unknown as string;
-  const extensionStates = await getDataForPath(extensionStateKey);
+  const data = await getDataFromChromeStorage(currentPathName) as unknown as string;
+  const extensionStates = await getDataFromChromeStorage(extensionStateKey);
   const deserializedData = deserializeData(data);
 
   const queryBtn: HTMLElement = document.querySelector(`input[name='${currentPathName}Submit']`);
@@ -28,7 +28,7 @@ import { addToStorage } from './StorageServices';
 
   const props = {
     ...deserializedData,
-    defaultDrawerState: (extensionStates && extensionStates[currentPathName]) ?? true,
+    defaultDrawerState: (extensionStates && extensionStates[currentPathName] as boolean) ?? true,
     currentPathName
   };
   ReactDOM.render(<App {...props} />, container);
