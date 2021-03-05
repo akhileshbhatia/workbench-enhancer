@@ -1,8 +1,8 @@
 import {
   getFormattedDateAndTimestamp,
-  setDataToPath,
+  setDataToChromeStorage,
   serializeMap,
-  getDataForPath
+  getDataFromChromeStorage
 } from './common/HelperFunctions';
 import { extensionStateKey } from './common/Constants';
 
@@ -34,12 +34,12 @@ export async function addToStorage(
     dateMap.set(date, serializeMap<number, Record<string, unknown>>(info));
   }
 
-  await setDataToPath(currentPathName, serializeMap<string, string>(dateMap));
+  await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dateMap));
 
 }
 
 export async function updateExtensionState(currentPathName: string, newState: boolean): Promise<void> {
-  const currentExtensionStates = await getDataForPath(extensionStateKey) || {};
+  const currentExtensionStates = await getDataFromChromeStorage(extensionStateKey) || {};
   currentExtensionStates[currentPathName] = newState;
-  await setDataToPath(extensionStateKey, currentExtensionStates);
+  await setDataToChromeStorage(extensionStateKey, currentExtensionStates);
 }

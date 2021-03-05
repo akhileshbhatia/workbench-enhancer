@@ -1,8 +1,10 @@
-export function getDataForPath(path: string): Promise<Record<string, unknown>> {
+import { QueryDataMap, ChromeStorageQueryData } from './Types';
+
+export function getDataFromChromeStorage(key: string): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.get(path, (data) => {
-        path === null ? resolve(data) : resolve(data[path]);
+      chrome.storage.local.get(key, (data) => {
+        key === null ? resolve(data) : resolve(data[key]);
       });
     } catch (err) {
       reject(err);
@@ -20,10 +22,10 @@ export function clearStorage(): Promise<void> {
   });
 }
 
-export function setDataToPath(path: string, data: any): Promise<void> {
+export function setDataToChromeStorage(key: string, data: any): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
-      chrome.storage.local.set({ [path]: data }, () => {
+      chrome.storage.local.set({ [key]: data }, () => {
         if (chrome.runtime.lastError) {
           reject('Error in setting data to chrome storage');
         }
@@ -43,20 +45,20 @@ export function deserializeToMap<keyType, valueType>(data: string): Map<keyType,
   return new Map(JSON.parse(data));
 }
 
-export function deserializeData(data: string): { output: Map<string, Map<number, Record<string, unknown>>> } {
+export function deserializeData(data: string): { output: QueryDataMap } {
   const finalMap = new Map();
   if (data) {
     const dateMap = deserializeToMap<string, string>(data);
     for (const [date, info] of dateMap.entries()) {
-      const newValue = deserializeToMap<number, Record<string, unknown>>(info);
+      const newValue = deserializeToMap<number, ChromeStorageQueryData>(info);
       finalMap.set(date, newValue);
     }
   }
   return { output: finalMap };
 }
 
-export function getHoursAndMinsFromTimestamp(timestamp: string): string {
-  const date = new Date(+timestamp * 1000);
+export function getHoursAndMinsFromTimestamp(timestamp: number): string {
+  const date = new Date(timestamp * 1000);
   // Pad 0 to hours and mins in case they are single digit
   const hours = String(date.getHours()).padStart(2, '0');
   const mins = String(date.getMinutes()).padStart(2, '0');
