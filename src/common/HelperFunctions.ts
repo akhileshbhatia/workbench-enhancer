@@ -1,4 +1,4 @@
-import { QueryDataMap } from './Types';
+import { QueryDataMap, ChromeStorageQueryData } from './Types';
 
 export function getDataFromChromeStorage(key: string): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ export function deserializeData(data: string): { output: QueryDataMap } {
   if (data) {
     const dateMap = deserializeToMap<string, string>(data);
     for (const [date, info] of dateMap.entries()) {
-      const newValue = deserializeToMap<number, Record<string, unknown>>(info);
+      const newValue = deserializeToMap<number, ChromeStorageQueryData>(info);
       finalMap.set(date, newValue);
     }
   }

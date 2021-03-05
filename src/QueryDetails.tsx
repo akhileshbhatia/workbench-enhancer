@@ -14,7 +14,6 @@ type QueryDetailsProps = {
 export default function QueryDetails(props: QueryDetailsProps): ReactElement {
   const { timestamp, details } = props;
   const updateTextArea = () => document.querySelector('textarea').value = details.data;
-  details['test'] = 'test-value';
   return (
     <div className='row'>
       <div className='column-flex-2'>
