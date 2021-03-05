@@ -42,7 +42,7 @@ export default function QueryAccordion(props: QueryAccordionProps): ReactElement
               const queryDetailsProps = {
                 timestamp: entry[0],
                 details: entry[1],
-                handleDelete: (timestamp) => props.handleDelete(timestamp, date)
+                handleDelete: (timestamp: number) => props.handleDelete(timestamp, date)
               };
               return (
                 <AccordionDetails key={index} className="accordion-details">
