@@ -11,6 +11,10 @@
   ],
   "rules": {
     "no-prototype-builtins": "off",
-    "no-unexpected-multiline": "off"
+    "no-unexpected-multiline": "off",
+    "semi": [
+      "error",
+      "always"
+    ]
   }
 }

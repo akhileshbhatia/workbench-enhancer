@@ -76,5 +76,5 @@ export function getFormattedDateAndTimestamp(): {
   return {
     formattedDate: `${day} ${month} ${year}`,
     timestamp: Math.round(<number><unknown>todaysDate / 1000)
-  }
+  };
 }

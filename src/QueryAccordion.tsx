@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import './app.scss';
 import { Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import QueryDetails from './QueryDetails';
+import { QueryDetails } from './QueryDetails';
 import { ChromeStorageQueryData } from './common/Types';
 
 type QueryAccordionProps = {
@@ -17,12 +17,12 @@ export default function QueryAccordion(props: QueryAccordionProps): ReactElement
   const [openAccordion, setAccordionState] = useState(false);
   const toggleAccordionState = () => {
     setAccordionState(!openAccordion);
-  }
+  };
   const doesDataMatchToSearch = (entry) => {
     // If there is no search term OR 'data' attribute exists and matches the search term
     // At this point, we can be sure that entry is an array with length atleast 2
     return !searchTerm || (!!entry[1].data && entry[1].data.includes(searchTerm));
-  }
+  };
 
   return (
     <Accordion className="accordion" expanded={openAccordion || !!searchTerm}>
@@ -48,11 +48,11 @@ export default function QueryAccordion(props: QueryAccordionProps): ReactElement
                 <AccordionDetails key={index} className="accordion-details">
                   <QueryDetails {...queryDetailsProps} />
                 </AccordionDetails>
-              )
+              );
             }
           })
         }
       </div>
     </Accordion>
-  )
+  );
 }

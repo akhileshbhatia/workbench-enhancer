@@ -69,11 +69,11 @@ export default function App(props: AppProps): ReactElement {
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
     await updateExtensionState(currentPathName, newState);
-  }
+  };
 
   const handleSearchTermUpdate = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  }
+  };
 
   const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
     const detailsMap = allData.get(dateToDeleteFrom);
@@ -89,7 +89,7 @@ export default function App(props: AppProps): ReactElement {
       dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
     }
     await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -145,7 +145,7 @@ export default function App(props: AppProps): ReactElement {
         </div>
       </Drawer>
     </div >
-  )
+  );
 }
 
 

@@ -24,7 +24,7 @@ import { addToStorage } from './StorageServices';
       return; // If textarea is empty, do nothing
     }
     await addToStorage(deserializedData.output, currentPathName, { data });
-  }
+  };
 
   const props = {
     ...deserializedData,
