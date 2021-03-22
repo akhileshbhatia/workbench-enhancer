@@ -15,7 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import clsx from 'clsx';
 import { updateExtensionState } from './StorageServices';
 import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
-import QueryAccordion from './QueryAccordion';
+import { QueryAccordion } from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
 
 const drawerWidth = 240;

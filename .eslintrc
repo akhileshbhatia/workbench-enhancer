@@ -28,6 +28,12 @@
         "max": 1
       }
     ],
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "@typescript-eslint/no-inferrable-types": [
+      "error",
+      {
+        "ignoreParameters": true
+      }
+    ]
   }
 }

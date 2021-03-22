@@ -18,6 +18,7 @@ describe('QueryDetails', () => {
   };
 
   beforeEach(() => {
+    jest.clearAllMocks();
     handleDelete = jest.fn();
     init(20212021, 'test-data');
   });
