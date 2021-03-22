@@ -19,9 +19,7 @@ Object {
           class="column-flex-6"
           data-testid="querydata-component"
         >
-          <div
-            data-testid="full-text-no-link"
-          >
+          <div>
             test-data
           </div>
         </div>
@@ -73,9 +71,7 @@ Object {
         class="column-flex-6"
         data-testid="querydata-component"
       >
-        <div
-          data-testid="full-text-no-link"
-        >
+        <div>
           test-data
         </div>
       </div>

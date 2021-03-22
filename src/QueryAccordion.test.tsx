@@ -57,7 +57,7 @@ describe('QueryAccordion', () => {
   it('shows only results matching search term', () => {
     const dataArray = ['test-data', 'dummy-data'];
     init(dataArray, 'data');
-    expect(getAllByTestId(component.container, 'accordion-details').length).toBe(dataArray.length);
+    expect(getAllByTestId(component.container, 'accordion-details').length).toBe(2);
     init(dataArray, 'dummy');
     expect(getAllByTestId(component.container, 'accordion-details').length).toBe(1);
   });

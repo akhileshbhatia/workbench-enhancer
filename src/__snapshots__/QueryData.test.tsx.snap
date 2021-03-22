@@ -5,17 +5,13 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        data-testid="full-text-no-link"
-      >
+      <div>
         test-data
       </div>
     </div>
   </body>,
   "container": <div>
-    <div
-      data-testid="full-text-no-link"
-    >
+    <div>
       test-data
     </div>
   </div>,

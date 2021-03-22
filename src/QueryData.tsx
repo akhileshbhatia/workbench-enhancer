@@ -8,14 +8,14 @@ export function QueryData(props: ChromeStorageQueryData): ReactElement {
 
   if (props.data.length <= 50) {
     return (
-      <div data-testid="full-text-no-link">
+      <div>
         {props.data}
       </div>
     );
   }
   if (showMore) {
     return (
-      <div data-testid="truncated-text">
+      <div>
         {props.data.substr(0, 50)}
         ...<Link data-testid="show-more-link" onClick={() => changeShowMore(false)}>Show More</Link>
       </div>
