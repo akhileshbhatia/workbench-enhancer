@@ -1,5 +1,10 @@
 import { Migration } from './interface';
-import { getDataFromChromeStorage, clearStorage, setDataToChromeStorage, serializeMap } from '../common/HelperFunctions';
+import {
+  getDataFromChromeStorage,
+  clearStorage,
+  setDataToChromeStorage,
+  serializeMap
+} from '../common/HelperFunctions';
 /**
  * Converts obj in each path (query, search and execute) to
  * new data structure into map

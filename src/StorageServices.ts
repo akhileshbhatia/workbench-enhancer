@@ -13,9 +13,9 @@ export async function addToStorage(
 
   const { formattedDate, timestamp: newTimestamp } = getFormattedDateAndTimestamp();
   const dataForPathArray = [...dataForPath];
-  /* 
-    Since we can only insert at TODAY's date (and not in past or future), that means we only need to check 
-    the latest date if it exists. If the date exists, that means we need to update that date's map. 
+  /*
+    Since we can only insert at TODAY's date (and not in past or future), that means we only need to check
+    the latest date if it exists. If the date exists, that means we need to update that date's map.
     If it doesn't exist, that means we need a new entry for that date
   */
   const latestDate = !!dataForPathArray.length && dataForPathArray[0][0];

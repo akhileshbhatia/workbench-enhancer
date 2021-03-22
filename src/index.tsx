@@ -33,5 +33,3 @@ import { addToStorage } from './StorageServices';
   };
   ReactDOM.render(<App {...props} />, container);
 })();
-
-

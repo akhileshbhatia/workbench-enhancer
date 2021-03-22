@@ -78,3 +78,7 @@ export function getFormattedDateAndTimestamp(): {
     timestamp: Math.round(<number><unknown>todaysDate / 1000)
   };
 }
+
+export function updateTextArea(value) {
+  document.querySelector('textarea').value = value;
+}

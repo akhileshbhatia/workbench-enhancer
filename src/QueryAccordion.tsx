@@ -36,7 +36,7 @@ export default function QueryAccordion(props: QueryAccordionProps): ReactElement
       <div>
         {
           entries.map((entry, index) => {
-            /* If entry doesn't have minimum two values (timestamp and details), 
+            /* If entry doesn't have minimum two values (timestamp and details),
             there is something wrong with it so skip it */
             if (Array.isArray(entry) && entry.length >= 2 && doesDataMatchToSearch(entry)) {
               const queryDetailsProps = {

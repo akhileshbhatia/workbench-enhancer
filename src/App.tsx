@@ -18,7 +18,6 @@ import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
 import QueryAccordion from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -147,5 +146,3 @@ export default function App(props: AppProps): ReactElement {
     </div >
   );
 }
-
-
