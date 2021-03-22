@@ -37,7 +37,8 @@ describe('QueryDetails', () => {
     updateTextAreaSpy = jest.spyOn(HelperFunctions, 'updateTextArea');
 
     fireEvent.click(getByTestId(component.container, 'querydata-component'));
-    expect(updateTextAreaSpy).toHaveBeenCalled();
+    expect(updateTextAreaSpy).toHaveBeenCalledTimes(1);
+    expect(updateTextAreaSpy).toHaveBeenCalledWith('test-data');
   });
 
 });

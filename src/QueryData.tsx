@@ -22,7 +22,7 @@ export function QueryData(props: ChromeStorageQueryData): ReactElement {
     );
   } else {
     return (
-      <div data-testid="full-text">
+      <div>
         {props.data}
         <Link data-testid="show-less-link" onClick={() => changeShowMore(true)}>Show Less</Link>
       </div>
