@@ -8,7 +8,7 @@ module.exports = {
   },
 
   moduleNameMapper: {
-    '.*scss': '<rootDir>/src/test_setup/emptyObject.ts'
+    '.*scss': '<rootDir>/src/test/emptyObject.ts'
   },
 
   // Test spec file resolution pattern.

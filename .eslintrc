@@ -10,6 +10,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
+    // Default rules override
     "no-prototype-builtins": "off",
     "no-unexpected-multiline": "off",
     "semi": [
@@ -29,11 +30,14 @@
       }
     ],
     "no-trailing-spaces": "error",
+    "no-console": "error",
+    // TS rules override
     "@typescript-eslint/no-inferrable-types": [
       "error",
       {
         "ignoreParameters": true
       }
-    ]
+    ],
+    "@typescript-eslint/no-unused-vars": "error"
   }
 }

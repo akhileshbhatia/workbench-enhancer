@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
-    "lint": "eslint . --ext .ts --ext .tsx",
+    "lint": "eslint '**/*.{ts,tsx}'",
+    "lintfix": "eslint --fix '**/*.{ts,tsx}'",
     "test": "jest"
   },
   "pre-commit": {

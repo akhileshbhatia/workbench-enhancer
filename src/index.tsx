@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { App } from './App';
 import { deserializeData, getDataFromChromeStorage } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
 import { addToStorage } from './StorageServices';

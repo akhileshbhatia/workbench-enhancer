@@ -2,16 +2,17 @@ import React from 'react';
 import { RenderResult, render, fireEvent, getByTestId } from '@testing-library/react';
 import { QueryDetailsProps, QueryDetails } from './QueryDetails';
 import * as HelperFunctions from './common/HelperFunctions';
+import { getRandomTimestamp } from './test/HelperFunctions';
 
 describe('QueryDetails', () => {
   let component: RenderResult;
   let handleDelete;
   let updateTextAreaSpy;
 
-  const init = (timestamp: number, data: string): void => {
+  const init = (): void => {
     const props: QueryDetailsProps = {
-      timestamp,
-      details: { data },
+      timestamp: getRandomTimestamp(),
+      details: { data: 'test-data' },
       handleDelete
     };
     component = render(<QueryDetails {...props} />);
@@ -20,7 +21,7 @@ describe('QueryDetails', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     handleDelete = jest.fn();
-    init(20212021, 'test-data');
+    init();
   });
 
   it('renders the component correctly', () => {

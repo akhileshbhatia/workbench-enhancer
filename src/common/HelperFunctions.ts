@@ -79,6 +79,6 @@ export function getFormattedDateAndTimestamp(): {
   };
 }
 
-export function updateTextArea(value) {
+export function updateTextArea(value: string): void {
   document.querySelector('textarea').value = value;
 }

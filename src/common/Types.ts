@@ -2,4 +2,6 @@ export type ChromeStorageQueryData = {
   data: string
 };
 
-export type QueryDataMap = Map<string, Map<number, ChromeStorageQueryData>>;
+export type TimeDetailsMap = Map<number, ChromeStorageQueryData>;
+
+export type QueryDataMap = Map<string, TimeDetailsMap>;
