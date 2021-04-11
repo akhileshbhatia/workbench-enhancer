@@ -2,7 +2,6 @@ import React from 'react';
 import { RenderResult, render, fireEvent, getByTestId } from '@testing-library/react';
 import { QueryDetailsProps, QueryDetails } from './QueryDetails';
 import * as HelperFunctions from './common/HelperFunctions';
-import { getRandomTimestamp } from './test/HelperFunctions';
 
 describe('QueryDetails', () => {
   let component: RenderResult;
@@ -11,7 +10,7 @@ describe('QueryDetails', () => {
 
   const init = (): void => {
     const props: QueryDetailsProps = {
-      timestamp: getRandomTimestamp(),
+      timestamp: 1165669168,
       details: { data: 'test-data' },
       handleDelete
     };

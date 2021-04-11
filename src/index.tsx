@@ -12,9 +12,8 @@ import { addToStorage } from './StorageServices';
   document.body.insertBefore(container, document.getElementById(mainBlockId));
 
   const currentPathName = window.location.pathname.replace('/', '').replace('.php', '').replace('#', '');
-  const data = await getDataFromChromeStorage(currentPathName) as unknown as string;
   const extensionStates = await getDataFromChromeStorage(extensionStateKey);
-  const deserializedData = deserializeData(data);
+  const deserializedData = deserializeData(await getDataFromChromeStorage(currentPathName) as unknown as string);
 
   const queryBtn: HTMLElement = document.querySelector(`input[name='${currentPathName}Submit']`);
   const textarea: HTMLTextAreaElement = document.querySelector('textarea');

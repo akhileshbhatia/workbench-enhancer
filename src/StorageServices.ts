@@ -5,6 +5,7 @@ import {
   getDataFromChromeStorage
 } from './common/HelperFunctions';
 import { extensionStateKey } from './common/Constants';
+import { QueryDataMap } from './common/Types';
 
 export async function addToStorage(
   dataForPath: Map<string, Map<number, Record<string, unknown>>>,
@@ -42,4 +43,25 @@ export async function updateExtensionState(currentPathName: string, newState: bo
   const currentExtensionStates = await getDataFromChromeStorage(extensionStateKey) || {};
   currentExtensionStates[currentPathName] = newState;
   await setDataToChromeStorage(extensionStateKey, currentExtensionStates);
+}
+
+export async function deleteFromStorage(
+  timestamp: number,
+  dateToDeleteFrom: string,
+  currentPathName: string,
+  allData: QueryDataMap): Promise<QueryDataMap> {
+
+  const detailsMap = allData.get(dateToDeleteFrom);
+  detailsMap.delete(timestamp);
+  if (detailsMap.size > 0) {
+    allData.set(dateToDeleteFrom, detailsMap); // Reset the new map for the same date
+  } else {
+    allData.delete(dateToDeleteFrom); // remove the date if it has no data
+  }
+  const dataToStore = new Map<string, string>();
+  for (const [date, details] of allData.entries()) {
+    dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
+  }
+  await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
+  return allData;
 }

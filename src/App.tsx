@@ -13,8 +13,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
-import { updateExtensionState } from './StorageServices';
-import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
+import { updateExtensionState, deleteFromStorage } from './StorageServices';
 import { QueryAccordion } from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
 
@@ -75,19 +74,8 @@ export function App(props: AppProps): ReactElement {
   };
 
   const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
-    const detailsMap = allData.get(dateToDeleteFrom);
-    detailsMap.delete(timestamp);
-    if (detailsMap.size > 0) {
-      allData.set(dateToDeleteFrom, detailsMap); // Reset the new map for the same date
-    } else {
-      allData.delete(dateToDeleteFrom); // remove the date if it has no data
-    }
-    setAllData(() => new Map([...allData]));
-    const dataToStore = new Map<string, string>();
-    for (const [date, details] of allData.entries()) {
-      dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
-    }
-    await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
+    const updatedData = await deleteFromStorage(timestamp, dateToDeleteFrom, currentPathName, allData);
+    setAllData(() => new Map([...updatedData]));
   };
 
   return (

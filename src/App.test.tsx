@@ -7,16 +7,16 @@ import {
   getByTestId,
   waitFor,
   getAllByTestId,
-  queryByTestId
 } from '@testing-library/react';
 import { QueryDataMap, TimeDetailsMap } from './common/Types';
 import { updateExtensionState } from './StorageServices';
-import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
 import { getRandomTimestamp } from './test/HelperFunctions';
 
 jest.mock('./StorageServices', () => {
+  const { deleteFromStorage } = jest.requireActual('./StorageServices');
   return {
-    updateExtensionState: jest.fn()
+    updateExtensionState: jest.fn(),
+    deleteFromStorage
   };
 });
 
@@ -107,26 +107,9 @@ describe('App', () => {
     expect(getAllByTestId(component.container, 'accordion-details').length).toBe(dataArray.length);
     // Delete first item
     deleteItem();
-    // Prepare expected output
-    const dataToStore = new Map<string, string>();
-    for (const [date, details] of queryDataMap.entries()) {
-      dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
-    }
     await waitFor(() => {
-      expect(setDataToChromeStorage).toHaveBeenCalledTimes(1);
-      expect(setDataToChromeStorage).toHaveBeenCalledWith(testPathName, serializeMap<string, string>(dataToStore));
       // UI should now have one less item
       expect(getAllByTestId(component.container, 'accordion-details').length).toBe(dataArray.length - 1);
-    });
-
-    // Delete both the remaining items
-    deleteItem();
-    deleteItem();
-
-    await waitFor(() => {
-      expect(setDataToChromeStorage).toHaveBeenCalledTimes(3);
-      expect(setDataToChromeStorage).toHaveBeenLastCalledWith(testPathName, serializeMap<string, string>(new Map()));
-      expect(queryByTestId(component.container, 'accordion-details')).toBeNull();
     });
   });
 });
