@@ -5,6 +5,7 @@ import {
   setDataToChromeStorage,
   serializeMap
 } from '../common/HelperFunctions';
+import { extensionStateKey } from '../common/Constants';
 /**
  * Converts obj in each path (query, search and execute) to
  * new data structure into map
@@ -12,13 +13,12 @@ import {
 class Migration1 implements Migration {
   private allData: Record<string, any>;
   private extensionState: Record<string, any>;
-  private statesKey = 'extension_states';
 
   async shouldUpgrade() {
     this.allData = await getDataFromChromeStorage(null); // 'null' gets all the data for all keys
-    if (this.allData.hasOwnProperty(this.statesKey)) {
-      this.extensionState = this.allData[this.statesKey];
-      delete this.allData[this.statesKey]; // no need to migrate extension_states
+    if (this.allData.hasOwnProperty(extensionStateKey)) {
+      this.extensionState = this.allData[extensionStateKey];
+      delete this.allData[extensionStateKey]; // no need to migrate extension_states
     }
     let doUpgrade = false;
     const allKeys = Object.keys(this.allData);
@@ -46,7 +46,7 @@ class Migration1 implements Migration {
       }
       await setDataToChromeStorage(path, serializeMap<string, string>(dateMap));
       if (Object.keys(this.extensionState).length) {
-        await setDataToChromeStorage(this.statesKey, this.extensionState);
+        await setDataToChromeStorage(extensionStateKey, this.extensionState);
       }
     }
   }

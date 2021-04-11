@@ -1,4 +1,4 @@
-import { QueryDataMap, ChromeStorageQueryData } from './Types';
+import { QueryDataMap, ChromeStorageQueryData, TimeDetailsMap } from './Types';
 
 export function getDataFromChromeStorage(key: string): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
@@ -81,4 +81,15 @@ export function getFormattedDateAndTimestamp(): {
 
 export function updateTextArea(value: string): void {
   document.querySelector('textarea').value = value;
+}
+
+export async function formatDataAndAddtoStorage(
+  dataArray: [string, TimeDetailsMap][],
+  currentPathName: string
+): Promise<void> {
+  const dataToStore = new Map<string, string>();
+  for (const [date, details] of dataArray) { // Serialize data again before storing
+    dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
+  }
+  await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
 }
