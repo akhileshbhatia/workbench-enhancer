@@ -1,33 +1,8 @@
 import React from 'react';
 import { AppProps, App } from './App';
-import {
-  RenderResult,
-  render,
-  fireEvent,
-  getByTestId,
-  waitFor,
-  getAllByTestId,
-} from '@testing-library/react';
+import { RenderResult, render, fireEvent, getByTestId, waitFor } from '@testing-library/react';
 import { QueryDataMap, TimeDetailsMap } from './common/Types';
-import { updateExtensionState } from './StorageServices';
 import { getRandomTimestamp } from './test/HelperFunctions';
-
-jest.mock('./StorageServices', () => {
-  const { deleteFromStorage } = jest.requireActual('./StorageServices');
-  return {
-    updateExtensionState: jest.fn(),
-    deleteFromStorage
-  };
-});
-
-jest.mock('./common/HelperFunctions', () => {
-  const { getHoursAndMinsFromTimestamp, serializeMap } = jest.requireActual('./common/HelperFunctions');
-  return {
-    setDataToChromeStorage: jest.fn(),
-    getHoursAndMinsFromTimestamp,
-    serializeMap
-  };
-});
 
 describe('App', () => {
   let component: RenderResult;
@@ -36,15 +11,17 @@ describe('App', () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
-    queryDataMap = new Map();
-    timeDetailsMap = new Map();
+    queryDataMap = new Map() as QueryDataMap;
+    timeDetailsMap = new Map() as TimeDetailsMap;
   });
 
   const init = (dataArray: string[] = [], defaultDrawerState = true, currentPathName = 'query'): void => {
     dataArray.map(data => {
       timeDetailsMap.set(getRandomTimestamp(), { data });
-      queryDataMap.set('12 March 2021', timeDetailsMap);
     });
+    if (timeDetailsMap.size) { // Only add to queryDataMap if there is atleast one data
+      queryDataMap.set('12 March 2021', timeDetailsMap);
+    }
     const props: AppProps = {
       output: queryDataMap,
       defaultDrawerState,
@@ -56,11 +33,6 @@ describe('App', () => {
   const getDrawerDivVisibility = (): string => {
     const drawer = component.container.getElementsByClassName('MuiDrawer-root')[0].firstElementChild;
     return window.getComputedStyle(drawer).visibility;
-  };
-
-  // Deletes the top most item it can find
-  const deleteItem = (): void => {
-    fireEvent.click(getAllByTestId(component.container, 'delete-icon')[0]);
   };
 
   it('should match snapshot', () => {
@@ -90,26 +62,10 @@ describe('App', () => {
     fireEvent.click(getByTestId(component.container, 'close-drawer-button'));
     await waitFor(() => {
       expect(getDrawerDivVisibility()).toBe('hidden');
-      expect(updateExtensionState).toHaveBeenCalledWith(testPathName, false);
     });
     fireEvent.click(getByTestId(component.container, 'open-drawer-button'));
     await waitFor(() => {
       expect(getDrawerDivVisibility()).toBe('visible');
-      expect(updateExtensionState).toHaveBeenCalledWith(testPathName, true);
-    });
-  });
-
-  it('should delete elements as expected', async () => {
-    const testPathName = 'test-path';
-    const dataArray = ['select name from info', 'select id, date from details', 'select test from app_test'];
-    init(dataArray, true, testPathName);
-    // Check that all the item are present
-    expect(getAllByTestId(component.container, 'accordion-details').length).toBe(dataArray.length);
-    // Delete first item
-    deleteItem();
-    await waitFor(() => {
-      // UI should now have one less item
-      expect(getAllByTestId(component.container, 'accordion-details').length).toBe(dataArray.length - 1);
     });
   });
 });

@@ -7,6 +7,8 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
 
+  setupFilesAfterEnv: ['<rootDir>/src/test/setup.ts'],
+
   moduleNameMapper: {
     '.*scss': '<rootDir>/src/test/emptyObject.ts'
   },
