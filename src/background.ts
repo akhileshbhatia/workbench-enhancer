@@ -1,4 +1,4 @@
-import { migration1 } from './migrations/migration1'; // TODO: Convert this into dynamic import
+import { migration1 } from './migrations/migration1/migration1'; // TODO: Convert this into dynamic import
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   if (details && details.reason === 'update') {

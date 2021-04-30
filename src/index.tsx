@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { App } from './App';
 import { deserializeData, getDataFromChromeStorage } from './common/HelperFunctions';
 import { extensionStateKey, appId, mainBlockId } from './common/Constants';
 import { addToStorage } from './StorageServices';
@@ -12,9 +12,8 @@ import { addToStorage } from './StorageServices';
   document.body.insertBefore(container, document.getElementById(mainBlockId));
 
   const currentPathName = window.location.pathname.replace('/', '').replace('.php', '').replace('#', '');
-  const data = await getDataFromChromeStorage(currentPathName) as unknown as string;
   const extensionStates = await getDataFromChromeStorage(extensionStateKey);
-  const deserializedData = deserializeData(data);
+  const deserializedData = deserializeData(await getDataFromChromeStorage(currentPathName) as unknown as string);
 
   const queryBtn: HTMLElement = document.querySelector(`input[name='${currentPathName}Submit']`);
   const textarea: HTMLTextAreaElement = document.querySelector('textarea');
@@ -24,7 +23,7 @@ import { addToStorage } from './StorageServices';
       return; // If textarea is empty, do nothing
     }
     await addToStorage(deserializedData.output, currentPathName, { data });
-  }
+  };
 
   const props = {
     ...deserializedData,
@@ -33,5 +32,3 @@ import { addToStorage } from './StorageServices';
   };
   ReactDOM.render(<App {...props} />, container);
 })();
-
-

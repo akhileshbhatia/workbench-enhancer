@@ -1,31 +1,31 @@
-import React, { ReactElement, Fragment, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Link } from '@material-ui/core';
 import './app.scss';
-import { ChromeStorageQueryData } from './common/Types'
+import { ChromeStorageQueryData } from './common/Types';
 
-export default function QueryData(props: ChromeStorageQueryData): ReactElement {
+export function QueryData(props: ChromeStorageQueryData): ReactElement {
   const [showMore, changeShowMore] = useState(true);
 
   if (props.data.length <= 50) {
     return (
-      <Fragment>
+      <div>
         {props.data}
-      </Fragment>
+      </div>
     );
   }
   if (showMore) {
     return (
-      <Fragment>
+      <div>
         {props.data.substr(0, 50)}
-        ...<Link onClick={() => changeShowMore(false)}>Show More</Link>
-      </Fragment>
-    )
+        ...<Link data-testid="show-more-link" onClick={() => changeShowMore(false)}>Show More</Link>
+      </div>
+    );
   } else {
     return (
-      <Fragment>
+      <div>
         {props.data}
-        <Link onClick={() => changeShowMore(true)}>Show Less</Link>
-      </Fragment>
-    )
+        <Link data-testid="show-less-link" onClick={() => changeShowMore(true)}>Show Less</Link>
+      </div>
+    );
   }
 }

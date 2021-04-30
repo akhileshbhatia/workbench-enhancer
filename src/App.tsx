@@ -13,11 +13,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
-import { updateExtensionState } from './StorageServices';
-import { setDataToChromeStorage, serializeMap } from './common/HelperFunctions';
-import QueryAccordion from './QueryAccordion';
+import { updateExtensionState, deleteFromStorage } from './StorageServices';
+import { QueryAccordion } from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
-
 
 const drawerWidth = 240;
 
@@ -53,13 +51,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-type AppProps = {
+export type AppProps = {
   output: QueryDataMap,
   defaultDrawerState: boolean,
   currentPathName: string
 };
 
-export default function App(props: AppProps): ReactElement {
+export function App(props: AppProps): ReactElement {
   const { output, defaultDrawerState, currentPathName } = props;
   const classes: Record<string, string> = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
@@ -69,33 +67,23 @@ export default function App(props: AppProps): ReactElement {
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
     await updateExtensionState(currentPathName, newState);
-  }
+  };
 
   const handleSearchTermUpdate = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  }
+  };
 
   const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
-    const detailsMap = allData.get(dateToDeleteFrom);
-    detailsMap.delete(timestamp);
-    if (detailsMap.size > 0) {
-      allData.set(dateToDeleteFrom, detailsMap); // Reset the new map for the same date
-    } else {
-      allData.delete(dateToDeleteFrom); // remove the date if it has no data
-    }
-    setAllData(() => new Map([...allData]));
-    const dataToStore = new Map<string, string>();
-    for (const [date, details] of allData.entries()) {
-      dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
-    }
-    await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
-  }
+    const updatedData = await deleteFromStorage(timestamp, dateToDeleteFrom, currentPathName, allData);
+    setAllData(() => new Map([...updatedData]));
+  };
 
   return (
     <div className={classes.root}>
       <IconButton
         color="inherit"
         aria-label="open drawer"
+        data-testid="open-drawer-button"
         onClick={() => updateDrawerState(true)}
         edge="end"
         className={clsx(classes.menuButton, drawerOpen && classes.hide)}
@@ -112,19 +100,20 @@ export default function App(props: AppProps): ReactElement {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={() => updateDrawerState(false)}>
+          <IconButton onClick={() => updateDrawerState(false)} data-testid="close-drawer-button">
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <div hidden={allData.size !== 0}>
+        <div data-testid="no-data-msg" hidden={allData.size !== 0}>
           <h2>Please add queries/searches to see them here!</h2>
         </div>
-        <div hidden={allData.size === 0}>
+        <div data-testid="data-div" hidden={allData.size === 0}>
           <TextField
             variant="outlined"
             className={classes.inputField}
             value={searchTerm}
             onChange={handleSearchTermUpdate}
+            data-testid="search-text-field"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -145,7 +134,5 @@ export default function App(props: AppProps): ReactElement {
         </div>
       </Drawer>
     </div >
-  )
+  );
 }
-
-
