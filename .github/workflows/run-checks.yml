@@ -1,7 +1,7 @@
-name: Tests
+name: Checks
 on: push
 jobs:
-  Linter-and-Tests:
+  Linters-And-Test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
