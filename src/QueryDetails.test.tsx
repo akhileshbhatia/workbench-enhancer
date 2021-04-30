@@ -1,12 +1,13 @@
 import React from 'react';
 import { RenderResult, render, fireEvent, getByTestId } from '@testing-library/react';
 import { QueryDetailsProps, QueryDetails } from './QueryDetails';
-import * as HelperFunctions from './common/HelperFunctions';
+import { updateTextArea, getHoursAndMinsFromTimestamp } from './common/HelperFunctions';
+
+jest.mock('./common/HelperFunctions');
 
 describe('QueryDetails', () => {
   let component: RenderResult;
   let handleDelete;
-  let updateTextAreaSpy;
 
   const init = (): void => {
     const props: QueryDetailsProps = {
@@ -20,6 +21,7 @@ describe('QueryDetails', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     handleDelete = jest.fn();
+    (getHoursAndMinsFromTimestamp as jest.Mock).mockReturnValue('10:45');
     init();
   });
 
@@ -33,12 +35,12 @@ describe('QueryDetails', () => {
   });
 
   it('calls the updateTextArea function', () => {
-    document.getElementsByTagName('body')[0].appendChild(document.createElement('textarea')); // Add a textarea to body
-    updateTextAreaSpy = jest.spyOn(HelperFunctions, 'updateTextArea');
+    // Add a textarea to body
+    document.getElementsByTagName('body')[0].appendChild(document.createElement('textarea'));
 
     fireEvent.click(getByTestId(component.container, 'querydata-component'));
-    expect(updateTextAreaSpy).toHaveBeenCalledTimes(1);
-    expect(updateTextAreaSpy).toHaveBeenCalledWith('test-data');
+    expect((updateTextArea as jest.Mock)).toHaveBeenCalledTimes(1);
+    expect((updateTextArea as jest.Mock)).toHaveBeenCalledWith('test-data');
   });
 
 });
