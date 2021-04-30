@@ -10,7 +10,7 @@ describe('QueryDetails', () => {
 
   const init = (): void => {
     const props: QueryDetailsProps = {
-      timestamp: 1165669168,
+      timestamp: 1411070714,
       details: { data: 'test-data' },
       handleDelete
     };
