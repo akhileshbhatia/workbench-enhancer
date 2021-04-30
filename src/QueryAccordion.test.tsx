@@ -12,7 +12,7 @@ describe('QueryAccordion', () => {
     const entries = [];
     dataArray.map(data => {
       const storageData: ChromeStorageQueryData = { data };
-      entries.push([1616406887321, storageData]);
+      entries.push([1616406887, storageData]);
     });
     const props: QueryAccordionProps = {
       date: '12 March 2021',
