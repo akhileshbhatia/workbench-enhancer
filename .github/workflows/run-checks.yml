@@ -2,6 +2,7 @@ name: Tests
 on: push
 jobs:
   Setup-Repo-And-Run-Linter:
+    name: Setup-Repo-And-Run-Linter
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -11,9 +12,10 @@ jobs:
         run: npm ci
       - name: Run Linter
         run: npm run lint
-  # Run-Tests:
-  #   needs: Setup-Repo-And-Run-Linter
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Run unit tests
-  #       run: npm run test
+  Run-Tests:
+    name: Run-Tests
+    needs: Setup-Repo-And-Run-Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run unit tests
+        run: npm run test
