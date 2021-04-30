@@ -35,9 +35,6 @@ describe('QueryDetails', () => {
   });
 
   it('calls the updateTextArea function', () => {
-    // Add a textarea to body
-    document.getElementsByTagName('body')[0].appendChild(document.createElement('textarea'));
-
     fireEvent.click(getByTestId(component.container, 'querydata-component'));
     expect((updateTextArea as jest.Mock)).toHaveBeenCalledTimes(1);
     expect((updateTextArea as jest.Mock)).toHaveBeenCalledWith('test-data');
