@@ -2,6 +2,9 @@ import React from 'react';
 import { QueryAccordion, QueryAccordionProps } from './QueryAccordion';
 import { ChromeStorageQueryData } from './common/Types';
 import { RenderResult, render, fireEvent, getByTestId, getAllByTestId } from '@testing-library/react';
+import { getHoursAndMinsFromTimestamp } from './common/HelperFunctions';
+
+jest.mock('./common/HelperFunctions');
 
 describe('QueryAccordion', () => {
   let component: RenderResult;
@@ -12,7 +15,7 @@ describe('QueryAccordion', () => {
     const entries = [];
     dataArray.map(data => {
       const storageData: ChromeStorageQueryData = { data };
-      entries.push([1616406887321, storageData]);
+      entries.push([1411070714, storageData]);
     });
     const props: QueryAccordionProps = {
       date: '12 March 2021',
@@ -27,6 +30,7 @@ describe('QueryAccordion', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     handleDelete = jest.fn();
+    (getHoursAndMinsFromTimestamp as jest.Mock).mockReturnValue('10:45');
   });
 
   it('renders the component correctly', () => {
