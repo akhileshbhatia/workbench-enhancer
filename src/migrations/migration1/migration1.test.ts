@@ -58,10 +58,10 @@ describe('Migration 1', () => {
     (serializeMap as jest.Mock).mockImplementation(jest.requireActual('../../common/HelperFunctions').serializeMap);
     const expectedData = [
       'search',
-      '[["10 April 2020","[[1586771698,{\\"data\\":\\"search something\\"}],' +
-      '[1586786716,{\\"data\\":\\"search something else\\"}]]"],' +
-      '["9 April 2020","[[1586774320,{\\"data\\":\\"old search 1\\"}],' +
-      '[1586779615,{\\"data\\":\\"old search 2\\"}]]"]]'
+      '[["10 April 2020","[[1586771698,{\\"data\\":\\"search something\\",\\"isBookmarked\\":false}],' +
+      '[1586786716,{\\"data\\":\\"search something else\\",\\"isBookmarked\\":false}]]"],' +
+      '["9 April 2020","[[1586774320,{\\"data\\":\\"old search 1\\",\\"isBookmarked\\":false}],' +
+      '[1586779615,{\\"data\\":\\"old search 2\\",\\"isBookmarked\\":false}]]"]]'
     ];
     const expectedExtensionState = ['extension_states', { query: true, search: false }];
     await migration1.upgrade();
