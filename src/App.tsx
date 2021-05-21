@@ -17,9 +17,9 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
 import { updateExtensionState, deleteFromStorage, updateProperty } from './StorageServices';
-import { QueryAccordion } from './QueryAccordion';
+
 import { QueryDataMap } from './common/Types';
-import { TabPanel } from './common/TabPanel';
+import { TabPanel } from './TabPanel';
 import { getBookmarkedData } from './common/HelperFunctions';
 
 const drawerWidth = 300;
@@ -157,28 +157,22 @@ export function App(props: AppProps): ReactElement {
             <Tab label="Bookmarked" />
           </Tabs>
         </AppBar>
-        <TabPanel value={tabValue} index={0}>
-          <div>
-            {
-              [...allData.keys()].map(date => {
-                const entries = [...allData.get(date).entries()];
-                const props = { date, entries, searchTerm, handleDelete, setIsBookmarked };
-                return <QueryAccordion key={date} {...props} />;
-              })
-            }
-          </div>
-        </TabPanel>
-        <TabPanel value={tabValue} index={1}>
-          <div>
-            {
-              [...bookmarkedData.keys()].map(date => {
-                const entries = [...bookmarkedData.get(date).entries()];
-                const props = { date, entries, searchTerm, handleDelete, setIsBookmarked };
-                return <QueryAccordion key={date} {...props} />;
-              })
-            }
-          </div>
-        </TabPanel>
+        <TabPanel
+          value={tabValue}
+          index={0}
+          data={allData}
+          searchTerm={searchTerm}
+          handleDelete={handleDelete}
+          setIsBookmarked={setIsBookmarked}
+        />
+        <TabPanel
+          value={tabValue}
+          index={1}
+          data={bookmarkedData}
+          searchTerm={searchTerm}
+          handleDelete={handleDelete}
+          setIsBookmarked={setIsBookmarked}
+        />
       </Drawer>
     </div >
   );
