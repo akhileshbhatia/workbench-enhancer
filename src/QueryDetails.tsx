@@ -3,13 +3,15 @@ import './app.scss';
 import { getHoursAndMinsFromTimestamp, updateTextArea } from './common/HelperFunctions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/StarBorder';
+import Star from '@material-ui/icons/Star';
 import { QueryData } from './QueryData';
 import { ChromeStorageQueryData } from './common/Types';
 
 export type QueryDetailsProps = {
   timestamp: number,
   details: ChromeStorageQueryData,
-  handleDelete: (timestamp: number) => Promise<void>
+  handleDelete: (timestamp: number) => Promise<void>,
+  setIsBookmarked: (timestamp: number, value: boolean) => Promise<void>
 };
 
 export function QueryDetails(props: QueryDetailsProps): ReactElement {
@@ -20,14 +22,26 @@ export function QueryDetails(props: QueryDetailsProps): ReactElement {
       <div className='column-flex-2'>
         <b>{getHoursAndMinsFromTimestamp(timestamp)}</b>
       </div>
-      <div className='column-flex-6' data-testid="querydata-component" onClick={() => updateTextArea(details.data)}>
+      <div
+        className='column-flex-6'
+        data-testid="querydata-component"
+        onClick={() => updateTextArea(details.data)}
+      >
         <QueryData {...details} />
       </div>
-      <div className='column-flex-1' data-testid="delete-icon" onClick={() => props.handleDelete(timestamp)}>
+      <div
+        className='column-flex-1'
+        data-testid="delete-icon"
+        onClick={() => props.handleDelete(timestamp)}
+      >
         <DeleteIcon />
       </div>
-      <div className='column-flex-1' data-testid="bookmark-icon">
-        <StarIcon />
+      <div
+        className='column-flex-1'
+        data-testid="bookmark-icon"
+        onClick={() => props.setIsBookmarked(timestamp, !details.isBookmarked)}
+      >
+        {details.isBookmarked ? <Star /> : <StarIcon />}
       </div>
     </div>
   );

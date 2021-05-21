@@ -21,7 +21,8 @@ describe('QueryAccordion', () => {
       date: '12 March 2021',
       searchTerm,
       handleDelete,
-      entries
+      entries,
+      setIsBookmarked: jest.fn()
     };
     component = render(<QueryAccordion {...props} />);
     accordionSummary = getByTestId(component.container, 'expand-collapse-link').firstElementChild;

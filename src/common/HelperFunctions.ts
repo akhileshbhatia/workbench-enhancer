@@ -93,3 +93,15 @@ export async function formatDataAndAddtoStorage(
   }
   await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
 }
+
+export function getBookmarkedData(allData: QueryDataMap): QueryDataMap {
+  const bookmarkedData = new Map() as QueryDataMap;
+  allData.forEach((detailsMap, date) => {
+    const bookmarkedTimeDetailsMap = new Map() as TimeDetailsMap;
+    detailsMap.forEach((value, timestamp) => value.isBookmarked && bookmarkedTimeDetailsMap.set(timestamp, value));
+    if (bookmarkedTimeDetailsMap.size) {
+      bookmarkedData.set(date, bookmarkedTimeDetailsMap);
+    }
+  });
+  return bookmarkedData;
+}

@@ -56,3 +56,23 @@ export async function deleteFromStorage(
   await formatDataAndAddtoStorage([...allData.entries()], currentPathName);
   return allData;
 }
+
+export async function updateProperty(
+  newData: Record<string, unknown>,
+  timestamp: number,
+  dateToUpdateFrom: string,
+  currentPathName: string,
+  allData: QueryDataMap
+): Promise<QueryDataMap> {
+  const [propertyToUpdate, newValue] = Object.entries(newData)[0];
+  const detailsMap = allData.get(dateToUpdateFrom);
+  const data = detailsMap.get(timestamp);
+
+  data[propertyToUpdate] = newValue;
+
+  detailsMap.set(timestamp, data);
+  allData.set(dateToUpdateFrom, detailsMap);
+
+  await formatDataAndAddtoStorage([...allData.entries()], currentPathName);
+  return allData;
+}

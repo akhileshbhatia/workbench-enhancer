@@ -13,7 +13,8 @@ describe('QueryDetails', () => {
     const props: QueryDetailsProps = {
       timestamp: 1411070714,
       details: { data: 'test-data', isBookmarked: false },
-      handleDelete
+      handleDelete,
+      setIsBookmarked: jest.fn()
     };
     component = render(<QueryDetails {...props} />);
   };

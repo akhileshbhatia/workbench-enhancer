@@ -9,12 +9,13 @@ export type QueryAccordionProps = {
   date: string,
   searchTerm: string,
   handleDelete: (timestamp: number, date: string) => Promise<void>,
-  entries: [number, ChromeStorageQueryData][]
+  entries: [number, ChromeStorageQueryData][],
+  setIsBookmarked: (timestamp: number, date: string, value: boolean) => Promise<void>
 }
 
 export function QueryAccordion(props: QueryAccordionProps): ReactElement {
   const { date, entries, searchTerm } = props;
-  const [openAccordion, setAccordionState] = useState(false);
+  const [openAccordion, setAccordionState] = useState(true);
   const toggleAccordionState = () => {
     setAccordionState(!openAccordion);
   };
@@ -41,7 +42,8 @@ export function QueryAccordion(props: QueryAccordionProps): ReactElement {
               const queryDetailsProps = {
                 timestamp: entry[0],
                 details: entry[1],
-                handleDelete: (timestamp: number) => props.handleDelete(timestamp, date)
+                handleDelete: (timestamp: number) => props.handleDelete(timestamp, date),
+                setIsBookmarked: (timestamp: number, value: boolean) => props.setIsBookmarked(timestamp, date, value)
               };
               return (
                 <AccordionDetails key={index} className="accordion-details" data-testid="accordion-details">

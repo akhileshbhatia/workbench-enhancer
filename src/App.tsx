@@ -16,10 +16,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
 
 import clsx from 'clsx';
-import { updateExtensionState, deleteFromStorage } from './StorageServices';
+import { updateExtensionState, deleteFromStorage, updateProperty } from './StorageServices';
 import { QueryAccordion } from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
 import { TabPanel } from './common/TabPanel';
+import { getBookmarkedData } from './common/HelperFunctions';
 
 const drawerWidth = 300;
 
@@ -68,6 +69,7 @@ export function App(props: AppProps): ReactElement {
   const [searchTerm, setSearchTerm] = useState('');
   const [allData, setAllData] = useState(output);
   const [tabValue, setTabValue] = useState(0);
+  const bookmarkedData: QueryDataMap = getBookmarkedData(allData);
 
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
@@ -80,6 +82,17 @@ export function App(props: AppProps): ReactElement {
 
   const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
     const updatedData = await deleteFromStorage(timestamp, dateToDeleteFrom, currentPathName, allData);
+    setAllData(() => new Map([...updatedData]));
+  };
+
+  const setIsBookmarked = async (timestamp: number, dateToUpdateFrom: string, value: boolean) => {
+    const updatedData = await updateProperty(
+      { isBookmarked: value },
+      timestamp,
+      dateToUpdateFrom,
+      currentPathName,
+      allData
+    );
     setAllData(() => new Map([...updatedData]));
   };
 
@@ -149,13 +162,23 @@ export function App(props: AppProps): ReactElement {
             {
               [...allData.keys()].map(date => {
                 const entries = [...allData.get(date).entries()];
-                const props = { date, entries, searchTerm, handleDelete };
+                const props = { date, entries, searchTerm, handleDelete, setIsBookmarked };
                 return <QueryAccordion key={date} {...props} />;
               })
             }
           </div>
         </TabPanel>
-        <TabPanel value={tabValue} index={1}></TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <div>
+            {
+              [...bookmarkedData.keys()].map(date => {
+                const entries = [...bookmarkedData.get(date).entries()];
+                const props = { date, entries, searchTerm, handleDelete, setIsBookmarked };
+                return <QueryAccordion key={date} {...props} />;
+              })
+            }
+          </div>
+        </TabPanel>
       </Drawer>
     </div >
   );
