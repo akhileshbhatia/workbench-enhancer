@@ -1,5 +1,6 @@
 export type ChromeStorageQueryData = {
-  data: string
+  data: string;
+  isBookmarked: boolean;
 };
 
 export type TimeDetailsMap = Map<number, ChromeStorageQueryData>;

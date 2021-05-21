@@ -18,7 +18,8 @@ describe('Storage services', () => {
     let timeDetailsMap: TimeDetailsMap;
     let fakeDateAndTimestamp: ReturnType<typeof getFormattedDateAndTimestamp>;
     const newData: ChromeStorageQueryData = {
-      data: 'And Then There Were None'
+      data: 'And Then There Were None',
+      isBookmarked: false
     };
     const timestamp = 1371561054;
     const dataArray = ['The Murder of Roger Ackroyd', 'The A.B.C Murders'];
@@ -29,7 +30,7 @@ describe('Storage services', () => {
       timeDetailsMap = new Map() as TimeDetailsMap;
 
       dataArray.forEach(data => {
-        timeDetailsMap.set(getRandomTimestamp(), { data });
+        timeDetailsMap.set(getRandomTimestamp(), { data, isBookmarked: false });
       });
       if (timeDetailsMap.size) {
         queryDataMap.set(defaultDate, timeDetailsMap);
@@ -89,13 +90,13 @@ describe('Storage services', () => {
     const timestamps = [1392350458, 1410277586];
     const dataArray = ['Batman begins', 'The Dark Knight'];
     dataArray.forEach((data, index) => {
-      timeDetailsMap.set(timestamps[index], { data });
+      timeDetailsMap.set(timestamps[index], { data, isBookmarked: false });
     });
     queryDataMap.set(defaultDate, timeDetailsMap);
 
     it('should keep the date till the last element is deleted', async () => {
       const expected: ChromeStorageQueryData = {
-        data: dataArray[1]
+        data: dataArray[1], isBookmarked: false
       };
       let updatedData = await deleteFromStorage(timestamps[0], defaultDate, 'test', queryDataMap);
       expect(updatedData.size).toBe(1);

@@ -6,7 +6,7 @@ import { ChromeStorageQueryData } from './common/Types';
 describe('QueryData', () => {
   let component: RenderResult;
   const init = (data: string): void => {
-    const props: ChromeStorageQueryData = { data };
+    const props: ChromeStorageQueryData = { data, isBookmarked: false };
     component = render(<QueryData {...props} />);
   };
 

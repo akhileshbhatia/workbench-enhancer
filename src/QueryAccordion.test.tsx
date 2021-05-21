@@ -14,7 +14,7 @@ describe('QueryAccordion', () => {
   const init = (dataArray: string[], searchTerm: string = ''): void => {
     const entries = [];
     dataArray.map(data => {
-      const storageData: ChromeStorageQueryData = { data };
+      const storageData: ChromeStorageQueryData = { data, isBookmarked: false };
       entries.push([1411070714, storageData]);
     });
     const props: QueryAccordionProps = {

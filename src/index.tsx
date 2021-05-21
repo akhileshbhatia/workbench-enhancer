@@ -22,7 +22,7 @@ import { addToStorage } from './StorageServices';
     if (!data) {
       return; // If textarea is empty, do nothing
     }
-    await addToStorage(deserializedData.output, currentPathName, { data });
+    await addToStorage(deserializedData.output, currentPathName, { data, isBookmarked: false });
   };
 
   const props = {

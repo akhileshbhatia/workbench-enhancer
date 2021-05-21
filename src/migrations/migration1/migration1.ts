@@ -6,6 +6,7 @@ import {
   serializeMap
 } from '../../common/HelperFunctions';
 import { extensionStateKey } from '../../common/Constants';
+import { TimeDetailsMap } from '../../common/Types';
 /**
  * Converts obj in each path (query, search and execute) to
  * new data structure into map
@@ -14,7 +15,7 @@ export class Migration1 implements Migration {
   private allData: Record<string, any>;
   private extensionState: Record<string, any>;
 
-  async shouldUpgrade() {
+  async shouldUpgrade(): Promise<boolean> {
     this.allData = await getDataFromChromeStorage(null); // 'null' gets all the data for all keys
     if (this.allData.hasOwnProperty(extensionStateKey)) {
       this.extensionState = this.allData[extensionStateKey];
@@ -33,7 +34,7 @@ export class Migration1 implements Migration {
     return doUpgrade;
   }
 
-  async upgrade() {
+  async upgrade(): Promise<void> {
     if (!await this.shouldUpgrade()) {
       return;
     }
@@ -42,9 +43,10 @@ export class Migration1 implements Migration {
       const dateMap = new Map<string, string>();
       const sortedDates = Object.keys(data).sort((a, b) => new Date(b).valueOf() - new Date(a).valueOf());
       for (const currentDate of sortedDates) {
-        const timeDetailsMap = new Map<number, Record<string, unknown>>();
+        const timeDetailsMap = new Map() as TimeDetailsMap;
         // Set key as timestamp and a obj with 'data' set to query/search value
-        data[currentDate].map(info => timeDetailsMap.set(info[0], { data: info[1] }));
+        // Set isBookmarked to false because its a new feature
+        data[currentDate].map(info => timeDetailsMap.set(info[0], { data: info[1], isBookmarked: false }));
         dateMap.set(currentDate, serializeMap<number, Record<string, unknown>>(timeDetailsMap));
       }
       await setDataToChromeStorage(path, serializeMap<string, string>(dateMap));

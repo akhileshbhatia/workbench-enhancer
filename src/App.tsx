@@ -6,7 +6,10 @@ import {
   makeStyles,
   Theme,
   TextField,
-  InputAdornment
+  InputAdornment,
+  AppBar,
+  Tabs,
+  Tab
 } from '@material-ui/core';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -16,8 +19,9 @@ import clsx from 'clsx';
 import { updateExtensionState, deleteFromStorage } from './StorageServices';
 import { QueryAccordion } from './QueryAccordion';
 import { QueryDataMap } from './common/Types';
+import { TabPanel } from './common/TabPanel';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -63,6 +67,7 @@ export function App(props: AppProps): ReactElement {
   const [drawerOpen, setDrawerOpen] = useState(defaultDrawerState);
   const [searchTerm, setSearchTerm] = useState('');
   const [allData, setAllData] = useState(output);
+  const [tabValue, setTabValue] = useState(0);
 
   const updateDrawerState = async (newState: boolean) => {
     setDrawerOpen(newState);
@@ -76,6 +81,10 @@ export function App(props: AppProps): ReactElement {
   const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
     const updatedData = await deleteFromStorage(timestamp, dateToDeleteFrom, currentPathName, allData);
     setAllData(() => new Map([...updatedData]));
+  };
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (
@@ -123,15 +132,30 @@ export function App(props: AppProps): ReactElement {
             }}
           />
         </div>
-        <div>
-          {
-            [...allData.keys()].map(date => {
-              const entries = [...allData.get(date).entries()];
-              const props = { date, entries, searchTerm, handleDelete };
-              return <QueryAccordion key={date} {...props} />;
-            })
-          }
-        </div>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+          >
+            <Tab label="All" />
+            <Tab label="Bookmarked" />
+          </Tabs>
+        </AppBar>
+        <TabPanel value={tabValue} index={0}>
+          <div>
+            {
+              [...allData.keys()].map(date => {
+                const entries = [...allData.get(date).entries()];
+                const props = { date, entries, searchTerm, handleDelete };
+                return <QueryAccordion key={date} {...props} />;
+              })
+            }
+          </div>
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}></TabPanel>
       </Drawer>
     </div >
   );

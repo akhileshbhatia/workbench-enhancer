@@ -12,7 +12,7 @@ describe('QueryDetails', () => {
   const init = (): void => {
     const props: QueryDetailsProps = {
       timestamp: 1411070714,
-      details: { data: 'test-data' },
+      details: { data: 'test-data', isBookmarked: false },
       handleDelete
     };
     component = render(<QueryDetails {...props} />);

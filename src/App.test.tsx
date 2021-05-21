@@ -17,7 +17,7 @@ describe('App', () => {
 
   const init = (dataArray: string[] = [], defaultDrawerState = true, currentPathName = 'query'): void => {
     dataArray.map(data => {
-      timeDetailsMap.set(getRandomTimestamp(), { data });
+      timeDetailsMap.set(getRandomTimestamp(), { data, isBookmarked: false });
     });
     if (timeDetailsMap.size) { // Only add to queryDataMap if there is atleast one data
       queryDataMap.set('12 March 2021', timeDetailsMap);
