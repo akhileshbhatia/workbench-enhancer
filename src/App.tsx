@@ -126,10 +126,7 @@ export function App(props: AppProps): ReactElement {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <div data-testid="no-data-msg" hidden={allData.size !== 0}>
-          <h2>Please add queries/searches to see them here!</h2>
-        </div>
-        <div data-testid="data-div" hidden={allData.size === 0}>
+        <div data-testid="data-div">
           <TextField
             variant="outlined"
             className={classes.inputField}

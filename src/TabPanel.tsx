@@ -15,7 +15,7 @@ export function TabPanel(props: TabPanelProps): JSX.Element {
   const { value, index, data, searchTerm, handleDelete, setIsBookmarked } = props;
   return (
     <div>
-      {value === index &&
+      {value === index && data.size !== 0 &&
         <div>
           {
             [...data.keys()].map(date => {
@@ -26,6 +26,7 @@ export function TabPanel(props: TabPanelProps): JSX.Element {
           }
         </div>
       }
+      {value === index && data.size === 0 && <h2>No queries/searches found!</h2>}
     </div>
   );
 }
