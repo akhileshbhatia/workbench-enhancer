@@ -1,5 +1,10 @@
 import { QueryDataMap, ChromeStorageQueryData, TimeDetailsMap } from './Types';
 
+const cache = {
+  allDataString: '',
+  bookmarkedData: new Map()
+};
+
 export function getDataFromChromeStorage(key: string): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     try {
@@ -83,25 +88,30 @@ export function updateTextArea(value: string): void {
   document.querySelector('textarea').value = value;
 }
 
-export async function formatDataAndAddtoStorage(
-  dataArray: [string, TimeDetailsMap][],
-  currentPathName: string
-): Promise<void> {
-  const dataToStore = new Map<string, string>();
-  for (const [date, details] of dataArray) { // Serialize data again before storing
-    dataToStore.set(date, serializeMap<number, Record<string, unknown>>(details));
+export function formatQueryDataMapToString(data: QueryDataMap): string {
+  const finalMap = new Map<string, string>();
+  for (const [date, details] of data.entries()) {
+    finalMap.set(date, serializeMap<number, Record<string, unknown>>(details));
   }
-  await setDataToChromeStorage(currentPathName, serializeMap<string, string>(dataToStore));
+  return serializeMap<string, string>(finalMap);
 }
 
 export function getBookmarkedData(allData: QueryDataMap): QueryDataMap {
-  const bookmarkedData = new Map() as QueryDataMap;
-  allData.forEach((detailsMap, date) => {
-    const bookmarkedTimeDetailsMap = new Map() as TimeDetailsMap;
-    detailsMap.forEach((value, timestamp) => value.isBookmarked && bookmarkedTimeDetailsMap.set(timestamp, value));
-    if (bookmarkedTimeDetailsMap.size) {
-      bookmarkedData.set(date, bookmarkedTimeDetailsMap);
-    }
-  });
-  return bookmarkedData;
+  /*Formatting map to string is a less expensive operation than calculating bookmarked data
+  every time  we switch tabs */
+  const allDataString = formatQueryDataMapToString(allData);
+  if (cache.allDataString !== allDataString) {
+    cache.allDataString = allDataString;
+    const bookmarkedData = new Map() as QueryDataMap;
+    allData.forEach((detailsMap, date) => {
+      const bookmarkedTimeDetailsMap = new Map() as TimeDetailsMap;
+      detailsMap.forEach((value, timestamp) => value.isBookmarked && bookmarkedTimeDetailsMap.set(timestamp, value));
+      if (bookmarkedTimeDetailsMap.size) {
+        bookmarkedData.set(date, bookmarkedTimeDetailsMap);
+      }
+    });
+    cache.bookmarkedData = bookmarkedData;
+  }
+
+  return cache.bookmarkedData;
 }

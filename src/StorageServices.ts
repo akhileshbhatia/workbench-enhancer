@@ -2,7 +2,7 @@ import {
   getFormattedDateAndTimestamp,
   setDataToChromeStorage,
   getDataFromChromeStorage,
-  formatDataAndAddtoStorage
+  formatQueryDataMapToString
 } from './common/HelperFunctions';
 import { extensionStateKey } from './common/Constants';
 import { ChromeStorageQueryData, QueryDataMap, TimeDetailsMap } from './common/Types';
@@ -31,7 +31,7 @@ export async function addToStorage(
     newMap.set(newTimestamp, newData);
     dataForPathArray.unshift([formattedDate, newMap]); // insert new record in the data
   }
-  await formatDataAndAddtoStorage(dataForPathArray, currentPathName);
+  await setDataToChromeStorage(currentPathName, formatQueryDataMapToString(new Map(dataForPathArray)));
 }
 
 export async function updateExtensionState(currentPathName: string, newState: boolean): Promise<void> {
@@ -53,7 +53,7 @@ export async function deleteFromStorage(
   } else {
     allData.delete(dateToDeleteFrom); // remove the date if it has no data
   }
-  await formatDataAndAddtoStorage([...allData.entries()], currentPathName);
+  await setDataToChromeStorage(currentPathName, formatQueryDataMapToString(allData));
   return allData;
 }
 
@@ -73,6 +73,6 @@ export async function updateProperty(
   detailsMap.set(timestamp, data);
   allData.set(dateToUpdateFrom, detailsMap);
 
-  await formatDataAndAddtoStorage([...allData.entries()], currentPathName);
+  await setDataToChromeStorage(currentPathName, formatQueryDataMapToString(allData));
   return allData;
 }
