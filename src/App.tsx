@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, ChangeEvent } from 'react';
+import React, { ReactElement, useState, ChangeEvent, useCallback } from 'react';
 import './app.scss';
 import {
   Drawer,
@@ -71,21 +71,21 @@ export function App(props: AppProps): ReactElement {
   const [tabValue, setTabValue] = useState(0);
   const bookmarkedData: QueryDataMap = getBookmarkedData(allData);
 
-  const updateDrawerState = async (newState: boolean) => {
+  const updateDrawerState = useCallback(async (newState: boolean) => {
     setDrawerOpen(newState);
     await updateExtensionState(currentPathName, newState);
-  };
+  }, []);
 
-  const handleSearchTermUpdate = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSearchTermUpdate = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  };
+  }, []);
 
-  const handleDelete = async (timestamp: number, dateToDeleteFrom: string) => {
+  const handleDelete = useCallback(async (timestamp: number, dateToDeleteFrom: string) => {
     const updatedData = await deleteFromStorage(timestamp, dateToDeleteFrom, currentPathName, allData);
     setAllData(() => new Map([...updatedData]));
-  };
+  }, []);
 
-  const setIsBookmarked = async (timestamp: number, dateToUpdateFrom: string, value: boolean) => {
+  const setIsBookmarked = useCallback(async (timestamp: number, dateToUpdateFrom: string, value: boolean) => {
     const updatedData = await updateProperty(
       { isBookmarked: value },
       timestamp,
@@ -94,11 +94,11 @@ export function App(props: AppProps): ReactElement {
       allData
     );
     setAllData(() => new Map([...updatedData]));
-  };
+  }, []);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = useCallback((event, newValue) => {
     setTabValue(newValue);
-  };
+  }, []);
 
   return (
     <div className={classes.root}>
