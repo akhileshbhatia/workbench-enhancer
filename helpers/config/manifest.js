@@ -9,7 +9,6 @@ const manifest = {
     "128": "icons/icon128.png"
   },
   "permissions": [
-    "cookies",
     "storage"
   ],
   "background": {
