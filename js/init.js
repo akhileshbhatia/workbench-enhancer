@@ -22,10 +22,12 @@ switch (pathname) {
   case 'execute':
     textarea = document.getElementById('scriptInput');
     queryBtn = document.getElementsByName('execute')[0];
+    break;
 
   case 'search':
     textarea = document.getElementById('sosl_search_textarea');
     queryBtn = document.getElementsByName('searchSubmit')[0];
+    break;
 }
 
 textarea.setAttribute('ng-model', 'allDataObj.textAreaVal');

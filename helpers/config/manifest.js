@@ -1,6 +1,6 @@
 const manifest = {
   "name": "Workbench Enhancer Beta",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "manifest_version": 2,
   "description": "An extension to add much needed improvements to Salesforce Workbench",
   "icons": {
