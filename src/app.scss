@@ -1,0 +1,75 @@
+$primary-color: darkblue;
+$background-color: #e8e8e8;
+
+body {
+    margin: 0px;
+}
+
+.accordion {
+  margin-bottom: 0 !important;
+}
+
+.accordion-summary{
+  &:hover {
+    background-color: $background-color;
+  }
+}
+.accordion-heading {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+.accordion-details {
+  padding: 8px 8px 16px !important;
+  &:hover {
+    background-color: $background-color;
+    cursor: pointer;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: start;
+}
+
+.column-flex-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.column-flex-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.column-flex-3 {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.column-flex-4 {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.column-flex-5 {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+
+.column-flex-6 {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+  word-break: break-all;
+}
+

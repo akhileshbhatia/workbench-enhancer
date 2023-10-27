@@ -1,5 +1,6 @@
 .vscode
 node_modules
-dist
 *.log
-manifest.json
+dist/js/*
+!dist/js/.empty
+
